@@ -1,3 +1,4 @@
+// components/common/ProductListSec.tsx
 import React from "react";
 import * as motion from "framer-motion/client";
 import { cn } from "@/lib/utils";
@@ -18,8 +19,31 @@ type ProductListSecProps = {
 };
 
 const ProductListSec = ({ title, data, viewAllLink }: ProductListSecProps) => {
+  // Show empty state if no data
+  if (data.length === 0) {
+    return (
+      <section className="max-w-[1400px] mx-auto text-center px-4">
+        <h2 className={cn([
+          integralCF.className,
+          "text-[32px] md:text-5xl mb-8 md:mb-14 capitalize font-bold",
+        ])}>
+          {title}
+        </h2>
+        <div className="bg-gray-50 rounded-lg py-16">
+          <p className="text-gray-500 mb-4">No products available in this section yet.</p>
+          <Link
+            href="/shop"
+            className="inline-block px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors"
+          >
+            Browse All Books
+          </Link>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section className="max-w-frame mx-auto text-center">
+    <section className="max-w-[1400px] mx-auto text-center">
       <motion.h2
         initial={{ y: "100px", opacity: 0 }}
         whileInView={{ y: "0", opacity: 1 }}
@@ -27,7 +51,7 @@ const ProductListSec = ({ title, data, viewAllLink }: ProductListSecProps) => {
         transition={{ duration: 0.6 }}
         className={cn([
           integralCF.className,
-          "text-[32px] md:text-5xl mb-8 md:mb-14 capitalize",
+          "text-[32px] md:text-5xl mb-8 md:mb-14 capitalize font-bold",
         ])}
       >
         {title}
@@ -41,6 +65,7 @@ const ProductListSec = ({ title, data, viewAllLink }: ProductListSecProps) => {
         <Carousel
           opts={{
             align: "start",
+            loop: data.length > 4,
           }}
           className="w-full mb-6 md:mb-9"
         >
@@ -48,7 +73,7 @@ const ProductListSec = ({ title, data, viewAllLink }: ProductListSecProps) => {
             {data.map((product) => (
               <CarouselItem
                 key={product.id}
-                className="w-full max-w-[198px] sm:max-w-[295px] pl-0"
+                className="w-full sm:max-w-[295px] md:max-w-[220px] lg:max-w-[250px] pl-0"
               >
                 <ProductCard data={product} />
               </CarouselItem>

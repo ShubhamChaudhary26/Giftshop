@@ -1,14 +1,19 @@
-export type Discount = {
-  amount: number;
-  percentage: number;
-};
-
-export type Product = {
+// types/product.types.ts
+export interface Product {
   id: number;
   title: string;
   srcUrl: string;
-  gallery?: string[];
+  gallery: string[];
   price: number;
-  discount: Discount;
+  discount: {
+    amount: number;
+    percentage: number;
+  };
   rating: number;
-};
+  author?: string;
+  category?: string;
+  stock?: number;
+  description?: string; // Add this
+  is_new_arrival?: boolean;
+  is_top_selling?: boolean;
+}

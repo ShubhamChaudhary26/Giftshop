@@ -108,15 +108,7 @@ const Footer = () => {
                 href="https://github.com/mohammadoftadeh"
                 className="text-black font-medium"
               >
-                Mohammad Oftadeh
-              </Link>
-              {", "}
-              Designed by{" "}
-              <Link
-                href="https://www.figma.com/@hamzauix"
-                className="text-black font-medium"
-              >
-                Hamza Naeem
+              Shubham Chaudhary
               </Link>
             </p>
             <div className="flex items-center">

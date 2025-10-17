@@ -1,3 +1,4 @@
+// components/common/ProductCard.tsx
 import React from "react";
 import Rating from "../ui/Rating";
 import Image from "next/image";
@@ -9,72 +10,71 @@ type ProductCardProps = {
 };
 
 const ProductCard = ({ data }: ProductCardProps) => {
+  // Create URL-friendly slug
+  const createSlug = (title: string) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  };
+
   return (
     <Link
-      href={`/shop/product/${data.id}/${data.title.split(" ").join("-")}`}
-      className="flex flex-col items-start aspect-auto"
+      href={`/shop/product/${data.id}/${createSlug(data.title)}`}
+      className="flex flex-col items-start bg-white rounded-lg p-2 sm:p-3 shadow-sm hover:shadow-md transition-all duration-300 ease-in-out"
     >
-      <div className="bg-[#F0EEED] rounded-[13px] lg:rounded-[20px] w-full lg:max-w-[295px] aspect-square mb-2.5 xl:mb-4 overflow-hidden">
-        <Image
-          src={data.srcUrl}
-          width={295}
-          height={298}
-          className="rounded-md w-full h-full object-contain hover:scale-110 transition-all duration-500"
-          alt={data.title}
-          priority
+      {/* Rest of your component code remains the same */}
+      <div className="w-full aspect-[3/4] overflow-hidden relative flex items-center justify-center bg-gray-50 rounded-md">
+        <Image 
+          src={data.srcUrl} 
+          alt={data.title} 
+          fill 
+          className="object-contain transition-transform duration-500 ease-in-out" 
+          priority 
         />
       </div>
-      <strong className="text-black xl:text-xl">{data.title}</strong>
-      <div className="flex items-end mb-1 xl:mb-2">
+
+      <strong className="mt-2 text-sm sm:text-base font-semibold text-black line-clamp-2 leading-snug h-[40px] sm:h-[48px]">
+        {data.title}
+      </strong>
+
+      <div className="flex items-center mb-1">
         <Rating
           initialValue={data.rating}
           allowFraction
           SVGclassName="inline-block"
-          emptyClassName="fill-gray-50"
-          size={19}
+          emptyClassName="fill-gray-100"
+          size={16}
           readonly
         />
-        <span className="text-black text-xs xl:text-sm ml-[11px] xl:ml-[13px] pb-0.5 xl:pb-0">
+        <span className="text-black text-xs ml-1.5">
           {data.rating.toFixed(1)}
           <span className="text-black/60">/5</span>
         </span>
       </div>
-      <div className="flex items-center space-x-[5px] xl:space-x-2.5">
-        {data.discount.percentage > 0 ? (
-          <span className="font-bold text-black text-xl xl:text-2xl">
-            {`₹${Math.round(
-              data.price - (data.price * data.discount.percentage) / 100
-            )}`}
-          </span>
-        ) : data.discount.amount > 0 ? (
-          <span className="font-bold text-black text-xl xl:text-2xl">
-            {`₹${data.price - data.discount.amount}`}
-          </span>
-        ) : (
-          <span className="font-bold text-black text-xl xl:text-2xl">
+
+      <div className="flex items-center flex-wrap gap-2">
+        <span className="font-bold text-base sm:text-lg text-black">
+          ₹
+          {data.discount.percentage > 0
+            ? Math.round(data.price - (data.price * data.discount.percentage) / 100)
+            : data.discount.amount > 0
+            ? data.price - data.discount.amount
+            : data.price}
+        </span>
+
+        {(data.discount.percentage > 0 || data.discount.amount > 0) && (
+          <span className="font-medium text-gray-400 line-through text-sm sm:text-base">
             ₹{data.price}
           </span>
         )}
-        {data.discount.percentage > 0 && (
-          <span className="font-bold text-black/40 line-through text-xl xl:text-2xl">
-            ₹{data.price}
+
+        {(data.discount.percentage > 0 || data.discount.amount > 0) && (
+          <span className="text-[10px] sm:text-xs py-1 px-2 rounded-full bg-[#FF3333]/10 text-[#FF3333] font-medium">
+            {data.discount.percentage > 0
+              ? `-${data.discount.percentage}%`
+              : `-₹${data.discount.amount}`}
           </span>
-        )}
-        {data.discount.amount > 0 && (
-          <span className="font-bold text-black/40 line-through text-xl xl:text-2xl">
-            ₹{data.price}
-          </span>
-        )}
-        {data.discount.percentage > 0 ? (
-          <span className="font-medium text-[10px] xl:text-xs py-1.5 px-3.5 rounded-full bg-[#FF3333]/10 text-[#FF3333]">
-            {`-${data.discount.percentage}%`}
-          </span>
-        ) : (
-          data.discount.amount > 0 && (
-            <span className="font-medium text-[10px] xl:text-xs py-1.5 px-3.5 rounded-full bg-[#FF3333]/10 text-[#FF3333]">
-              {`-₹${data.discount.amount}`}
-            </span>
-          )
         )}
       </div>
     </Link>

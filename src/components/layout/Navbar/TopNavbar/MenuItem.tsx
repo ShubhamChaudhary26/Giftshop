@@ -17,7 +17,7 @@ export function MenuItem({ label, url }: MenuItemProps) {
     <NavigationMenuItem>
       <Link href={url ?? "/"} legacyBehavior passHref>
         <NavigationMenuLink
-          className={cn([navigationMenuTriggerStyle(), "font-normal px-3"])}
+          className={cn([navigationMenuTriggerStyle(), "font-extrabold px-3  "])}
         >
           {label}
         </NavigationMenuLink>
