@@ -17,3 +17,8 @@ export interface Product {
   is_new_arrival?: boolean;
   is_top_selling?: boolean;
 }
+
+export type Discount = {
+  amount: number;
+  percentage: number;
+};
