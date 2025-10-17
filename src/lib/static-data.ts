@@ -8,7 +8,7 @@ export const reviewsData: Review[] = [
     content:
       '"These books on AI and Cyber Security are amazing! Easy to read and very informative."',
     rating: 5,
-    date: "December 15, 2024",
+    date: "December 15, 2024 ",
   },
   {
     id: 2,
