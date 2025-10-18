@@ -13,36 +13,37 @@ type FaqItem = {
 
 const faqsData: FaqItem[] = [
   {
-    question: "What materials are the candles made from?",
+    question: "What types of IT and AI books do you offer?",
     answer:
-      "Our candles are made from 100% natural soy wax with a cotton wick for a clean and long-lasting burn.",
+      "We offer a wide range of IT and AI books including programming, data science, machine learning, artificial intelligence, cloud computing, cybersecurity, and more.",
   },
   {
-    question: "How long do the candles burn?",
+    question: "Are your books suitable for beginners?",
     answer:
-      "The burn time varies by size, ranging from 30 to 50 hours depending on the candle type and size.",
+      "Yes! We have books for all levels, from complete beginners to advanced professionals looking to deepen their knowledge.",
   },
   {
-    question: "Are the candles scented?",
+    question: "Do you provide e-books or only physical copies?",
     answer:
-      "Yes, each candle is infused with high-quality fragrance oils, such as lavender, vanilla, and sandalwood.",
+      "We provide both physical copies and e-books. You can choose your preferred format while purchasing.",
   },
   {
-    question: "Are the candles safe for indoors?",
+    question: "Are the books up-to-date with the latest technologies?",
     answer:
-      "Absolutely. Our candles are designed for indoor use and produce minimal soot when burned properly.",
+      "Absolutely. We carefully curate our collection to include the latest editions and trending topics in IT and AI.",
   },
   {
-    question: "Do you offer shipping and delivery?",
+    question: "Do you offer worldwide shipping?",
     answer:
-      "Yes, we provide nationwide shipping. Delivery times vary depending on your location and chosen shipping method.",
+      "Yes, we provide worldwide shipping. Delivery times vary depending on the destination and chosen shipping method.",
   },
   {
-    question: "What is your return policy?",
+    question: "What is your return and refund policy?",
     answer:
-      "We accept returns within 14 days of delivery for unopened and unused candles. Refunds or exchanges will be processed accordingly.",
+      "We accept returns within 14 days of delivery for unopened or defective books. Refunds or exchanges are processed promptly according to our policy.",
   },
 ];
+
 
 const FaqContent = () => {
   return (
