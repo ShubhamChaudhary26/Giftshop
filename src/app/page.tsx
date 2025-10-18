@@ -11,88 +11,92 @@ export const dynamic = "force-dynamic";
 
 // Fetch products from Supabase
 async function getNewArrivals(): Promise<Product[]> {
-const { data, error } = await supabase
-.from("products")
-.select("*")
-.eq("is_new_arrival", true)
-.limit(8)
-.order("created_at", { ascending: false });
+  const { data, error } = await supabase
+    .from("products")
+    .select("*")
+    .eq("is_new_arrival", true)
+    .limit(8)
+    .order("created_at", { ascending: false });
 
-if (error || !data) return [];
+  if (error || !data) return [];
 
-return data.map((item: any) => ({
-id: item.id,
-title: item.title || "",
-srcUrl: item.src_url || "/images/book1.webp",
-gallery: item.gallery || [item.src_url || "/images/book1.webp"],
-price: item.price || 0,
-discount: {
-amount: item.discount_amount || 0,
-percentage: item.discount_percentage || 0,
-},
-rating: item.rating || 0,
-author: item.author,
-category: item.category,
-stock: item.stock,
-}));
+  return data.map((item: any) => ({
+    id: item.id,
+    title: item.title || "",
+    srcUrl: item.src_url || "/images/book1.webp",
+    gallery: item.gallery || [item.src_url || "/images/book1.webp"],
+    price: item.price || 0,
+    discount: {
+      amount: item.discount_amount || 0,
+      percentage: item.discount_percentage || 0,
+    },
+    rating: item.rating || 0,
+    author: item.author,
+    category: item.category,
+    stock: item.stock,
+  }));
 }
 
 async function getTopSelling(): Promise<Product[]> {
-const { data, error } = await supabase
-.from("products")
-.select("*")
-.eq("is_top_selling", true)
-.limit(8)
-.order("rating", { ascending: false });
+  const { data, error } = await supabase
+    .from("products")
+    .select("*")
+    .eq("is_top_selling", true)
+    .limit(8)
+    .order("rating", { ascending: false });
 
-if (error || !data) return [];
+  if (error || !data) return [];
 
-return data.map((item: any) => ({
-id: item.id,
-title: item.title || "",
-srcUrl: item.src_url || "/images/book1.webp",
-gallery: item.gallery || [item.src_url || "/images/book1.webp"],
-price: item.price || 0,
-discount: {
-amount: item.discount_amount || 0,
-percentage: item.discount_percentage || 0,
-},
-rating: item.rating || 0,
-author: item.author,
-category: item.category,
-stock: item.stock,
-}));
+  return data.map((item: any) => ({
+    id: item.id,
+    title: item.title || "",
+    srcUrl: item.src_url || "/images/book1.webp",
+    gallery: item.gallery || [item.src_url || "/images/book1.webp"],
+    price: item.price || 0,
+    discount: {
+      amount: item.discount_amount || 0,
+      percentage: item.discount_percentage || 0,
+    },
+    rating: item.rating || 0,
+    author: item.author,
+    category: item.category,
+    stock: item.stock,
+  }));
 }
 
 export default async function Home() {
-const [newArrivals, topSelling] = await Promise.all([
-getNewArrivals(),
-getTopSelling(),
-]);
+  const [newArrivals, topSelling] = await Promise.all([
+    getNewArrivals(),
+    getTopSelling(),
+  ]);
 
-return (
-<>
-<Header />
-<Brands />
-<main className="my-[55px] sm:my-[72px]">
-<ProductListSec title="NEW ARRIVALS" data={newArrivals} viewAllLink="/shop#new-arrivals" />
+  return (
+    <>
+      <Header />
+      <Brands />
+      <main className="my-[55px] sm:my-[72px]">
+        <ProductListSec
+          title="NEW ARRIVALS"
+          data={newArrivals}
+          viewAllLink="/shop#new-arrivals"
+        />
 
-    {newArrivals.length > 0 && (
-      <div className="max-w-frame mx-auto px-4 xl:px-0">
-        <hr className="h-[1px] border-t-black/10 my-10 sm:my-16" />
-      </div>
-    )}
+        {newArrivals.length > 0 && (
+          <div className="max-w-frame mx-auto px-4 xl:px-0">
+            <hr className="h-[1px] border-t-black/10 my-10 sm:my-16" />
+          </div>
+        )}
 
-    <div className="mb-[50px] sm:mb-20">
-      <ProductListSec
-        title="TOP SELLING"
-        data={topSelling}
-        viewAllLink="/shop#top-selling"
-      />
-    </div>
+        <div className="mb-[50px] sm:mb-20">
+          <ProductListSec
+            title="TOP SELLING"
+            data={topSelling}
+            viewAllLink="/shop#top-selling"
+          />
+        </div>
 
-    <Reviews data={reviewsData} />
-  </main>
-</>
-);
+        <Reviews data={reviewsData} />
+      </main>
+    </>
+  );
 }

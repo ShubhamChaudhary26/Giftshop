@@ -1,15 +1,18 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { integralCF } from "@/styles/fonts";
 import Link from "next/link";
 import React from "react";
-import { NavigationMenu, NavigationMenuList } from "@/components/ui/navigation-menu";
+import {
+  NavigationMenu,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
 import { MenuItem } from "./MenuItem";
 import Image from "next/image";
 import InputGroup from "@/components/ui/input-group";
 import ResTopNavbar from "./ResTopNavbar";
 import CartBtn from "./CartBtn";
 
-// ✅ Simple menu data
 const data: {
   id: number;
   type: "MenuItem" | "MenuList";
@@ -19,32 +22,35 @@ const data: {
 }[] = [
   { id: 0, type: "MenuItem", label: "Home", url: "/", children: [] },
   { id: 1, type: "MenuItem", label: "About", url: "/about", children: [] },
-  { id: 2, type: "MenuItem", label: "Services", url: "/service", children: [] }, // redirects to services
-  { id: 2, type: "MenuItem", label: "Ecom", url: "/shop", children: [] }, // redirects to shop
-  { id: 3, type: "MenuItem", label: "Contact", url: "/contact", children: [] },
+  { id: 2, type: "MenuItem", label: "Services", url: "/service", children: [] },
+  { id: 3, type: "MenuItem", label: "Ecom", url: "/shop", children: [] },
+  { id: 4, type: "MenuItem", label: "Contact", url: "/contact", children: [] },
 ];
 
 const TopNavbar = () => {
   return (
     <nav className="sticky top-0 bg-white z-20 shadow-sm">
-      <div className="flex relative max-w-frame mx-auto items-center justify-between md:justify-start py-5 md:py-6 px-4 xl:px-0">
-        {/* Logo */}
+      <div className="flex relative max-w-frame mx-auto items-center justify-between md:justify-start py-3 md:py-5 px-3 sm:px-4 lg:px-0">
+        {/* Left Section: Logo + Mobile Menu */}
         <div className="flex items-center">
-          <div className="block md:hidden mr-4">
+          {/* Mobile Menu Button */}
+          <div className="block md:hidden mr-3">
             <ResTopNavbar data={data} />
           </div>
+
+          {/* Logo */}
           <Link
             href="/"
             className={cn(
               integralCF.className,
-              "text-2xl lg:text-[32px] mb-2 mr-3 lg:mr-10 font-bold"
+              "text-xl sm:text-2xl lg:text-[32px] font-bold mr-3 lg:mr-10"
             )}
           >
-         Book.Verse
+            Book.Verse
           </Link>
         </div>
 
-        {/* Navigation Menu */}
+        {/* Middle Section: Menu (hidden on mobile) */}
         <NavigationMenu className="hidden md:flex mr-2 lg:mr-7">
           <NavigationMenuList>
             {data.map((item) => (
@@ -53,40 +59,44 @@ const TopNavbar = () => {
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* Search */}
-        <InputGroup className="hidden md:flex bg-[#F0F0F0] mr-3 lg:mr-10">
-          <InputGroup.Text>
-            <Image
-              priority
-              src="/icons/search.svg"
-              height={20}
-              width={20}
-              alt="search"
-              className="min-w-5 min-h-5"
-            />
-          </InputGroup.Text>
-          <InputGroup.Input
-            type="search"
-            name="search"
-            placeholder="Search for products..."
-            className="bg-transparent placeholder:text-black/40"
-          />
-        </InputGroup>
+        {/* Right Section: Search + Cart */}
+        <div className="flex items-center ml-auto w-full ">
+          {/* Search (Desktop) */}
+          <div className="hidden md:flex flex-1 max-w-[550px] bg-[#F0F0F0] rounded-full mr-3 lg:mr-10">
+            <InputGroup className="w-full">
+              <InputGroup.Text className="pl-4">
+                <Image
+                  priority
+                  src="/icons/search.svg"
+                  height={20}
+                  width={20}
+                  alt="search"
+                  className="min-w-5 min-h-5"
+                />
+              </InputGroup.Text>
+              <InputGroup.Input
+                type="search"
+                name="search"
+                placeholder="Search for products..."
+                className="bg-transparent placeholder:text-black/40 w-full"
+              />
+            </InputGroup>
+          </div>
 
-        {/* Right Icons */}
-        <div className="flex items-center">
-          <Link href="/search" className="block md:hidden mr-[14px] p-1">
+          {/* Mobile Search Icon */}
+          <Link href="/search" className="block md:hidden mr-3 p-1">
             <Image
               priority
               src="/icons/search-black.svg"
-              height={150}
-              width={150}
+              height={22}
+              width={22}
               alt="search"
-              className="max-w-[52px] max-h-[32px]"
+              className="min-w-[22px] min-h-[22px]"
             />
           </Link>
+
+          {/* Cart Button */}
           <CartBtn />
-         
         </div>
       </div>
     </nav>
