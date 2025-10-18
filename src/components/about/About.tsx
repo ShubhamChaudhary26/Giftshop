@@ -321,7 +321,7 @@ const AboutPage = () => {
           
           <div className="relative">
             <motion.div 
-              className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-gray-700 to-yellow-400"
+              className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-900"
               initial={{ height: 0 }}
               whileInView={{ height: "100%" }}
               transition={{ duration: 1.5 }}
@@ -352,7 +352,7 @@ const AboutPage = () => {
                   </div>
                   
                   <motion.div 
-                    className="w-12 h-12 bg-gradient-to-r from-gray-700 to-yellow-400 rounded-full flex items-center justify-center z-10"
+                    className="w-12 h-12 bg-gradient-to-r from-gray-500 to-gray-800 rounded-full flex items-center justify-center z-10"
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     transition={{ duration: 0.3, delay: index * 0.1 + 0.3 }}
