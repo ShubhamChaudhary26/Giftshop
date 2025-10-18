@@ -5,11 +5,12 @@ import Reviews from "@/components/homepage/Reviews";
 import { Product } from "@/types/product.types";
 import { supabase } from "@/lib/supabase";
 import { reviewsData } from "@/lib/static-data";
+import { notFound } from "next/navigation";
 
 // Make page dynamic (no static caching)
 export const dynamic = "force-dynamic";
 
-// Fetch products from Supabase
+// Fetch new arrivals
 async function getNewArrivals(): Promise<Product[]> {
   const { data, error } = await supabase
     .from("products")
@@ -37,6 +38,7 @@ async function getNewArrivals(): Promise<Product[]> {
   }));
 }
 
+// Fetch top selling
 async function getTopSelling(): Promise<Product[]> {
   const { data, error } = await supabase
     .from("products")
@@ -70,6 +72,10 @@ export default async function Home() {
     getTopSelling(),
   ]);
 
+  // Filter out any null or deleted books (safety)
+  const validNewArrivals = newArrivals.filter((book) => book && book.id);
+  const validTopSelling = topSelling.filter((book) => book && book.id);
+
   return (
     <>
       <Header />
@@ -77,11 +83,11 @@ export default async function Home() {
       <main className="my-[55px] sm:my-[72px]">
         <ProductListSec
           title="NEW ARRIVALS"
-          data={newArrivals}
+          data={validNewArrivals}
           viewAllLink="/shop#new-arrivals"
         />
 
-        {newArrivals.length > 0 && (
+        {validNewArrivals.length > 0 && (
           <div className="max-w-frame mx-auto px-4 xl:px-0">
             <hr className="h-[1px] border-t-black/10 my-10 sm:my-16" />
           </div>
@@ -90,7 +96,7 @@ export default async function Home() {
         <div className="mb-[50px] sm:mb-20">
           <ProductListSec
             title="TOP SELLING"
-            data={topSelling}
+            data={validTopSelling}
             viewAllLink="/shop#top-selling"
           />
         </div>
