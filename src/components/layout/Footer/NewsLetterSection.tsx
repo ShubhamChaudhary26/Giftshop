@@ -1,11 +1,24 @@
+'use client';
 import { Button } from "@/components/ui/button";
 import InputGroup from "@/components/ui/input-group";
 import { cn } from "@/lib/utils";
 import { integralCF } from "@/styles/fonts";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 const NewsLetterSection = () => {
+  const [email, setEmail] = useState("");
+
+  const whatsappNumber = "917777909218"; // your WhatsApp number (with country code)
+  
+  const handleSubscribe = () => {
+    if (!email) return alert("Please enter your email");
+    
+    const message = encodeURIComponent(`New newsletter subscription: ${email}`);
+    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
+    setEmail(""); // reset input
+  };
+
   return (
     <div className="relative grid grid-cols-1 md:grid-cols-2 py-9 md:py-11 px-6 md:px-16 max-w-frame mx-auto bg-black rounded-[20px]">
       <p
@@ -32,6 +45,8 @@ const NewsLetterSection = () => {
             <InputGroup.Input
               type="email"
               name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email address"
               className="bg-transparent placeholder:text-black/40 placeholder:text-sm sm:placeholder:text-base"
             />
@@ -41,6 +56,7 @@ const NewsLetterSection = () => {
             className="text-sm sm:text-base font-medium bg-white h-12 rounded-full px-4 py-3"
             aria-label="Subscribe to Newsletter"
             type="button"
+            onClick={handleSubscribe}
           >
             Subscribe to Newsletter
           </Button>
