@@ -7,13 +7,13 @@ import InputGroup from "@/components/ui/input-group";
 import { cn } from "@/lib/utils";
 import { integralCF } from "@/styles/fonts";
 import { TbBasketExclamation } from "react-icons/tb";
-import React, { useState, useEffect, useMemo, useCallback, memo } from "react";
+import React, { useState, useEffect, useMemo, useCallback, memo, useTransition } from "react";
 import { RootState } from "@/lib/store";
 import { useAppSelector } from "@/lib/hooks/redux";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { clearCart } from "@/lib/store/cartsSlice";
-import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 
 declare let Razorpay: any;
 
@@ -39,7 +39,8 @@ const OrderSummary = memo(({
   onNameChange, 
   onPhoneChange, 
   onAddressChange, 
-  onPayment 
+  onPayment,
+  isPending
 }: any) => {
   const discount = useMemo(() => {
     if (totalPrice === 0) return 0;
@@ -51,7 +52,7 @@ const OrderSummary = memo(({
   }, [totalPrice, adjustedTotalPrice]);
 
   return (
-    <div className="w-full lg:max-w-[505px] p-5 md:px-6 flex-col space-y-4 md:space-y-6 rounded-[20px] border border-black/10">
+    <div className="w-full lg:max-w-[505px] p-5 md:px-6 flex-col space-y-4 md:space-y-6 rounded-[20px] border border-black/10 sticky top-24">
       <h6 className="text-xl md:text-2xl font-bold text-black">Order Summary</h6>
 
       {/* User Details */}
@@ -62,6 +63,7 @@ const OrderSummary = memo(({
             placeholder="Your Name"
             value={name}
             onChange={onNameChange}
+            disabled={isPending}
           />
         </InputGroup>
         <InputGroup>
@@ -70,6 +72,7 @@ const OrderSummary = memo(({
             placeholder="Phone Number"
             value={phone}
             onChange={onPhoneChange}
+            disabled={isPending}
           />
         </InputGroup>
         <InputGroup>
@@ -78,6 +81,7 @@ const OrderSummary = memo(({
             placeholder="Address"
             value={address}
             onChange={onAddressChange}
+            disabled={isPending}
           />
         </InputGroup>
       </div>
@@ -113,10 +117,11 @@ const OrderSummary = memo(({
 
       <Button
         type="button"
-        className="text-sm md:text-base font-medium bg-black rounded-full w-full py-4"
+        className="text-sm md:text-base font-medium bg-black rounded-full w-full py-4 disabled:opacity-50"
         onClick={onPayment}
+        disabled={isPending}
       >
-        Pay Now
+        {isPending ? "Processing..." : "Pay Now"}
       </Button>
     </div>
   );
@@ -124,6 +129,9 @@ const OrderSummary = memo(({
 OrderSummary.displayName = "OrderSummary";
 
 export default function CartPage() {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
   // Optimize Redux selectors with shallow equality
   const cart = useAppSelector((state: RootState) => state.carts.cart);
   const totalPrice = useAppSelector((state: RootState) => state.carts.totalPrice ?? 0);
@@ -139,8 +147,10 @@ export default function CartPage() {
   // Memoize cart items
   const items = useMemo(() => cart?.items ?? [], [cart?.items]);
 
-  // Load Razorpay script only once
+  // Load Razorpay script eagerly
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     // Check if Razorpay is already loaded
     if (typeof Razorpay !== 'undefined') {
       setRazorpayLoaded(true);
@@ -148,7 +158,9 @@ export default function CartPage() {
     }
 
     // Check if script is already in DOM
-    if (document.querySelector("#razorpay-script")) {
+    const existingScript = document.querySelector("#razorpay-script");
+    if (existingScript) {
+      existingScript.addEventListener('load', () => setRazorpayLoaded(true));
       return;
     }
 
@@ -157,11 +169,8 @@ export default function CartPage() {
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
     script.onload = () => setRazorpayLoaded(true);
-    document.body.appendChild(script);
-
-    return () => {
-      // Cleanup if needed
-    };
+    script.onerror = () => console.error("Failed to load Razorpay");
+    document.head.appendChild(script); // Use head instead of body for faster loading
   }, []);
 
   // Memoize event handlers
@@ -188,49 +197,59 @@ export default function CartPage() {
       return;
     }
 
-    // Create a snapshot of current items
-    const currentItems = items.map(item => ({ ...item }));
+    startTransition(() => {
+      // Create a snapshot of current items
+      const currentItems = items.map(item => ({ ...item }));
 
-    const options = {
-      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-      amount: Math.round(adjustedTotalPrice) * 100,
-      currency: "INR",
-      name: "Book Store", // Changed from Candle Store
-      description: "Purchase Books",
-      handler: (response: any) => {
-        // Prepare WhatsApp message using snapshot
-        const productsList = currentItems
-          .map((p) => `- ${p.name} x ${p.quantity}`)
-          .join("\n");
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: Math.round(adjustedTotalPrice) * 100,
+        currency: "INR",
+        name: "Book Store",
+        description: "Purchase Books",
+        handler: (response: any) => {
+          // Prepare WhatsApp message using snapshot
+          const productsList = currentItems
+            .map((p) => `- ${p.name} x ${p.quantity}`)
+            .join("\n");
 
-        const message = `New order received!\n\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nTotal Paid: ₹${Math.round(
-          adjustedTotalPrice
-        )}\nPayment ID: ${response.razorpay_payment_id}\n\nProducts:\n${productsList}`;
+          const message = `New order received!\n\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nTotal Paid: ₹${Math.round(
+            adjustedTotalPrice
+          )}\nPayment ID: ${response.razorpay_payment_id}\n\nProducts:\n${productsList}`;
 
-        // Clear cart first
-        dispatch(clearCart());
+          // Clear cart first
+          dispatch(clearCart());
 
-        // Open WhatsApp after cart is cleared
-        setTimeout(() => {
-          const whatsappNumber = "7777909218";
-          const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-            message
-          )}`;
-          window.open(whatsappUrl, "_blank");
-        }, 300);
-      },
-      prefill: {
-        name,
-        contact: phone,
-      },
-      theme: {
-        color: "#000000",
-      },
-    };
+          // Open WhatsApp after cart is cleared
+          requestAnimationFrame(() => {
+            const whatsappNumber = "7777909218";
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+              message
+            )}`;
+            window.open(whatsappUrl, "_blank");
+            
+            // Redirect to home or shop page
+            router.push("/shop");
+          });
+        },
+        prefill: {
+          name,
+          contact: phone,
+        },
+        theme: {
+          color: "#000000",
+        },
+        modal: {
+          ondismiss: () => {
+            // Handle modal close
+          }
+        }
+      };
 
-    const rzp = new Razorpay(options);
-    rzp.open();
-  }, [name, phone, address, items, adjustedTotalPrice, dispatch, razorpayLoaded]);
+      const rzp = new Razorpay(options);
+      rzp.open();
+    });
+  }, [name, phone, address, items, adjustedTotalPrice, dispatch, razorpayLoaded, router]);
 
   // Early return for empty cart
   if (items.length === 0) {
@@ -260,7 +279,7 @@ export default function CartPage() {
           {/* Cart Items */}
           <div className="w-full p-3.5 md:px-6 flex-col space-y-4 md:space-y-6 rounded-[20px] border border-black/10">
             {items.map((product, idx) => (
-              <React.Fragment key={product.id || idx}>
+              <React.Fragment key={`${product.id}-${idx}`}>
                 <ProductCard data={product} />
                 {idx < items.length - 1 && <hr className="border-t-black/10" />}
               </React.Fragment>
@@ -278,6 +297,7 @@ export default function CartPage() {
             onPhoneChange={handlePhoneChange}
             onAddressChange={handleAddressChange}
             onPayment={handlePayment}
+            isPending={isPending}
           />
         </div>
       </div>

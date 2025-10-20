@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { cn } from "@/lib/utils";
 import { integralCF } from "@/styles/fonts";
+import { Target, Eye, Gem, Leaf, Handshake, Shield } from "lucide-react";
 
 // Counter animation hook
 const useCounter = (end: number, duration: number = 2) => {
@@ -68,37 +69,34 @@ const AboutPage = () => {
     animate: { scale: 1, opacity: 1, transition: { duration: 0.5 } },
   };
 
-
-
-
   const values = [
     {
-      icon: "🎯",
+      icon: Target,
       title: "Our Mission",
       description: "To democratize access to knowledge by making quality books affordable and accessible to every reader in India.",
     },
     {
-      icon: "👁️",
+      icon: Eye,
       title: "Our Vision", 
       description: "To become India's most trusted online bookstore, fostering a nation of readers and lifelong learners.",
     },
     {
-      icon: "💎",
+      icon: Gem,
       title: "Quality Promise",
       description: "Every book is carefully selected, ensuring authentic editions from verified publishers only.",
     },
     {
-      icon: "🌱",
+      icon: Leaf,
       title: "Sustainability",
       description: "Eco-friendly packaging and carbon-neutral delivery for a greener tomorrow.",
     },
     {
-      icon: "🤝",
+      icon: Handshake,
       title: "Community First",
       description: "Building a community of readers through book clubs, author meets, and reading challenges.",
     },
     {
-      icon: "🛡️",
+      icon: Shield,
       title: "Trust & Security",
       description: "100% secure payments, easy returns, and complete data privacy protection.",
     },
@@ -145,7 +143,7 @@ const AboutPage = () => {
 
   return (
     <div className="min-h-screen bg-white overflow-hidden">
- <section className="relative bg-black text-white py-20 md:py-32 overflow-hidden">
+      <section className="relative bg-black text-white py-20 md:py-32 overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
@@ -294,10 +292,6 @@ const AboutPage = () => {
         </div>
       </section>
 
-
-  
-
-
       {/* Animated Timeline Section */}
       <section className="py-20 bg-white hidden md:block">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -406,37 +400,40 @@ const AboutPage = () => {
             whileInView="animate"
             viewport={{ once: true }}
           >
-            {values.map((value, index) => (
-              <motion.div 
-                key={index}
-                className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all group"
-                variants={fadeInUp}
-                whileHover={{ 
-                  scale: 1.05,
-                  transition: { type: "spring", stiffness: 300 }
-                }}
-              >
+            {values.map((value, index) => {
+              const IconComponent = value.icon;
+              return (
                 <motion.div 
-                  className="text-5xl mb-6"
-                  initial={{ rotate: -180, opacity: 0 }}
-                  whileInView={{ rotate: 0, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  viewport={{ once: true }}
+                  key={index}
+                  className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all group"
+                  variants={fadeInUp}
                   whileHover={{ 
-                    rotate: [0, -10, 10, -10, 10, 0],
-                    transition: { duration: 0.5 }
+                    scale: 1.05,
+                    transition: { type: "spring", stiffness: 300 }
                   }}
                 >
-                  {value.icon}
+                  <motion.div 
+                    className="mb-6 w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center"
+                    initial={{ rotate: -180, opacity: 0 }}
+                    whileInView={{ rotate: 0, opacity: 1 }}
+                    transition={{ duration: 0.5, delay: index * 0.05 }}
+                    viewport={{ once: true }}
+                    whileHover={{ 
+                      rotate: [0, -10, 10, -10, 10, 0],
+                      transition: { duration: 0.5 }
+                    }}
+                  >
+                    <IconComponent className="w-8 h-8 text-gray-700" strokeWidth={2} />
+                  </motion.div>
+                  <h3 className={cn([integralCF.className, "text-2xl text-black mb-4"])}>
+                    {value.title}
+                  </h3>
+                  <p className="text-black/60 leading-relaxed text-lg">
+                    {value.description}
+                  </p>
                 </motion.div>
-                <h3 className={cn([integralCF.className, "text-2xl text-black mb-4"])}>
-                  {value.title}
-                </h3>
-                <p className="text-black/60 leading-relaxed text-lg">
-                  {value.description}
-                </p>
-              </motion.div>
-            ))}
+              );
+            })}
           </motion.div>
         </div>
       </section>
