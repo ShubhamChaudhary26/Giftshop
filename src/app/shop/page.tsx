@@ -36,6 +36,7 @@ export default function ShopPage() {
       const formattedProducts: Product[] = (data || []).map(item => ({
         id: item.id,
         title: item.title || '',
+        src_url: item.src_url || '/images/book1.webp',      // ✅ Add this
         srcUrl: item.src_url || '/images/book1.webp',
         gallery: item.gallery || [item.src_url || '/images/book1.webp'],
         price: item.price || 0,
@@ -43,10 +44,15 @@ export default function ShopPage() {
           amount: item.discount_amount || 0,
           percentage: item.discount_percentage || 0
         },
+        discount_amount: item.discount_amount || 0,          // ✅ Add database columns
+        discount_percentage: item.discount_percentage || 0,  // ✅ Add database columns
         rating: item.rating || 0,
         author: item.author,
         category: item.category,
-        stock: item.stock
+        stock: item.stock,
+        is_new_arrival: item.is_new_arrival,
+        is_featured: item.is_featured,
+        is_top_selling: item.is_top_selling,
       }));
 
       setProducts(formattedProducts);
@@ -62,6 +68,17 @@ export default function ShopPage() {
     }
   }
 
+  // ✅ Helper function for safe price calculation
+  const getDiscountedPrice = (product: Product): number => {
+    const price = product.price || 0;
+    const discountPercent = product.discount?.percentage || 0;
+    
+    if (discountPercent > 0) {
+      return price - (price * discountPercent / 100);
+    }
+    return price;
+  };
+
   function filterAndSortProducts() {
     let filtered = [...products];
 
@@ -70,33 +87,20 @@ export default function ShopPage() {
       filtered = filtered.filter(p => p.category === selectedCategory);
     }
 
-    // Sort products
+    // ✅ FIXED: Sort products with safe discount handling
     switch (sortBy) {
       case 'priceLow':
-        filtered.sort((a, b) => {
-          const priceA = a.discount.percentage > 0 
-            ? a.price - (a.price * a.discount.percentage / 100)
-            : a.price;
-          const priceB = b.discount.percentage > 0 
-            ? b.price - (b.price * b.discount.percentage / 100)
-            : b.price;
-          return priceA - priceB;
-        });
+        filtered.sort((a, b) => getDiscountedPrice(a) - getDiscountedPrice(b));
         break;
+
       case 'priceHigh':
-        filtered.sort((a, b) => {
-          const priceA = a.discount.percentage > 0 
-            ? a.price - (a.price * a.discount.percentage / 100)
-            : a.price;
-          const priceB = b.discount.percentage > 0 
-            ? b.price - (b.price * b.discount.percentage / 100)
-            : b.price;
-          return priceB - priceA;
-        });
+        filtered.sort((a, b) => getDiscountedPrice(b) - getDiscountedPrice(a));
         break;
+
       case 'rating':
-        filtered.sort((a, b) => b.rating - a.rating);
+        filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
         break;
+
       case 'newest':
       default:
         // Already sorted by newest from database
@@ -108,8 +112,11 @@ export default function ShopPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-2xl">Loading products...</div>
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="text-center">
+          <div className="animate-spin inline-block w-12 h-12 border-4 border-black border-t-transparent rounded-full mb-4"></div>
+          <p className="text-xl text-gray-600">Loading products...</p>
+        </div>
       </div>
     );
   }
@@ -129,15 +136,15 @@ export default function ShopPage() {
       </div>
 
       {/* Filters and Sort */}
-      <div className="sticky top-0 bg-white border-b z-40">
+      <div className="sticky top-0 bg-white border-b z-40 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex flex-col lg:flex-row gap-4 justify-between">
+          <div className="flex flex-col lg:flex-row gap-4 justify-between items-start lg:items-center">
             {/* Category Filter */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 overflow-x-auto max-w-full">
               <button
                 onClick={() => setSelectedCategory('All')}
                 className={cn([
-                  "px-4 py-2 rounded-full transition-all",
+                  "px-4 py-2 rounded-full transition-all whitespace-nowrap",
                   selectedCategory === 'All' 
                     ? "bg-black text-white" 
                     : "bg-gray-100 hover:bg-gray-200"
@@ -152,7 +159,7 @@ export default function ShopPage() {
                     key={category}
                     onClick={() => setSelectedCategory(category)}
                     className={cn([
-                      "px-4 py-2 rounded-full transition-all",
+                      "px-4 py-2 rounded-full transition-all whitespace-nowrap",
                       selectedCategory === category 
                         ? "bg-black text-white" 
                         : "bg-gray-100 hover:bg-gray-200"
@@ -168,7 +175,7 @@ export default function ShopPage() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 border rounded-lg focus:outline-none focus:border-black"
+              className="px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-black min-w-[200px]"
             >
               <option value="newest">Newest First</option>
               <option value="priceLow">Price: Low to High</option>
@@ -183,7 +190,7 @@ export default function ShopPage() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         {filteredProducts.length > 0 ? (
           <motion.div 
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -193,7 +200,7 @@ export default function ShopPage() {
                 key={product.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
+                transition={{ delay: index * 0.05, duration: 0.3 }}
               >
                 <ProductCard data={product} />
               </motion.div>
@@ -201,12 +208,13 @@ export default function ShopPage() {
           </motion.div>
         ) : (
           <div className="text-center py-20">
+            <div className="text-6xl mb-4">📚</div>
             <p className="text-gray-500 text-xl mb-4">
               No products found in "{selectedCategory}" category
             </p>
             <button
               onClick={() => setSelectedCategory('All')}
-              className="text-blue-600 hover:underline"
+              className="px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors"
             >
               View all products
             </button>
