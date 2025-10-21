@@ -61,7 +61,7 @@ const HeroSection = () => {
   const goToSlide = (index: number) => setCurrentSlide(index);
 
   return (
-    <section className="relative w-full h-[500px] sm:h-[550px] md:h-[600px] lg:h-[650px] xl:h-[615px] overflow-hidden bg-gradient-to-br from-gray-900 to-black">
+    <section className="relative w-full min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 to-black">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
@@ -80,114 +80,66 @@ const HeroSection = () => {
             animate={{ scale: 1.05 }}
             transition={{ duration: 5, ease: "linear" }}
           />
-          
+
           {/* Gradient Overlays */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
           {/* Content Container */}
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-32">
-              <motion.div
-                initial={{ x: -50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-                className="max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6"
+          <div className="absolute inset-0 flex items-center justify-center px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 2xl:px-32">
+            <motion.div
+              initial={{ x: -50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+              className="text-center max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6"
+            >
+              {/* Discount Badge */}
+              <motion.span
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                className="inline-block bg-gray-600 text-white px-4 py-1.5 sm:px-5 sm:py-2 md:px-6 md:py-2.5 rounded-full text-[10px] sm:text-xs md:text-sm lg:text-base font-black tracking-wider shadow-2xl shadow-gray-500/50 uppercase"
               >
-                {/* Discount Badge */}
-                <motion.span
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                  className="inline-block bg-gray-600 text-white px-4 py-1.5 sm:px-5 sm:py-2 md:px-6 md:py-2.5 rounded-full text-[10px] sm:text-xs md:text-sm lg:text-base font-black tracking-wider shadow-2xl shadow-gray-500/50 uppercase"
+                {slides[currentSlide].discount}
+              </motion.span>
+
+              {/* Main Title */}
+              <h1 className={cn([integralCF.className, "text-white uppercase leading-tight drop-shadow-2xl"])}>
+                <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl mb-1 sm:mb-2">
+                  {slides[currentSlide].title}
+                </span>
+                <span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-gray-300 font-light">
+                  {slides[currentSlide].highlight}
+                </span>
+              </h1>
+
+              {/* Subtitle */}
+              <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-white/95 font-medium max-w-lg mx-auto leading-relaxed drop-shadow-lg">
+                {slides[currentSlide].subtitle}
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-5 pt-2 sm:pt-3 justify-center">
+                <Link
+                  href={slides[currentSlide].buttonLink}
+                  className="group relative bg-white text-black px-6 py-3 sm:px-7 sm:py-3.5 md:px-8 md:py-4 lg:px-10 lg:py-4 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-bold hover:text-white transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-gray-500/50 flex items-center justify-center gap-2 overflow-hidden"
                 >
-                  {slides[currentSlide].discount}
-                </motion.span>
+                  <span className="relative z-10">{slides[currentSlide].buttonText}</span>
+                  <span className="relative z-10 group-hover:translate-x-1 transition-transform duration-300">→</span>
+                  <div className="absolute inset-0 bg-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </Link>
 
-                {/* Main Title */}
-                <h1
-                  className={cn([
-                    integralCF.className,
-                    "text-white uppercase leading-tight drop-shadow-2xl",
-                  ])}
+                <Link
+                  href="/shop"
+                  className="border-2 border-white text-white px-6 py-3 sm:px-7 sm:py-3.5 md:px-8 md:py-4 lg:px-10 lg:py-4 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-bold hover:bg-white hover:text-black transition-all duration-300 text-center shadow-xl hover:shadow-2xl backdrop-blur-sm"
                 >
-                  <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl mb-1 sm:mb-2">
-                    {slides[currentSlide].title}
-                  </span>
-                  <span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-gray-300 font-light">
-                    {slides[currentSlide].highlight}
-                  </span>
-                </h1>
-
-                {/* Subtitle */}
-                <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-white/95 font-medium max-w-lg lg:max-w-xl xl:max-w-2xl leading-relaxed drop-shadow-lg">
-                  {slides[currentSlide].subtitle}
-                </p>
-
-                {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-5 pt-2 sm:pt-3">
-                  <Link
-                    href={slides[currentSlide].buttonLink}
-                    className="group relative bg-white text-black px-6 py-3 sm:px-7 sm:py-3.5 md:px-8 md:py-4 lg:px-10 lg:py-4 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-bold  hover:text-white transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-gray-500/50 flex items-center justify-center gap-2 overflow-hidden"
-                  >
-                    <span className="relative z-10">{slides[currentSlide].buttonText}</span>
-                    <span className="relative z-10 group-hover:translate-x-1 transition-transform duration-300">
-                      →
-                    </span>
-                    <div className="absolute inset-0 bg-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </Link>
-
-                  <Link
-                    href="/shop"
-                    className="border-2 border-white text-white px-6 py-3 sm:px-7 sm:py-3.5 md:px-8 md:py-4 lg:px-10 lg:py-4 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-bold hover:bg-white hover:text-black transition-all duration-300 text-center shadow-xl hover:shadow-2xl backdrop-blur-sm"
-                  >
-                    View All Candles
-                  </Link>
-                </div>
-
-                {/* Features */}
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.7, duration: 0.6 }}
-                  className="flex flex-wrap gap-3 sm:gap-4 md:gap-5 lg:gap-6 pt-1 sm:pt-2"
-                >
-                  <div className="flex items-center gap-1.5 sm:gap-2 text-white/90 text-[10px] sm:text-xs md:text-sm lg:text-base font-medium bg-white/10 backdrop-blur-md px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/20">
-                    <span className="text-sm sm:text-base md:text-lg">🚚</span>
-                    <span>Free Delivery</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 sm:gap-2 text-white/90 text-[10px] sm:text-xs md:text-sm lg:text-base font-medium bg-white/10 backdrop-blur-md px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/20">
-                    <span className="text-sm sm:text-base md:text-lg">🔥</span>
-                    <span>Handcrafted</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 sm:gap-2 text-white/90 text-[10px] sm:text-xs md:text-sm lg:text-base font-medium bg-white/10 backdrop-blur-md px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/20">
-                    <span className="text-sm sm:text-base md:text-lg">🛡️</span>
-                    <span>Secure Payment</span>
-                  </div>
-                </motion.div>
-              </motion.div>
-            </div>
+                  View All Candles
+                </Link>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
       </AnimatePresence>
-
-      {/* Navigation Arrows (Desktop Only) */}
-      <div className="hidden lg:block">
-        <button
-          onClick={() => goToSlide((currentSlide - 1 + slides.length) % slides.length)}
-          className="absolute left-4 xl:left-8 top-1/2 -translate-y-1/2 w-12 h-12 xl:w-14 xl:h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center text-xl font-bold shadow-xl z-10"
-          aria-label="Previous slide"
-        >
-          ←
-        </button>
-        <button
-          onClick={() => goToSlide((currentSlide + 1) % slides.length)}
-          className="absolute right-4 xl:right-8 top-1/2 -translate-y-1/2 w-12 h-12 xl:w-14 xl:h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center text-xl font-bold shadow-xl z-10"
-          aria-label="Next slide"
-        >
-          →
-        </button>
-      </div>
 
       {/* Slide Indicators */}
       <div className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-2.5 md:gap-3 z-10">
@@ -204,21 +156,6 @@ const HeroSection = () => {
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
-      </div>
-
-      {/* Animated Progress Bar */}
-      <div className="absolute bottom-0 left-0 right-0 h-0.5 sm:h-1 bg-white/10 overflow-hidden">
-        <motion.div
-          className="h-full bg-gradient-to-r from-gray-600 via-gray-800 to-gray-200 shadow-lg shadow-gray-500/50"
-          initial={{ width: "0%" }}
-          animate={{ width: "100%" }}
-          transition={{
-            duration: 5,
-            ease: "linear",
-            repeat: Infinity,
-          }}
-          key={currentSlide}
-        />
       </div>
     </section>
   );
