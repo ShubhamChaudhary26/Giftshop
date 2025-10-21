@@ -136,7 +136,7 @@ export default function ShopPage() {
       </div>
 
       {/* Filters and Sort */}
-      <div className="sticky top-0 bg-white border-b z-40 shadow-sm">
+      <div className=" top-0 bg-white border-b z-40 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex flex-col lg:flex-row gap-4 justify-between items-start lg:items-center">
             {/* Category Filter */}
