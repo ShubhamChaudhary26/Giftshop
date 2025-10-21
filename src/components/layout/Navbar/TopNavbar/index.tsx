@@ -1,11 +1,14 @@
-'use client';
+"use client";
 
 import { cn } from "@/lib/utils";
 import { integralCF } from "@/styles/fonts";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { NavigationMenu, NavigationMenuList } from "@/components/ui/navigation-menu";
+import {
+  NavigationMenu,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
 import { MenuItem } from "./MenuItem";
 import Image from "next/image";
 import InputGroup from "@/components/ui/input-group";
@@ -31,7 +34,7 @@ const data: NavMenuItem[] = [
 
 const TopNavbar = () => {
   const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -39,13 +42,16 @@ const TopNavbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
         setShowResults(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   useEffect(() => {
@@ -65,18 +71,20 @@ const TopNavbar = () => {
     try {
       setLoading(true);
       const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .or(`title.ilike.%${query}%,author.ilike.%${query}%,description.ilike.%${query}%`)
+        .from("products")
+        .select("*")
+        .or(
+          `title.ilike.%${query}%,author.ilike.%${query}%,description.ilike.%${query}%`
+        )
         .limit(5);
 
       if (error) throw error;
-      
-      console.log('Search results:', data);
+
+      console.log("Search results:", data);
       setSearchResults(data || []);
       setShowResults(true);
     } catch (error) {
-      console.error('Search error:', error);
+      console.error("Search error:", error);
       setSearchResults([]);
     } finally {
       setLoading(false);
@@ -88,29 +96,33 @@ const TopNavbar = () => {
     if (searchQuery.trim()) {
       router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
       setShowResults(false);
-      setSearchQuery('');
+      setSearchQuery("");
     }
   };
 
   const handleProductClick = () => {
     setShowResults(false);
-    setSearchQuery('');
+    setSearchQuery("");
   };
 
   const getImageUrl = (product: any) => {
     // ✅ Fixed: Use src_url (snake_case) to match database
-    return product.src_url || product.image_url || product.imageUrl || '';
+    return product.src_url || product.image_url || product.imageUrl || "";
   };
 
   const createSlug = (title: string) => {
-    return title?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'product';
+    return (
+      title
+        ?.toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "") || "product"
+    );
   };
 
   return (
     <nav className="sticky top-0 bg-white z-20 shadow-sm">
-      <div className="flex items-center justify-between max-w-frame mx-auto py-4 px-4 sm:px-6 lg:px-0">
-
-        <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between max-w-frame mx-auto py-4 px-4 sm:px-2 lg:px-0">
+        <div className="flex items-center ">
           <div className="block md:hidden">
             <ResTopNavbar data={data} />
           </div>
@@ -173,14 +185,17 @@ const TopNavbar = () => {
                   </div>
                 ) : searchResults.length === 0 ? (
                   <div className="p-6 text-center">
-                    <div className="text-5xl mb-3">📚</div>
-                    <p className="text-gray-600">No results for "{searchQuery}"</p>
+                    <div className="text-5xl mb-3">🕯️</div>
+                    <p className="text-gray-600">
+                      No results for "{searchQuery}"
+                    </p>
                   </div>
                 ) : (
                   <>
                     <div className="p-3 border-b bg-gray-50 flex items-center justify-between sticky top-0 z-10">
                       <span className="text-sm font-semibold text-gray-700">
-                        {searchResults.length} result{searchResults.length !== 1 ? 's' : ''}
+                        {searchResults.length} result
+                        {searchResults.length !== 1 ? "s" : ""}
                       </span>
                       <button
                         type="button"
@@ -190,12 +205,12 @@ const TopNavbar = () => {
                         ✕
                       </button>
                     </div>
-                    
+
                     <div className="divide-y">
                       {searchResults.map((product) => {
                         const imageUrl = getImageUrl(product);
                         const productSlug = createSlug(product.title);
-                        
+
                         return (
                           <Link
                             key={product.id}
@@ -208,21 +223,22 @@ const TopNavbar = () => {
                               {imageUrl ? (
                                 <img
                                   src={imageUrl}
-                                  alt={product.title || 'Product'}
+                                  alt={product.title || "Product"}
                                   className="w-full h-full object-cover"
                                   loading="lazy"
                                   onError={(e) => {
                                     const img = e.target as HTMLImageElement;
-                                    img.style.display = 'none';
+                                    img.style.display = "none";
                                     const parent = img.parentElement;
                                     if (parent) {
-                                      parent.innerHTML = '<div class="w-full h-full flex items-center justify-center text-3xl">📚</div>';
+                                      parent.innerHTML =
+                                        '<div class="w-full h-full flex items-center justify-center text-3xl">🕯️</div>';
                                     }
                                   }}
                                 />
                               ) : (
                                 <div className="w-full h-full flex items-center justify-center text-3xl">
-                                  📚
+                                  🕯️
                                 </div>
                               )}
                             </div>
@@ -230,7 +246,7 @@ const TopNavbar = () => {
                             {/* Product Info */}
                             <div className="flex-1 min-w-0">
                               <h4 className="font-bold text-sm line-clamp-2 mb-1 leading-tight text-gray-900">
-                                {product.title || 'Untitled'}
+                                {product.title || "Untitled"}
                               </h4>
                               {product.author && (
                                 <p className="text-xs text-gray-500 mb-1 line-clamp-1">
@@ -239,7 +255,9 @@ const TopNavbar = () => {
                               )}
                               <div className="flex items-center gap-2">
                                 <p className="font-semibold text-black text-sm">
-                                  ₹{product.price?.toLocaleString('en-IN') || '0'}
+                                  ₹
+                                  {product.price?.toLocaleString("en-IN") ||
+                                    "0"}
                                 </p>
                                 {product.rating && product.rating > 0 && (
                                   <span className="text-xs text-gray-600">
@@ -252,13 +270,15 @@ const TopNavbar = () => {
                         );
                       })}
                     </div>
-                    
+
                     <button
                       type="button"
                       onClick={() => {
-                        router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
+                        router.push(
+                          `/search?q=${encodeURIComponent(searchQuery)}`
+                        );
                         setShowResults(false);
-                        setSearchQuery('');
+                        setSearchQuery("");
                       }}
                       className="w-full p-3 text-center bg-gray-50 hover:bg-gray-100 font-semibold text-black text-sm border-t transition-colors"
                     >
@@ -277,16 +297,19 @@ const TopNavbar = () => {
             )}
           </div>
 
-          <Link href="/search" className="block md:hidden p-1">
-            <Image
-              priority
-              src="/icons/search-black.svg"
-              height={22}
-              width={22}
-              alt="search"
-            />
+          {/* Mobile Search Icon */}
+          <Link href="/search" className="block md:hidden ml-1">
+            <div className="w-10 h-10 flex items-center justify-center rounded-full">
+              <Image
+                priority
+                src="/icons/search-black.svg"
+                height={24} // better size for mobile
+                width={24}
+                alt="search"
+                className="object-contain"
+              />
+            </div>
           </Link>
-
           <CartBtn />
         </div>
       </div>

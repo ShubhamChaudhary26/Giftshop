@@ -556,7 +556,7 @@ const Search = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className="text-center py-20"
                 >
-                  <div className="text-6xl mb-4">📚</div>
+                  <div className="text-6xl mb-4">🕯️</div>
                   <h3 className="text-2xl font-bold mb-2">No books found</h3>
                   <p className="text-gray-600 mb-6">
                     {searchQuery

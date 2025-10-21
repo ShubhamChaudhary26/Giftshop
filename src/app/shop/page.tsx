@@ -208,7 +208,7 @@ export default function ShopPage() {
           </motion.div>
         ) : (
           <div className="text-center py-20">
-            <div className="text-6xl mb-4">📚</div>
+            <div className="text-6xl mb-4">🕯️</div>
             <p className="text-gray-500 text-xl mb-4">
               No products found in "{selectedCategory}" category
             </p>

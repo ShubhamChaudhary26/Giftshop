@@ -57,7 +57,7 @@ export default function ProductTable({ products, onEdit, onDelete }: ProductTabl
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-gray-400">
-                        📚
+                        🕯️
                       </div>
                     )}
                   </div>
