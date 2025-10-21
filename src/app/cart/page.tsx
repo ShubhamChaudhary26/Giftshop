@@ -1,3 +1,4 @@
+// app/cart/page.tsx
 "use client";
 
 import BreadcrumbCart from "@/components/cart-page/BreadcrumbCart";
@@ -14,11 +15,12 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { clearCart } from "@/lib/store/cartsSlice";
 import { useRouter } from "next/navigation";
-// ❌ REMOVED: import { toast } from "sonner";
+import { motion, AnimatePresence } from "framer-motion";
+import { Check } from "lucide-react";
 
 declare let Razorpay: any;
 
-// ✅ Type for Order Summary Props
+// Type for Order Summary Props
 interface OrderSummaryProps {
   totalPrice: number;
   adjustedTotalPrice: number;
@@ -66,7 +68,6 @@ const OrderSummary = memo<OrderSummaryProps>(({
     return Math.round(totalPrice - adjustedTotalPrice);
   }, [totalPrice, adjustedTotalPrice]);
 
-  // ✅ Form validation
   const isFormValid = useMemo(() => {
     return (
       name.trim().length >= 2 &&
@@ -79,7 +80,6 @@ const OrderSummary = memo<OrderSummaryProps>(({
     <div className="w-full lg:max-w-[505px] p-5 md:px-6 flex-col space-y-4 md:space-y-6 rounded-[20px] border border-black/10 sticky top-24 bg-white">
       <h6 className="text-xl md:text-2xl font-bold text-black">Order Summary</h6>
 
-      {/* User Details */}
       <div className="flex flex-col space-y-3">
         <InputGroup>
           <InputGroup.Input
@@ -90,10 +90,7 @@ const OrderSummary = memo<OrderSummaryProps>(({
             disabled={isPending}
             required
             minLength={2}
-            className={cn([
-              "transition-all",
-              name && name.length < 2 && "border-red-300 focus:border-red-500"
-            ])}
+            className={cn(["transition-all", name && name.length < 2 && "border-red-300 focus:border-red-500"])}
           />
         </InputGroup>
         
@@ -107,10 +104,7 @@ const OrderSummary = memo<OrderSummaryProps>(({
             required
             pattern="[0-9]{10}"
             maxLength={10}
-            className={cn([
-              "transition-all",
-              phone && phone.length < 10 && "border-red-300 focus:border-red-500"
-            ])}
+            className={cn(["transition-all", phone && phone.length < 10 && "border-red-300 focus:border-red-500"])}
           />
         </InputGroup>
         
@@ -123,31 +117,21 @@ const OrderSummary = memo<OrderSummaryProps>(({
             disabled={isPending}
             required
             minLength={10}
-            className={cn([
-              "transition-all",
-              address && address.length < 10 && "border-red-300 focus:border-red-500"
-            ])}
+            className={cn(["transition-all", address && address.length < 10 && "border-red-300 focus:border-red-500"])}
           />
         </InputGroup>
       </div>
 
-      {/* Pricing */}
       <div className="flex flex-col space-y-2 border-t border-b border-black/10 py-4">
         <div className="flex items-center justify-between">
           <span className="text-base md:text-xl text-black/60">Subtotal</span>
-          <span className="text-base md:text-xl font-bold">
-            ₹{totalPrice.toLocaleString('en-IN')}
-          </span>
+          <span className="text-base md:text-xl font-bold">₹{totalPrice.toLocaleString('en-IN')}</span>
         </div>
         
         {discount > 0 && (
           <div className="flex items-center justify-between">
-            <span className="text-base md:text-xl text-black/60">
-              Discount (-{discount}%)
-            </span>
-            <span className="text-base md:text-xl font-bold text-red-600">
-              -₹{discountAmount.toLocaleString('en-IN')}
-            </span>
+            <span className="text-base md:text-xl text-black/60">Discount (-{discount}%)</span>
+            <span className="text-base md:text-xl font-bold text-red-600">-₹{discountAmount.toLocaleString('en-IN')}</span>
           </div>
         )}
         
@@ -157,21 +141,14 @@ const OrderSummary = memo<OrderSummaryProps>(({
         </div>
       </div>
 
-      {/* Total */}
       <div className="flex items-center justify-between py-2">
         <span className="text-lg md:text-xl text-black font-semibold">Total</span>
-        <span className="text-xl md:text-2xl font-bold text-black">
-          ₹{Math.round(adjustedTotalPrice).toLocaleString('en-IN')}
-        </span>
+        <span className="text-xl md:text-2xl font-bold text-black">₹{Math.round(adjustedTotalPrice).toLocaleString('en-IN')}</span>
       </div>
 
-      {/* Pay Button */}
       <Button
         type="button"
-        className={cn([
-          "text-sm md:text-base font-medium bg-black rounded-full w-full py-4 md:py-6 disabled:opacity-50 disabled:cursor-not-allowed",
-          "hover:bg-gray-800 transition-all duration-300"
-        ])}
+        className={cn("text-sm md:text-base font-medium bg-black rounded-full w-full py-4 md:py-6 disabled:opacity-50 disabled:cursor-not-allowed", "hover:bg-gray-800 transition-all duration-300")}
         onClick={onPayment}
         disabled={isPending || !isFormValid}
       >
@@ -183,19 +160,13 @@ const OrderSummary = memo<OrderSummaryProps>(({
             </svg>
             Processing...
           </span>
-        ) : (
-          "Proceed to Payment"
-        )}
+        ) : "Proceed to Payment"}
       </Button>
 
-      {/* Helper Text */}
       {!isFormValid && (
-        <p className="text-xs text-red-500 text-center">
-          Please fill all fields correctly before proceeding
-        </p>
+        <p className="text-xs text-red-500 text-center">Please fill all fields correctly before proceeding</p>
       )}
 
-      {/* Security Badge */}
       <div className="flex items-center justify-center gap-2 text-xs text-gray-500 pt-2">
         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
           <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
@@ -212,21 +183,19 @@ export default function CartPage() {
   const [isPending, startTransition] = useTransition();
   const dispatch = useDispatch();
 
-  // Redux selectors
   const cart = useAppSelector((state: RootState) => state.carts.cart);
   const totalPrice = useAppSelector((state: RootState) => state.carts.totalPrice ?? 0);
   const adjustedTotalPrice = useAppSelector((state: RootState) => state.carts.adjustedTotalPrice ?? 0);
 
-  // Form state
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [razorpayLoaded, setRazorpayLoaded] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [whatsappUrl, setWhatsappUrl] = useState('');
 
-  // Memoize cart items
   const items = useMemo(() => cart?.items ?? [], [cart?.items]);
 
-  // Load Razorpay script
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -263,49 +232,19 @@ export default function CartPage() {
     document.head.appendChild(script);
   }, []);
 
-  // Event handlers
-  const handleNameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  }, []);
-
+  const handleNameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value), []);
   const handlePhoneChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, ''); // Only numbers
-    if (value.length <= 10) {
-      setPhone(value);
-    }
+    const value = e.target.value.replace(/\D/g, '');
+    if (value.length <= 10) setPhone(value);
   }, []);
+  const handleAddressChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setAddress(e.target.value), []);
 
-  const handleAddressChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setAddress(e.target.value);
-  }, []);
-
-  // Payment handler
   const handlePayment = useCallback(() => {
-    // Validation
-    if (!name || name.length < 2) {
-      alert("Please enter a valid name (minimum 2 characters)");
-      return;
-    }
-
-    if (!phone || phone.length !== 10) {
-      alert("Please enter a valid 10-digit phone number");
-      return;
-    }
-
-    if (!address || address.length < 10) {
-      alert("Please enter a complete address (minimum 10 characters)");
-      return;
-    }
-
-    if (!razorpayLoaded || typeof Razorpay === 'undefined') {
-      alert("Payment gateway is still loading. Please wait a moment and try again.");
-      return;
-    }
-
-    if (items.length === 0) {
-      alert("Your cart is empty!");
-      return;
-    }
+    if (!name || name.length < 2) { alert("Please enter a valid name"); return; }
+    if (!phone || phone.length !== 10) { alert("Please enter a 10-digit phone number"); return; }
+    if (!address || address.length < 10) { alert("Please enter a complete address"); return; }
+    if (!razorpayLoaded || typeof Razorpay === 'undefined') { alert("Payment gateway is loading. Please wait."); return; }
+    if (items.length === 0) { alert("Your cart is empty!"); return; }
 
     startTransition(() => {
       const currentItems = items.map(item => ({ ...item }));
@@ -314,90 +253,93 @@ export default function CartPage() {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         amount: Math.round(adjustedTotalPrice) * 100,
         currency: "INR",
-        name: "Book.Verse",
-        description: "Purchase Books",
-        image: "/logo.png", // Add your logo
+        name: "Candle.Store",
+        description: "Purchase Candles",
         handler: (response: any) => {
-          try {
-            // Prepare order details
-            const productsList = currentItems
-              .map((p) => `- ${p.name} x ${p.quantity} = ₹${(p.price * p.quantity).toLocaleString('en-IN')}`)
-              .join("\n");
-
-            const message = `🎉 *New Order Received!*\n\n` +
-              `👤 *Customer Details:*\n` +
-              `Name: ${name}\n` +
-              `Phone: ${phone}\n` +
-              `Address: ${address}\n\n` +
-              `💰 *Payment Details:*\n` +
-              `Total Paid: ₹${Math.round(adjustedTotalPrice).toLocaleString('en-IN')}\n` +
-              `Payment ID: ${response.razorpay_payment_id}\n\n` +
-              `📚 *Products:*\n${productsList}\n\n` +
-              `Thank you for your order! 🙏`;
-
-            // Clear cart
-            dispatch(clearCart());
-
-            // Reset form
-            setName("");
-            setPhone("");
-            setAddress("");
-
-            // Success notification
-            alert("Payment successful! Redirecting to WhatsApp...");
-
-            // Open WhatsApp
-            requestAnimationFrame(() => {
-              const whatsappNumber = "7777909218";
-              const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-              window.open(whatsappUrl, "_blank");
-              
-              // Redirect after short delay
-              setTimeout(() => {
-                router.push("/shop?success=true");
-              }, 1000);
-            });
-          } catch (error) {
-            console.error("Error processing payment:", error);
-            alert("Payment successful but there was an error. Please contact support.");
-          }
+          const productsList = currentItems.map(p => `- ${p.name} x ${p.quantity}`).join("\n");
+          const message = `🎉 *New Order Received!*\n\n👤 *Customer:*\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\n\n💰 *Payment:*\nTotal: ₹${Math.round(adjustedTotalPrice).toLocaleString('en-IN')}\nID: ${response.razorpay_payment_id}\n\n🕯️ *Products:*\n${productsList}\n\nThank you! 🙏`;
+          const finalWhatsappUrl = `https://wa.me/7777909218?text=${encodeURIComponent(message)}`;
+          
+          setWhatsappUrl(finalWhatsappUrl);
+          setPaymentSuccess(true);
+          
+          dispatch(clearCart());
+          setName("");
+          setPhone("");
+          setAddress("");
         },
-        prefill: {
-          name,
-          contact: phone,
-          email: "", // Optional: add email field
-        },
-        notes: {
-          address: address,
-          order_type: "Book Purchase",
-        },
-        theme: {
-          color: "#000000",
-        },
+        prefill: { name, contact: phone },
+        notes: { address, order_type: "Candle Purchase" },
+        theme: { color: "#000000" },
         modal: {
-          ondismiss: () => {
-            console.log("Payment cancelled by user");
-          },
-          escape: true,
-          animation: true,
+          ondismiss: () => console.log("Payment cancelled by user"),
         },
       };
 
       try {
         const rzp = new Razorpay(options);
-        rzp.on('payment.failed', function (response: any) {
-          alert(`Payment Failed: ${response.error.description}`);
-          console.error('Payment failed:', response.error);
-        });
+        rzp.on('payment.failed', (resp: any) => alert(`Payment Failed: ${resp.error.description}`));
         rzp.open();
       } catch (error) {
-        console.error("Error opening Razorpay:", error);
-        alert("Failed to open payment gateway. Please try again.");
+        alert("Failed to open payment gateway.");
       }
     });
   }, [name, phone, address, items, adjustedTotalPrice, dispatch, razorpayLoaded, router]);
 
-  // Empty cart state
+  if (paymentSuccess) {
+    return (
+      <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="fixed inset-0 bg-gray-50 z-50 flex items-center justify-center p-4"
+        >
+          <motion.div
+            initial={{ scale: 0.8, y: 50 }}
+            animate={{ scale: 1, y: 0 }}
+            transition={{ type: 'spring', stiffness: 250, damping: 20 }}
+            className="bg-white rounded-3xl p-8 text-center shadow-2xl max-w-lg w-full mx-auto"
+          >
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, type: 'spring' }}
+              className="w-20 h-20 bg-green-100 rounded-full mx-auto flex items-center justify-center mb-6"
+            >
+              <Check className="w-12 h-12 text-green-600" />
+            </motion.div>
+            
+            <h2 className={cn([integralCF.className, "text-3xl font-bold mb-3"])}>
+              Payment Successful
+            </h2>
+            
+            <p className="text-gray-600 mb-8">
+              Thank you for your order. We've received your payment and your order is now being processed.
+            </p>
+            
+            <div className="space-y-4">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-block px-8 py-4 bg-green-500 text-white rounded-full font-bold hover:bg-green-600 transition-colors text-lg"
+              >
+                Confirm Order on WhatsApp
+              </a>
+              {/* <Button 
+                variant="outline"
+                className="w-full rounded-full py-4"
+                onClick={() => router.push('/shop')}
+              >
+                Continue Shopping
+              </Button> */}
+            </div>
+          </motion.div>
+        </motion.div>
+      </AnimatePresence>
+    );
+  }
+
   if (items.length === 0) {
     return (
       <main className="pb-20 min-h-screen">
@@ -413,14 +355,8 @@ export default function CartPage() {
       <div className="max-w-frame mx-auto px-4 xl:px-0">
         <BreadcrumbCart />
         
-        {/* Header */}
         <div className="flex items-center justify-between mb-5 md:mb-6">
-          <h2
-            className={cn([
-              integralCF.className,
-              "font-bold text-2xl md:text-[32px] lg:text-[40px] text-black uppercase",
-            ])}
-          >
+          <h2 className={cn([integralCF.className, "font-bold text-2xl md:text-[32px] lg:text-[40px] text-black uppercase"])}>
             Your Cart
           </h2>
           <span className="text-sm md:text-base text-gray-600">
@@ -429,7 +365,6 @@ export default function CartPage() {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-5 lg:gap-6 items-start">
-          {/* Cart Items */}
           <div className="w-full lg:flex-1 p-3.5 md:px-6 md:py-5 flex-col space-y-4 md:space-y-6 rounded-[20px] border border-black/10">
             {items.map((product, idx) => (
               <React.Fragment key={`${product.id}-${product.attributes.join('-')}-${idx}`}>
@@ -439,7 +374,6 @@ export default function CartPage() {
             ))}
           </div>
 
-          {/* Order Summary */}
           <OrderSummary
             totalPrice={totalPrice}
             adjustedTotalPrice={adjustedTotalPrice}

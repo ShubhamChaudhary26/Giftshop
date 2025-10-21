@@ -127,7 +127,7 @@ export default function ShopPage() {
       <div className="bg-black text-white py-12">
         <div className="max-w-7xl mx-auto px-4">
           <h1 className={cn([integralCF.className, "text-4xl md:text-5xl uppercase"])}>
-            Shop All Books
+            Shop All Candles
           </h1>
           <p className="text-gray-400 mt-2">
             {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} available

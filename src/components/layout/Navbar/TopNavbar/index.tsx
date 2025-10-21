@@ -23,9 +23,9 @@ type NavMenuItem = {
 
 const data: NavMenuItem[] = [
   { id: 0, type: "MenuItem", label: "Home", url: "/", children: [] },
+  { id: 3, type: "MenuItem", label: "Shop", url: "/shop", children: [] },
   { id: 1, type: "MenuItem", label: "About", url: "/about", children: [] },
   { id: 2, type: "MenuItem", label: "Services", url: "/service", children: [] },
-  { id: 3, type: "MenuItem", label: "Ecom", url: "/shop", children: [] },
   { id: 4, type: "MenuItem", label: "Contact", url: "/contact", children: [] },
 ];
 
@@ -122,7 +122,7 @@ const TopNavbar = () => {
               "text-xl sm:text-2xl lg:text-[32px] font-bold mb-1.2 ml-2"
             )}
           >
-            Book.Verse
+            Candle.Store
           </Link>
         </div>
 

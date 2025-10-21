@@ -29,9 +29,10 @@ interface Product {
 }
 
 const CATEGORIES = [
-  'AI & ML', 'Programming', 'Web Development', 'Data Science', 'Cybersecurity', 'Cloud Computing',
-  'Database', 'Networking', 'Operating Systems', 'Software Engineering', 'Mobile Development',
-  'DevOps', 'Blockchain', 'Game Development', 'Other'
+  'Signature Collection', 'Aromatherapy Blends', 'Home Décor Candles', 'Luxury Scents', 
+'Classic Jars', 'Pillar Series', 'Mini Lights', 'Gift Hampers', 'Festive Collection', 
+'Personalized Candles', 'Eco Soy Candles', 'Wax Melts & Diffusers', 'Candle Accessories', 'Limited Editions', 'Other'
+
 ]
 
 const MAX_GALLERY_IMAGES = 3
@@ -284,7 +285,7 @@ export default function AdminDashboard() {
           <table className="w-full">
             <thead className="bg-gray-100">
               <tr>
-                <th className="p-4 text-left">Image</th><th className="p-4 text-left">Title</th><th className="p-4 text-left">Author</th>
+                <th className="p-4 text-left">Image</th><th className="p-4 text-left">Title</th><th className="p-4 text-left">Shop Name</th>
                 <th className="p-4 text-left">Price</th><th className="p-4 text-left">Stock</th><th className="p-4 text-left">Category</th>
                 <th className="p-4 text-left">Gallery</th><th className="p-4 text-left">Status</th><th className="p-4 text-left">Actions</th>
               </tr>
@@ -356,7 +357,7 @@ export default function AdminDashboard() {
                       />
                     </Field>
 
-                    <Field label="Author *">
+                    <Field label="Shop Name *">
                       <input
                         type="text"
                         value={formData.author}

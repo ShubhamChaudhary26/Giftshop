@@ -11,43 +11,43 @@ const HeroSection = () => {
   const slides = [
     {
       id: 1,
-      image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1920&h=600&fit=crop",
-      title: "Discover Next",
-      highlight: "Favorite Book",
-      subtitle: "50,000+ IT & AI Books Available at Unbeatable Prices",
+      image: "https://www.themaevastore.com/cdn/shop/files/Floating_candles.jpg?v=1756912952",
+      title: "Discover Your",
+      highlight: "Perfect Candle",
+      subtitle: "5,000+ Premium Scented Candles at Unbeatable Prices",
       buttonText: "Shop Now",
       buttonLink: "/shop",
       discount: "UPTO 70% OFF",
     },
     {
       id: 2,
-      image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1920&h=600&fit=crop",
+      image: "https://www.radliving.in/cdn/shop/products/rad5062.jpg?v=1663946515",
       title: "New Arrivals",
       highlight: "This Week",
-      subtitle: "Be the First to Explore Latest AI & Tech Books",
-      buttonText: "Explore New Books",
+      subtitle: "Be the First to Explore Latest Handcrafted Candles",
+      buttonText: "Explore New",
       buttonLink: "/new-arrivals",
       discount: "FREE DELIVERY",
     },
     {
       id: 3,
-      image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=1920&h=600&fit=crop",
+      image: "https://www.satyamkraft.in/cdn/shop/files/s3333_700x700.jpg?v=1747470913",
       title: "Bestselling",
       highlight: "Collections",
-      subtitle: "Handpicked IT & AI Books Loved by Readers",
+      subtitle: "Handpicked Aromatic Candles Loved by Customers",
       buttonText: "View Bestsellers",
       buttonLink: "/bestsellers",
       discount: "BUY 2 GET 1 FREE",
     },
     {
       id: 4,
-      image: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=1920&h=600&fit=crop",
-      title: "Academic Study",
-      highlight: "Materials",
-      subtitle: "Complete Your AI & IT Learning Journey",
-      buttonText: "Browse Academic",
-      buttonLink: "/academic",
-      discount: "STUDENT DISCOUNT",
+      image: "https://m.media-amazon.com/images/I/71IVkobrqyL._UF1000,1000_QL80_.jpg",
+      title: "Gift Sets for",
+      highlight: "Aromatherapy",
+      subtitle: "Complete Your Home with Premium Scented Candles",
+      buttonText: "Browse Collection",
+      buttonLink: "/gift-sets",
+      discount: "SPECIAL GIFT PACKS",
     },
   ];
 
@@ -141,7 +141,7 @@ const HeroSection = () => {
                     href="/shop"
                     className="border-2 border-white text-white px-6 py-3 sm:px-7 sm:py-3.5 md:px-8 md:py-4 lg:px-10 lg:py-4 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-bold hover:bg-white hover:text-black transition-all duration-300 text-center shadow-xl hover:shadow-2xl backdrop-blur-sm"
                   >
-                    View All Books
+                    View All Candles
                   </Link>
                 </div>
 
@@ -157,8 +157,8 @@ const HeroSection = () => {
                     <span>Free Delivery</span>
                   </div>
                   <div className="flex items-center gap-1.5 sm:gap-2 text-white/90 text-[10px] sm:text-xs md:text-sm lg:text-base font-medium bg-white/10 backdrop-blur-md px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/20">
-                    <span className="text-sm sm:text-base md:text-lg">✨</span>
-                    <span>Original Books</span>
+                    <span className="text-sm sm:text-base md:text-lg">🔥</span>
+                    <span>Handcrafted</span>
                   </div>
                   <div className="flex items-center gap-1.5 sm:gap-2 text-white/90 text-[10px] sm:text-xs md:text-sm lg:text-base font-medium bg-white/10 backdrop-blur-md px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/20">
                     <span className="text-sm sm:text-base md:text-lg">🛡️</span>
@@ -209,7 +209,7 @@ const HeroSection = () => {
       {/* Animated Progress Bar */}
       <div className="absolute bottom-0 left-0 right-0 h-0.5 sm:h-1 bg-white/10 overflow-hidden">
         <motion.div
-          className="h-full bg-gradient-to-r from-gray-600 via-gray-800 to-gray-200 shadow-lg shadow-orange-500/50"
+          className="h-full bg-gradient-to-r from-gray-600 via-gray-800 to-gray-200 shadow-lg shadow-gray-500/50"
           initial={{ width: "0%" }}
           animate={{ width: "100%" }}
           transition={{

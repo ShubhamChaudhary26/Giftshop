@@ -6,12 +6,12 @@ import { Product } from "@/types/product.types";
 import { supabase } from "@/lib/supabase";
 import { reviewsData } from "@/lib/static-data";
 import { notFound } from "next/navigation";
+import TrustBadges from "@/components/TrustBadges/TrustBadges";
+import GiftBoxBuilder from "@/components/ScentIntensitySelector/ScentIntensitySelector";
 
 // Make page dynamic (no static caching)
 export const dynamic = "force-dynamic";
 
-// Fetch new arrivals
-// app/page.tsx
 
 // Fetch new arrivals
 async function getNewArrivals(): Promise<Product[]> {
@@ -27,15 +27,15 @@ async function getNewArrivals(): Promise<Product[]> {
   return data.map((item: any) => ({
     id: item.id,
     title: item.title || "",
-    src_url: item.src_url || "/images/book1.webp",  // ✅ Changed from srcUrl to src_url
-    srcUrl: item.src_url || "/images/book1.webp",   // Keep both for compatibility
+    src_url: item.src_url || "/images/book1.webp", // ✅ Changed from srcUrl to src_url
+    srcUrl: item.src_url || "/images/book1.webp", // Keep both for compatibility
     gallery: item.gallery || [item.src_url || "/images/book1.webp"],
     price: item.price || 0,
     discount: {
       amount: item.discount_amount || 0,
       percentage: item.discount_percentage || 0,
     },
-    discount_amount: item.discount_amount || 0,     // Add these too
+    discount_amount: item.discount_amount || 0, // Add these too
     discount_percentage: item.discount_percentage || 0,
     rating: item.rating || 0,
     author: item.author,
@@ -61,8 +61,8 @@ async function getTopSelling(): Promise<Product[]> {
   return data.map((item: any) => ({
     id: item.id,
     title: item.title || "",
-    src_url: item.src_url || "/images/book1.webp",  // ✅ Changed from srcUrl to src_url
-    srcUrl: item.src_url || "/images/book1.webp",   // Keep both for compatibility
+    src_url: item.src_url || "/images/book1.webp", // ✅ Changed from srcUrl to src_url
+    srcUrl: item.src_url || "/images/book1.webp", // Keep both for compatibility
     gallery: item.gallery || [item.src_url || "/images/book1.webp"],
     price: item.price || 0,
     discount: {
@@ -107,7 +107,8 @@ export default async function Home() {
             <hr className="h-[1px] border-t-black/10 my-10 sm:my-16" />
           </div>
         )}
-
+        <TrustBadges />
+        <GiftBoxBuilder />
         <div className="mb-[50px] sm:mb-20">
           <ProductListSec
             title="TOP SELLING"

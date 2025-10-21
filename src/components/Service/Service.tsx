@@ -4,227 +4,262 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { integralCF } from "@/styles/fonts";
-import { 
-  Package, 
-  Gift, 
-  CreditCard, 
-  RefreshCcw, 
-  Headphones,
-  BookOpen,
-  Calendar,
-  Smartphone,
-  Mic,
-  PenTool,
-  Tag,
-  Search,
-  ShoppingCart,
-  MapPin,
-  BookMarked,
-  Award,
-  TrendingUp,
-  Users,
-  Clock,
-  Shield,
-  Zap,
-  Heart,
-  Star,
-  CheckCircle2,
-  ChevronDown,
-  ChevronUp
-} from "lucide-react";
-import { reviewsData } from "@/lib/static-data";
-import Reviews from "../homepage/Reviews";
 
 const ServicesPage = () => {
   const [selectedService, setSelectedService] = useState(0);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
-  // Services offered by bookstore
+  // Services offered by candle store
   const services = [
     {
-      icon: Package,
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+        </svg>
+      ),
+      title: "Custom Candles",
+      shortDesc: "Personalized fragrances & designs for you",
+      longDesc: "Create your unique signature candle with our custom service. Choose your fragrance, color, jar design, and even add personalized labels for special occasions.",
+      features: [
+        "Choose from 100+ fragrances",
+        "Custom jar designs & colors",
+        "Personalized labels & messages",
+        "Minimum order: Just 1 candle"
+      ],
+      image: "https://images.unsplash.com/photo-1602874801006-95926fc7e8b8?w=800&h=600&fit=crop"
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+        </svg>
+      ),
+      title: "Premium Gift Sets",
+      shortDesc: "Beautiful gift boxes for every occasion",
+      longDesc: "Surprise your loved ones with our curated gift sets. Perfect for birthdays, anniversaries, Diwali, weddings, and corporate gifting.",
+      features: [
+        "Luxury packaging included",
+        "Customizable gift boxes",
+        "Greeting cards & messages",
+        "Same-day delivery available"
+      ],
+      image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=800&h=600&fit=crop"
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+        </svg>
+      ),
       title: "Bulk Orders",
-      shortDesc: "Special discounts for schools & institutions",
-      longDesc: "We provide special services for educational institutions, libraries, and corporate bulk orders with attractive discounts and dedicated support.",
+      shortDesc: "Special discounts for weddings & events",
+      longDesc: "Planning a wedding, corporate event, or party? Get wholesale pricing on bulk orders with dedicated support and custom packaging options.",
       features: [
-        "Up to 40% discount",
-        "Dedicated account manager",
-        "Custom invoicing",
-        "Priority processing"
+        "Up to 50% discount",
+        "Custom fragrances for events",
+        "Branded packaging available",
+        "Dedicated account manager"
       ],
-      image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800&h=600&fit=crop"
+      image: "https://images.unsplash.com/photo-1588854337115-1c67d9247e4d?w=800&h=600&fit=crop"
     },
     {
-      icon: Gift,
-      title: "Gift Wrapping",
-      shortDesc: "Beautiful gift wrapping for special occasions",
-      longDesc: "Make your book gifts extra special with our premium gift wrapping service. Perfect for birthdays, anniversaries, and special occasions.",
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+        </svg>
+      ),
+      title: "Candle Subscription",
+      shortDesc: "Monthly curated candle boxes delivered",
+      longDesc: "Never run out of your favorite candles! Subscribe to receive handpicked premium candles every month with exclusive member benefits.",
       features: [
-        "Premium wrapping paper",
-        "Personalized messages",
-        "Greeting cards",
-        "Ribbon & decorations"
+        "New fragrances every month",
+        "20% off subscription price",
+        "Free shipping always",
+        "Cancel anytime, no commitment"
       ],
-      image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&h=600&fit=crop"
+      image: "https://images.unsplash.com/photo-1609709295948-17d77cb2a69b?w=800&h=600&fit=crop"
     },
     {
-      icon: CreditCard,
-      title: "Easy Payment",
-      shortDesc: "Multiple secure payment options",
-      longDesc: "Shop with confidence using our secure payment gateway. We accept all major payment methods including EMI options for your convenience.",
-      features: [
-        "Credit/Debit cards",
-        "UPI & Wallets",
-        "Cash on delivery",
-        "No-cost EMI available"
-      ],
-      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=600&fit=crop"
-    },
-    {
-      icon: RefreshCcw,
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+      ),
       title: "Easy Returns",
       shortDesc: "30-day hassle-free return policy",
-      longDesc: "Not satisfied with your purchase? No worries! We offer a 30-day return policy with free pickup service and instant refunds.",
+      longDesc: "Not satisfied with your candles? No worries! We offer a 30-day return policy with free pickup service and instant refunds to your account.",
       features: [
         "30-day return window",
-        "Free pickup service",
-        "Instant refunds",
-        "No questions asked"
+        "Free pickup from home",
+        "Instant refund processing",
+        "No questions asked policy"
       ],
-      image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&h=600&fit=crop"
+      image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&h=600&fit=crop"
     },
     {
-      icon: Headphones,
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+      ),
       title: "24/7 Support",
       shortDesc: "Round-the-clock customer assistance",
-      longDesc: "Our dedicated support team is available 24/7 to help you with any queries, recommendations, or issues you might have.",
+      longDesc: "Our aromatherapy experts and support team are available 24/7 to help you choose the perfect fragrance, answer queries, or resolve any issues.",
       features: [
-        "24/7 live chat",
-        "Phone support",
-        "Email assistance",
-        "Book recommendations"
+        "24/7 live chat support",
+        "WhatsApp assistance",
+        "Video call consultations",
+        "Fragrance recommendations"
       ],
-      image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&h=600&fit=crop"
+      image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&h=600&fit=crop"
     }
   ];
 
   // Additional services
   const additionalServices = [
-    { icon: BookOpen, title: "Book Recommendations", desc: "Personalized suggestions based on your reading history" },
-    { icon: Calendar, title: "Pre-Orders", desc: "Be the first to get upcoming releases" },
-    { icon: Smartphone, title: "E-Books", desc: "Digital versions available for instant reading" },
-    { icon: Mic, title: "Audiobooks", desc: "Listen to your favorite books on the go" },
-    { icon: PenTool, title: "Author Events", desc: "Meet your favorite authors at exclusive events" },
-    { icon: Tag, title: "Member Benefits", desc: "Special discounts and early access for members" }
+    { 
+      icon: (
+        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      ), 
+      title: "Same Day Delivery", 
+      desc: "Get your candles delivered within hours in select cities" 
+    },
+    { 
+      icon: (
+        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+      ), 
+      title: "Candle Refills", 
+      desc: "Eco-friendly refill service for sustainable living" 
+    },
+    { 
+      icon: (
+        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        </svg>
+      ), 
+      title: "Aromatherapy Consult", 
+      desc: "Free consultation with certified aromatherapy experts" 
+    },
+    { 
+      icon: (
+        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+      ), 
+      title: "Candle Care Guide", 
+      desc: "Detailed tips to maximize burn time and fragrance" 
+    },
+    { 
+      icon: (
+        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      ), 
+      title: "Corporate Gifting", 
+      desc: "Branded candles for corporate events and employee gifts" 
+    },
+    { 
+      icon: (
+        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+        </svg>
+      ), 
+      title: "Candle Workshops", 
+      desc: "Learn to make your own candles with expert guidance" 
+    },
   ];
 
   // How it works
   const process = [
-    { step: "01", title: "Browse", desc: "Explore our collection", icon: Search },
-    { step: "02", title: "Order", desc: "Add to cart & checkout", icon: ShoppingCart },
-    { step: "03", title: "Track", desc: "Real-time tracking", icon: MapPin },
-    { step: "04", title: "Enjoy", desc: "Start reading!", icon: BookMarked }
-  ];
-
-  // Why Choose Us
-  const whyChooseUs = [
-    {
-      icon: Award,
-      title: "Award-Winning Service",
-      description: "Recognized as India's #1 online bookstore for 3 consecutive years"
-    },
-    {
-      icon: TrendingUp,
-      title: "Fastest Growing",
-      description: "500K+ happy customers and growing every day"
-    },
-    {
-      icon: Users,
-      title: "Expert Team",
-      description: "Book enthusiasts helping you find your perfect read"
-    },
-    {
-      icon: Clock,
-      title: "Quick Delivery",
-      description: "Express delivery in metro cities within 24-48 hours"
-    },
-    {
-      icon: Shield,
-      title: "100% Authentic",
-      description: "Original books sourced directly from publishers"
-    },
-    {
-      icon: Zap,
-      title: "Lightning Fast",
-      description: "Seamless browsing experience with instant search"
-    }
+    { step: "01", title: "Choose", desc: "Select your fragrance", icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+    )},
+    { step: "02", title: "Order", desc: "Add to cart & checkout", icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+    )},
+    { step: "03", title: "Track", desc: "Real-time tracking", icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    )},
+    { step: "04", title: "Enjoy", desc: "Light up & relax!", icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    )}
   ];
 
   // Testimonials
   const testimonials = [
     {
       name: "Priya Sharma",
-      role: "Book Blogger",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
+      role: "Mumbai",
       rating: 5,
-      text: "The bulk order service is fantastic! Got amazing discounts for my book club. Highly recommended!"
+      text: "The custom candle service is amazing! Created a lavender-vanilla candle for my bedroom. The fragrance lasts all day!",
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
     },
     {
-      name: "Rahul Mehta",
-      role: "College Student",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
+      name: "Rahul Verma",
+      role: "Delhi",
       rating: 5,
-      text: "Love the gift wrapping service! Made my friend's birthday extra special. The packaging was beautiful."
+      text: "Ordered 100 candles for my wedding. The bulk discount was great and packaging was beautiful. Highly recommend!",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
     },
     {
-      name: "Anjali Desai",
-      role: "Teacher",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop",
+      name: "Ananya Desai",
+      role: "Bangalore",
       rating: 5,
-      text: "Customer support is excellent! They helped me track my order and resolved my query within minutes."
+      text: "Subscription box is worth every rupee! Love discovering new fragrances every month. Customer service is top-notch!",
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop"
     }
-  ];
-
-  // Statistics
-  const stats = [
-    { icon: Users, number: "500K+", label: "Happy Customers" },
-    { icon: BookOpen, number: "50K+", label: "Books Available" },
-    { icon: Package, number: "1M+", label: "Orders Delivered" },
-    { icon: Star, number: "4.8/5", label: "Average Rating" }
   ];
 
   // FAQs
   const faqs = [
     {
-      question: "What is your delivery time?",
-      answer: "We offer express delivery in metro cities within 24-48 hours. For other locations, delivery typically takes 3-5 business days."
+      question: "How long do your candles burn?",
+      answer: "Our candles have an average burn time of 40-60 hours depending on the size. Proper care (trimming wick, avoiding drafts) can extend burn time by 20%."
     },
     {
-      question: "Do you offer international shipping?",
-      answer: "Currently, we only ship within India. However, we're working on expanding our services internationally soon."
+      question: "Are your candles eco-friendly?",
+      answer: "Yes! We use 100% natural soy wax, cotton wicks, and essential oils. All packaging is recyclable and we offer a candle jar refill service."
     },
     {
-      question: "What is your return policy?",
-      answer: "We offer a 30-day hassle-free return policy. If you're not satisfied with your purchase, we'll arrange a free pickup and process your refund immediately."
+      question: "Do you offer custom fragrances?",
+      answer: "Absolutely! Our fragrance experts can help you create custom blends. Minimum order for fully custom fragrances is 10 candles."
     },
     {
-      question: "Are the books original?",
-      answer: "Yes, 100%! All our books are sourced directly from authorized publishers and distributors. We guarantee authenticity."
+      question: "What's your return policy?",
+      answer: "We offer a 30-day hassle-free return. If you're not satisfied, we'll pick up the candle from your home and process an instant refund."
     },
     {
-      question: "Do you offer EMI options?",
-      answer: "Yes, we offer no-cost EMI options on orders above ₹3,000 with select credit cards and payment partners."
-    },
-    {
-      question: "How can I track my order?",
-      answer: "Once your order is shipped, you'll receive a tracking link via email and SMS. You can also track your order from your account dashboard."
+      question: "Do you deliver all over India?",
+      answer: "Yes, we deliver pan-India! Same-day delivery available in Mumbai, Delhi, Bangalore, and Pune. Other cities receive within 2-5 business days."
     }
+  ];
+
+  // Stats
+  const stats = [
+    { number: "2K+", label: "Happy Customers" },
+    { number: "70+", label: "Unique Fragrances" },
+    { number: "28", label: "States Covered" },
+    { number: "4.9/5", label: "Average Rating" }
   ];
 
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative bg-black text-white py-20 md:py-32 overflow-hidden">
+        {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
             backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px)`
@@ -255,13 +290,34 @@ const ServicesPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              We're committed to making your book buying experience seamless and enjoyable
+              We're committed to making your candle buying experience seamless and delightful
             </motion.p>
           </motion.div>
         </div>
       </section>
 
-     
+      {/* Stats Section */}
+      <section className="py-12 bg-gray-50 border-b">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="text-center"
+              >
+                <div className="text-4xl md:text-5xl font-bold text-gray-700 mb-2">
+                  {stat.number}
+                </div>
+                <div className="text-gray-600">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Main Services Section */}
       <section className="py-20 md:py-22">
@@ -279,7 +335,7 @@ const ServicesPage = () => {
               What We Offer
             </h2>
             <p className="text-gray-600 text-lg">
-              Premium services designed for book lovers
+              Premium services designed for candle lovers
             </p>
           </motion.div>
 
@@ -287,47 +343,36 @@ const ServicesPage = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Service List */}
             <div className="space-y-4">
-              {services.map((service, index) => {
-                const IconComponent = service.icon;
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    onClick={() => setSelectedService(index)}
-                    className={cn([
-                      "p-6 rounded-2xl cursor-pointer transition-all duration-300",
-                      selectedService === index 
-                        ? "bg-black text-white shadow-xl" 
-                        : "bg-gray-100 hover:bg-gray-200"
-                    ])}
-                    whileHover={{ x: 10 }}
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className={cn([
-                        "w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0",
-                        selectedService === index ? "bg-white/20" : "bg-white"
+              {services.map((service, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  onClick={() => setSelectedService(index)}
+                  className={cn([
+                    "p-6 rounded-2xl cursor-pointer transition-all duration-300",
+                    selectedService === index 
+                      ? "bg-black text-white shadow-xl" 
+                      : "bg-gray-100 hover:bg-gray-200"
+                  ])}
+                  whileHover={{ x: 10 }}
+                >
+                  <div className="flex items-start gap-4">
+                    <span className="text-3xl">{service.icon}</span>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                      <p className={cn([
+                        "text-sm",
+                        selectedService === index ? "text-gray-300" : "text-gray-600"
                       ])}>
-                        <IconComponent className={cn([
-                          "w-6 h-6",
-                          selectedService === index ? "text-white" : "text-black"
-                        ])} />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-                        <p className={cn([
-                          "text-sm",
-                          selectedService === index ? "text-gray-300" : "text-gray-600"
-                        ])}>
-                          {service.shortDesc}
-                        </p>
-                      </div>
+                        {service.shortDesc}
+                      </p>
                     </div>
-                  </motion.div>
-                );
-              })}
+                  </div>
+                </motion.div>
+              ))}
             </div>
 
             {/* Service Details */}
@@ -360,7 +405,7 @@ const ServicesPage = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.1 }}
                   >
-                    <CheckCircle2 className="text-green-500 w-5 h-5 flex-shrink-0" />
+                    <span className="text-green-500 text-xl">✓</span>
                     <span>{feature}</span>
                   </motion.div>
                 ))}
@@ -370,57 +415,8 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <h2 className={cn([
-              integralCF.className,
-              "text-4xl md:text-5xl text-black uppercase mb-4"
-            ])}>
-              Why Choose Us
-            </h2>
-            <p className="text-gray-600 text-lg">
-              What makes us different from others
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {whyChooseUs.map((item, index) => {
-              const IconComponent = item.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -10 }}
-                  className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all"
-                >
-                  <motion.div 
-                    className="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center mb-6"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <IconComponent className="w-8 h-8 text-gray-700" />
-                  </motion.div>
-                  <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{item.description}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* How It Works */}
-      <section className="py-10 bg-white">
+      <section className="py-10 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div 
             className="text-center mb-16"
@@ -435,102 +431,38 @@ const ServicesPage = () => {
               How It Works
             </h2>
             <p className="text-gray-600 text-lg">
-              Simple steps to get your books
+              Simple steps to get your perfect candle
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-4 gap-8">
-            {process.map((item, index) => {
-              const IconComponent = item.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="text-center relative"
-                >
-                  {index < process.length - 1 && (
-                    <div className="hidden md:block absolute top-10 left-[60%] w-full h-0.5 bg-gray-200" />
-                  )}
-                  <motion.div 
-                    className="w-20 h-20 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-4 relative z-10"
-                    whileHover={{ scale: 1.1, rotate: 360 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <IconComponent className="w-10 h-10" />
-                  </motion.div>
-                  <div className="text-gray-400 text-sm mb-2">{item.step}</div>
-                  <h3 className="font-bold text-xl mb-2">{item.title}</h3>
-                  <p className="text-gray-600">{item.desc}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <div className="mt-20">
-
-     <Reviews data={reviewsData} />
-      </div>
-      {/* <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <h2 className={cn([
-              integralCF.className,
-              "text-4xl md:text-5xl text-black uppercase mb-4"
-            ])}>
-              What Our Customers Say
-            </h2>
-            <p className="text-gray-600 text-lg">
-              Real experiences from real book lovers
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
+            {process.map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all"
+                className="text-center"
               >
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-gray-600 mb-6 italic">"{testimonial.text}"</p>
-                <div className="flex items-center gap-4">
-                  <img 
-                    src={testimonial.image} 
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                  <div>
-                    <h4 className="font-bold">{testimonial.name}</h4>
-                    <p className="text-sm text-gray-500">{testimonial.role}</p>
-                  </div>
-                </div>
+                <motion.div 
+                  className="w-20 h-20 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-4"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {item.icon}
+                </motion.div>
+                <div className="text-gray-400 text-sm mb-2">{item.step}</div>
+                <h3 className="font-bold text-xl mb-2">{item.title}</h3>
+                <p className="text-gray-600">{item.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* Additional Services Grid */}
-      <section className="py-20 bg-white">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div 
             className="text-center mb-16"
@@ -547,32 +479,80 @@ const ServicesPage = () => {
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {additionalServices.map((service, index) => {
-              const IconComponent = service.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  whileHover={{ y: -10 }}
-                  className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-xl transition-all"
-                >
-                  <div className="w-14 h-14 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center mb-4">
-                    <IconComponent className="w-7 h-7 text-gray-700" />
+            {additionalServices.map((service, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                whileHover={{ y: -10 }}
+                className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-xl transition-all"
+              >
+                <div className="text-gray-700 mb-4">{service.icon}</div>
+                <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                <p className="text-gray-600">{service.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2 className={cn([
+              integralCF.className,
+              "text-4xl md:text-5xl text-black uppercase mb-4"
+            ])}>
+              What Our Customers Say
+            </h2>
+            <p className="text-gray-600 text-lg">
+              Real experiences from real candle lovers
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.name}
+                    className="w-16 h-16 rounded-full object-cover"
+                  />
+                  <div>
+                    <h4 className="font-bold text-lg">{testimonial.name}</h4>
+                    <p className="text-gray-600 text-sm">{testimonial.role}</p>
                   </div>
-                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-                  <p className="text-gray-600">{service.desc}</p>
-                </motion.div>
-              );
-            })}
+                </div>
+                <div className="flex gap-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <span key={i} className="text-yellow-500">★</span>
+                  ))}
+                </div>
+                <p className="text-gray-600 italic">"{testimonial.text}"</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20">
         <div className="max-w-4xl mx-auto px-4">
           <motion.div 
             className="text-center mb-16"
@@ -586,9 +566,6 @@ const ServicesPage = () => {
             ])}>
               Frequently Asked Questions
             </h2>
-            <p className="text-gray-600 text-lg">
-              Everything you need to know about our services
-            </p>
           </motion.div>
 
           <div className="space-y-4">
@@ -598,27 +575,32 @@ const ServicesPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                className="bg-white rounded-2xl shadow-md overflow-hidden"
+                transition={{ delay: index * 0.1 }}
+                className="border border-gray-200 rounded-2xl overflow-hidden"
               >
                 <button
-                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full p-6 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+                  onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                  className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
                 >
-                  <span className="font-bold text-lg pr-8">{faq.question}</span>
-                  {openFaq === index ? (
-                    <ChevronUp className="w-5 h-5 text-gray-500 flex-shrink-0" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0" />
-                  )}
+                  <span className="font-bold text-lg">{faq.question}</span>
+                  <motion.span
+                    animate={{ rotate: activeFaq === index ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-2xl"
+                  >
+                    ↓
+                  </motion.span>
                 </button>
                 <motion.div
                   initial={false}
-                  animate={{ height: openFaq === index ? "auto" : 0 }}
+                  animate={{
+                    height: activeFaq === index ? "auto" : 0,
+                    opacity: activeFaq === index ? 1 : 0
+                  }}
                   transition={{ duration: 0.3 }}
                   className="overflow-hidden"
                 >
-                  <div className="p-6 pt-0 text-gray-600 leading-relaxed">
+                  <div className="px-6 pb-4 text-gray-600">
                     {faq.answer}
                   </div>
                 </motion.div>
@@ -631,36 +613,45 @@ const ServicesPage = () => {
       {/* CTA Section */}
       <section className="py-20 bg-black text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+          <motion.h2 
+            className={cn([
+              integralCF.className,
+              "text-4xl md:text-5xl mb-6 uppercase"
+            ])}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-500/20 to-gray-700/20 blur-3xl" />
-            <div className="relative">
-              {/* <Heart className="w-16 h-16 mx-auto mb-6 text-red-500" /> */}
-              <h2 className={cn([
-                integralCF.className,
-                "text-4xl md:text-5xl mb-6 uppercase"
-              ])}>
-                Experience Our Services
-              </h2>
-              <p className="text-gray-400 text-xl mb-8">
-                Join thousands of satisfied customers
-              </p>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Link 
-                  href="/shop"
-                  className="inline-block bg-white text-black px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-200 transition-all"
-                >
-                  Start Shopping →
-                </Link>
-              </motion.div>
-            </div>
+            Experience Our Premium Services
+          </motion.h2>
+          <motion.p 
+            className="text-gray-400 text-xl mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            Join 50,000+ happy customers across India
+          </motion.p>
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+          >
+            <Link 
+              href="/shop"
+              className="inline-block bg-white text-black px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-200 transition-all"
+            >
+              Start Shopping →
+            </Link>
+            <Link 
+              href="/contact"
+              className="inline-block border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-black transition-all"
+            >
+              Get Custom Quote
+            </Link>
           </motion.div>
         </div>
       </section>

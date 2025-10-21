@@ -2,19 +2,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-const bookBrandsData = [
-  { id: "oreilly", name: "O'Reilly Media", srcUrl: "/icons/oreilly.png" },
-  { id: "packt", name: "Packt Publishing", srcUrl: "/icons/packt.png" },
-  { id: "apress", name: "Apress", srcUrl: "/icons/apress.png" },
-  { id: "manning", name: "Manning Publications", srcUrl: "/icons/manning.png" },
-  { id: "pearson", name: "Pearson Education", srcUrl: "/icons/pearson.png" },
-  { id: "wiley", name: "Wiley", srcUrl: "/icons/wiley.png" },
+const candleBrandsData = [
+  { id: "yankee", name: "Yankee Candle", srcUrl: "/icons/yankee.png" },
+  { id: "bath", name: "Bath & Body Works", srcUrl: "/icons/bath.png" },
+  { id: "woodwick", name: "WoodWick", srcUrl: "/icons/woodwick.png" },
+  { id: "voluspa", name: "Voluspa", srcUrl: "/icons/voluspa.png" },
+  { id: "diptyque", name: "Diptyque", srcUrl: "/icons/diptyque.png" },
+  { id: "nest", name: "Nest Fragrances", srcUrl: "/icons/nest.png" },
+  { id: "jo-malone", name: "Jo Malone", srcUrl: "/icons/jo-malone.png" },
+  { id: "byredo", name: "Byredo", srcUrl: "/icons/byredo.png" },
 ];
 
 const AnimatedCounter = ({
   target,
   suffix = "",
-  duration = 2,
+  duration = 3,
 }: {
   target: number;
   suffix?: string;
@@ -57,10 +59,10 @@ const RelatedBrands = () => {
           viewport={{ once: true }}
         >
           {[
-            { number: 50, suffix: "+", label: "Publishers" },
-            { number: 10000, suffix: "+", label: "Authors" },
-            { number: 25, suffix: "+", label: "Countries" },
-            { number: 100000, suffix: "+", label: "Titles" },
+            { number: 100, suffix: "+", label: "Fragrances" },
+            { number: 300, suffix: "+", label: "Products" },
+            { number: 30, suffix: "+", label: "Countries" },
+            { number: 500, suffix: "+", label: "Happy Customers" },
           ].map((stat, index) => (
             <motion.div
               key={index}
@@ -84,23 +86,24 @@ const RelatedBrands = () => {
         </motion.div>
       </div>
 
-      {/* Scrolling Brands */}
+      {/* Scrolling Brands - Infinite Seamless Loop */}
       <div className="mt-4 sm:mt-10 py-2 sm:py-5 overflow-hidden">
         <motion.div
           className="flex gap-4 sm:gap-8"
-          animate={{ x: [0, -1920] }}
+          animate={{ x: ["-50%", "0%"] }}
           transition={{
             x: {
               repeat: Infinity,
               repeatType: "loop",
-              duration: 25,
+              duration: 30,
               ease: "linear",
             },
           }}
         >
-          {[...bookBrandsData, ...bookBrandsData].map((brand, index) => (
+          {/* Triple duplicate for seamless infinite scroll */}
+          {[...candleBrandsData, ...candleBrandsData, ...candleBrandsData, ...candleBrandsData].map((brand, index) => (
             <div key={`${brand.id}-${index}`} className="flex-shrink-0">
-              <div className="bg-gray-900 rounded-md sm:rounded-xl px-3 sm:px-8 py-1.5 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-400 hover:text-white transition-all">
+              <div className="bg-gray-900 rounded-md sm:rounded-xl px-3 sm:px-8 py-1.5 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-400 hover:text-white transition-all cursor-pointer">
                 {brand.name}
               </div>
             </div>

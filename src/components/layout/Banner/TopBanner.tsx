@@ -16,7 +16,7 @@ const TopBanner = () => {
            <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
              <div className="hidden md:flex items-center gap-4">
                <span>📞 +91 98765 43210</span>
-               <span>✉️ support@bookstore.com</span>
+               <span>✉️ support@candlestore.com</span>
              </div>
              <div className="mx-auto md:mx-0">
                <span className="animate-pulse">🎉 Free Shipping on Orders Above ₹499!</span>

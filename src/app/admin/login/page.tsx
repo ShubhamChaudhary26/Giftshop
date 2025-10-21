@@ -59,7 +59,7 @@ export default function AdminLogin() {
               type="email"
               value={userid}
               onChange={(e) => setUserid(e.target.value)}
-              placeholder="admin@example.com"
+              placeholder="admin@gmail.com"
               className="mt-1 w-full border rounded-lg px-3 py-2 focus:outline-none focus:border-black"
               required
             />

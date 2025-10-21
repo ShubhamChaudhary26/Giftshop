@@ -10,8 +10,8 @@ import Providers from "./providers";
 import AdminWrapper from "@/components/layout/AdminWrapper";
 
 export const metadata: Metadata = {
-  title: "BookNest",
-  description: "BookNest - Your Gateway to a World of Books",
+  title: "Candle.Store",
+  description: "Candle.Store - Your Gateway to a World of Candles",
 };
 
 export const viewport: Viewport = {

@@ -22,7 +22,7 @@ const ProductListSec = ({ title, data, viewAllLink }: ProductListSecProps) => {
   // Show empty state if no data
   if (data.length === 0) {
     return (
-      <section className="max-w-[1400px] mx-auto text-center px-4">
+      <section className=" py-10 max-w-[1400px] mx-auto text-center px-4">
         <h2 className={cn([
           integralCF.className,
           "text-[32px] md:text-5xl mb-8 md:mb-14 capitalize font-bold",

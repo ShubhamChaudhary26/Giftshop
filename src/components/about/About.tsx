@@ -6,7 +6,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { cn } from "@/lib/utils";
 import { integralCF } from "@/styles/fonts";
-import { Target, Eye, Gem, Leaf, Handshake, Shield } from "lucide-react";
 
 // Counter animation hook
 const useCounter = (end: number, duration: number = 2) => {
@@ -71,64 +70,90 @@ const AboutPage = () => {
 
   const values = [
     {
-      icon: Target,
+      icon: (
+        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        </svg>
+      ),
       title: "Our Mission",
-      description: "To democratize access to knowledge by making quality books affordable and accessible to every reader in India.",
+      description: "To bring warmth and tranquility to every home through premium handcrafted candles at affordable prices.",
     },
     {
-      icon: Eye,
+      icon: (
+        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        </svg>
+      ),
       title: "Our Vision", 
-      description: "To become India's most trusted online bookstore, fostering a nation of readers and lifelong learners.",
+      description: "To become India's most trusted candle brand, creating memorable experiences through exceptional fragrances.",
     },
     {
-      icon: Gem,
+      icon: (
+        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+        </svg>
+      ),
       title: "Quality Promise",
-      description: "Every book is carefully selected, ensuring authentic editions from verified publishers only.",
+      description: "Every candle is handcrafted with premium soy wax, natural essential oils, and cotton wicks for a clean burn.",
     },
     {
-      icon: Leaf,
+      icon: (
+        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.5 9.5l15 15" />
+        </svg>
+      ),
       title: "Sustainability",
-      description: "Eco-friendly packaging and carbon-neutral delivery for a greener tomorrow.",
+      description: "Eco-friendly materials, recyclable packaging, and sustainable practices for a greener tomorrow.",
     },
     {
-      icon: Handshake,
+      icon: (
+        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+      ),
       title: "Community First",
-      description: "Building a community of readers through book clubs, author meets, and reading challenges.",
+      description: "Building a community of candle lovers through workshops, custom orders, and personalized gifts.",
     },
     {
-      icon: Shield,
+      icon: (
+        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+      ),
       title: "Trust & Security",
-      description: "100% secure payments, easy returns, and complete data privacy protection.",
+      description: "100% secure payments, easy returns, and complete customer satisfaction guarantee.",
     },
   ];
 
   const milestones = [
-    { year: "2020", event: "Company Founded", description: "Started with just 500 books" },
+    { year: "2020", event: "Company Founded", description: "Started with just 50 handcrafted candles" },
     { year: "2021", event: "10K Customers", description: "Reached our first milestone" },
     { year: "2022", event: "Pan-India Delivery", description: "Expanded to all 28 states" },
-    { year: "2023", event: "Mobile App Launch", description: "Launched iOS & Android apps" },
-    { year: "2024", event: "50K+ Books", description: "Largest online collection" },
+    { year: "2023", event: "Eco Certified", description: "Received eco-friendly certification" },
+    { year: "2024", event: "5000+ Candles", description: "Largest scented candle collection" },
   ];
 
   const team = [
     {
       name: "Rahul Sharma",
       role: "Founder & CEO",
-      bio: "IIM Ahmedabad alumnus with 15 years in publishing",
+      bio: "Aromatherapy expert with 15 years in fragrance industry",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
       linkedin: "#",
     },
     {
       name: "Priya Patel",
-      role: "Chief Content Officer",
-      bio: "Former Editor at Penguin Random House",
+      role: "Chief Fragrance Officer",
+      bio: "Master perfumer trained in Paris",
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
       linkedin: "#",
     },
     {
       name: "Arjun Singh",
       role: "Chief Technology Officer",
-      bio: "Ex-Amazon, Built scalable platforms for millions",
+      bio: "Ex-Amazon, Built e-commerce platforms for millions",
       image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
       linkedin: "#",
     },
@@ -175,7 +200,7 @@ const AboutPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              Passionate about books, driven by community, committed to excellence
+              Passionate about candles, driven by community, committed to excellence
             </motion.p>
           </motion.div>
         </div>
@@ -211,7 +236,7 @@ const AboutPage = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-               From a dream to Indias favorite bookstore
+                From a dream to Indias favorite candle store
               </motion.h2>
               
               <motion.div 
@@ -223,19 +248,19 @@ const AboutPage = () => {
               >
                 <p>
                   What started as a small dream in a Mumbai apartment has grown into India's 
-                  most loved online bookstore. Our founder, Rahul Sharma, a passionate reader 
-                  himself, noticed how difficult it was to find good books at reasonable prices.
+                  most loved candle brand. Our founder, Rahul Sharma, a passionate aromatherapy 
+                  enthusiast, noticed how difficult it was to find quality handcrafted candles at reasonable prices.
                 </p>
                 <p>
-                  In 2020, during the pandemic, when the world turned to books for comfort and 
-                  knowledge, we launched with just 500 titles. Today, we're proud to offer over 
-                  50,000 books across 50+ categories, serving readers in every corner of India.
+                  In 2020, during the pandemic, when the world turned to candles for comfort and 
+                  peace, we launched with just 50 handcrafted candles. Today, we're proud to offer over 
+                  5,000 premium scented candles across 100+ fragrances, serving customers in every corner of India.
                 </p>
                 <p>
-                  But we're more than just a bookstore. We're building a community of readers, 
-                  hosting author sessions, book clubs, and reading challenges. We believe that 
-                  books have the power to change lives, and we're committed to making that 
-                  power accessible to everyone.
+                  But we're more than just a candle store. We're building a community of fragrance lovers, 
+                  hosting candle-making workshops, custom orders, and gifting solutions. We believe that 
+                  candles have the power to transform spaces and moods, and we're committed to making that 
+                  experience accessible to everyone.
                 </p>
               </motion.div>
               
@@ -247,11 +272,11 @@ const AboutPage = () => {
                 viewport={{ once: true }}
               >
                 <motion.div whileHover={{ scale: 1.1 }} className="cursor-pointer">
-                  <p className="text-3xl text-gray-700 font-extrabold">4.8/5</p>
+                  <p className="text-3xl text-gray-700 font-extrabold">4.9/5</p>
                   <p className="text-black/60 font-medium">Average Rating</p>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.1 }} className="cursor-pointer">
-                  <p className= "text-3xl text-gray-700 font-extrabold">15K+</p>
+                  <p className="text-3xl text-gray-700 font-extrabold">20K+</p>
                   <p className="text-black/60 font-medium">Reviews</p>
                 </motion.div>
               </motion.div>
@@ -267,15 +292,15 @@ const AboutPage = () => {
             >
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop",
-                  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
-                  "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&h=300&fit=crop",
-                  "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=300&fit=crop",
+                  "https://images.unsplash.com/photo-1602874801006-95926fc7e8b8?w=400&h=300&fit=crop",
+                  "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=400&h=300&fit=crop",
+                  "https://images.unsplash.com/photo-1588854337115-1c67d9247e4d?w=400&h=300&fit=crop",
+                  "https://images.unsplash.com/photo-1609709295948-17d77cb2a69b?w=400&h=300&fit=crop",
                 ].map((src, index) => (
                   <motion.img
                     key={index}
                     src={src}
-                    alt={`Gallery ${index + 1}`}
+                    alt={`Candle Gallery ${index + 1}`}
                     className={`rounded-2xl shadow-lg hover:shadow-2xl transition-all ${
                       index % 2 === 1 ? 'mt-8' : ''
                     }`}
@@ -339,7 +364,7 @@ const AboutPage = () => {
                       }`}
                       whileHover={{ scale: 1.05, rotate: index % 2 === 0 ? -1 : 1 }}
                     >
-                      <span className= "text-gray-700 text-2xl font-extrabold">{milestone.year}</span>
+                      <span className="text-gray-700 text-2xl font-extrabold">{milestone.year}</span>
                       <h3 className="text-xl font-bold text-black mt-2">{milestone.event}</h3>
                       <p className="text-black/60 mt-2">{milestone.description}</p>
                     </motion.div>
@@ -389,7 +414,7 @@ const AboutPage = () => {
               What Drives Us Forward
             </h2>
             <p className="text-xl text-black/70 max-w-3xl mx-auto">
-              Our core values guide every decision we make and every book we deliver
+              Our core values guide every decision we make and every candle we craft
             </p>
           </motion.div>
           
@@ -400,40 +425,37 @@ const AboutPage = () => {
             whileInView="animate"
             viewport={{ once: true }}
           >
-            {values.map((value, index) => {
-              const IconComponent = value.icon;
-              return (
+            {values.map((value, index) => (
+              <motion.div 
+                key={index}
+                className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all group"
+                variants={fadeInUp}
+                whileHover={{ 
+                  scale: 1.05,
+                  transition: { type: "spring", stiffness: 300 }
+                }}
+              >
                 <motion.div 
-                  key={index}
-                  className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all group"
-                  variants={fadeInUp}
+                  className="text-gray-700 mb-6"
+                  initial={{ rotate: -180, opacity: 0 }}
+                  whileInView={{ rotate: 0, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  viewport={{ once: true }}
                   whileHover={{ 
-                    scale: 1.05,
-                    transition: { type: "spring", stiffness: 300 }
+                    rotate: [0, -10, 10, -10, 10, 0],
+                    transition: { duration: 0.5 }
                   }}
                 >
-                  <motion.div 
-                    className="mb-6 w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center"
-                    initial={{ rotate: -180, opacity: 0 }}
-                    whileInView={{ rotate: 0, opacity: 1 }}
-                    transition={{ duration: 0.5, delay: index * 0.05 }}
-                    viewport={{ once: true }}
-                    whileHover={{ 
-                      rotate: [0, -10, 10, -10, 10, 0],
-                      transition: { duration: 0.5 }
-                    }}
-                  >
-                    <IconComponent className="w-8 h-8 text-gray-700" strokeWidth={2} />
-                  </motion.div>
-                  <h3 className={cn([integralCF.className, "text-2xl text-black mb-4"])}>
-                    {value.title}
-                  </h3>
-                  <p className="text-black/60 leading-relaxed text-lg">
-                    {value.description}
-                  </p>
+                  {value.icon}
                 </motion.div>
-              );
-            })}
+                <h3 className={cn([integralCF.className, "text-2xl text-black mb-4"])}>
+                  {value.title}
+                </h3>
+                <p className="text-black/60 leading-relaxed text-lg">
+                  {value.description}
+                </p>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
@@ -464,7 +486,7 @@ const AboutPage = () => {
               Meet the Visionaries
             </h2>
             <p className="text-xl text-black/70 max-w-3xl mx-auto">
-              Passionate leaders with decades of combined experience in publishing, technology, and e-commerce
+              Passionate leaders with decades of combined experience in fragrance, aromatherapy, and e-commerce
             </p>
           </motion.div>
           
@@ -501,7 +523,7 @@ const AboutPage = () => {
                     <div className="absolute bottom-4 left-4 right-4">
                       <motion.a 
                         href={member.linkedin} 
-                        className="text-white hover:text-purple-300"
+                        className="text-white hover:text-gray-300"
                         whileHover={{ scale: 1.2 }}
                       >
                         <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
@@ -551,7 +573,7 @@ const AboutPage = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-0 right-0 w-96 h-96 bg-yellow-to-yellow-400/20 rounded-full filter blur-3xl"
+          className="absolute bottom-0 right-0 w-96 h-96 bg-gray-500/20 rounded-full filter blur-3xl"
           animate={{
             x: [0, -100, 0],
             y: [0, 100, 0],
@@ -574,7 +596,7 @@ const AboutPage = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Ready to Start Your Reading Journey?
+            Ready to Light Up Your Space?
           </motion.h2>
           
           <motion.p 
@@ -584,8 +606,8 @@ const AboutPage = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Join thousands of happy readers who have made us their trusted book companion. 
-            Your next favorite book is just a click away!
+            Join thousands of happy customers who have made us their trusted candle companion. 
+            Your perfect fragrance is just a click away!
           </motion.p>
           
           <motion.div 
@@ -600,7 +622,7 @@ const AboutPage = () => {
                 href="/shop"
                 className="inline-block bg-white text-black px-10 py-5 rounded-full hover:bg-white/90 transition-all font-bold text-lg"
               >
-                Explore 50,000+ Books
+                Explore 5,000+ Candles
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>

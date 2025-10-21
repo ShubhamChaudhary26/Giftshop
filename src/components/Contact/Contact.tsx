@@ -308,7 +308,7 @@ const ContactPage = () => {
                     <h4 className="font-bold text-black mb-1">Email Us</h4>
                     <p className="text-black/60 text-sm">
                       General: info@bookstore.com<br />
-                      Support: support@bookstore.com
+                      Support: support@candlestore.com
                     </p>
                   </div>
                 </div>

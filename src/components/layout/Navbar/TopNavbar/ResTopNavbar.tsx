@@ -31,7 +31,7 @@ const ResTopNavbar = ({ data }: { data: NavMenu }) => {
           <SheetTitle asChild>
             <SheetClose asChild>
               <Link href="/" className={cn([integralCF.className, "text-2xl"])}>
-                BOOK.VERSE
+                Candle.Store
               </Link>
             </SheetClose>
           </SheetTitle>
