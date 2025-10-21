@@ -121,8 +121,8 @@ const TopNavbar = () => {
 
   return (
     <nav className="sticky top-0 bg-white z-20 shadow-sm">
-      <div className="flex items-center justify-between max-w-frame mx-auto py-4 px-4 sm:px-2 lg:px-0">
-        <div className="flex items-center ">
+      <div className="flex items-center justify-between max-w-frame mx-auto py-3 px-4 sm:px-2 lg:px-0 gap-2">
+        <div className="flex items-center gap-2 flex-shrink-0">
           <div className="block md:hidden">
             <ResTopNavbar data={data} />
           </div>
@@ -131,7 +131,7 @@ const TopNavbar = () => {
             href="/"
             className={cn(
               integralCF.className,
-              "text-xl sm:text-2xl lg:text-[32px] font-bold mb-1.2 ml-2"
+              "text-lg sm:text-xl lg:text-[32px] font-bold leading-none tracking-tight ml-1"
             )}
           >
             Candle.Store
@@ -297,20 +297,20 @@ const TopNavbar = () => {
             )}
           </div>
 
-          {/* Mobile Search Icon */}
-          <Link href="/search" className="block md:hidden ml-1">
-            <div className="w-10 h-10 flex items-center justify-center rounded-full">
-              <Image
-                priority
-                src="/icons/search-black.svg"
-                height={24} // better size for mobile
-                width={24}
-                alt="search"
-                className="object-contain"
-              />
-            </div>
-          </Link>
-          <CartBtn />
+          <div className="flex items-center gap-2 sm:gap-5 flex-shrink-0">
+            <Link href="/search" className="block md:hidden ml-1">
+              <div className="w-9 h-9 flex items-center justify-center rounded-full">
+                <Image
+                  priority
+                  src="/icons/search-black.svg"
+                  height={22}
+                  width={22}
+                  alt="search"
+                />
+              </div>
+            </Link>
+            <CartBtn />
+          </div>
         </div>
       </div>
     </nav>

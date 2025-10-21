@@ -88,7 +88,7 @@ const ContactPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-                We're here to help! Whether you have questions about our books, need assistance with an order, or just want to say hello, feel free to reach out.
+              "We're here to help! Whether you have questions about our candles, need assistance with an order, or just want to say hello, feel free to reach out."
             </motion.p>
           </motion.div>
         </div>
@@ -307,7 +307,7 @@ const ContactPage = () => {
                   <div>
                     <h4 className="font-bold text-black mb-1">Email Us</h4>
                     <p className="text-black/60 text-sm">
-                      General: info@bookstore.com<br />
+                      General: info@candlestore.com<br />
                       Support: support@candlestore.com
                     </p>
                   </div>
@@ -367,7 +367,7 @@ const ContactPage = () => {
               Frequently Asked Questions
             </h2>
             <p className="text-black/60 max-w-2xl mx-auto">
-              Find answers to common questions about our bookstore and services.
+              Find answers to common questions about our candle store and services.
             </p>
           </motion.div>
 
@@ -415,7 +415,6 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
   );
 };
 
-// Contact Info Data
 const contactInfo = [
   {
     icon: <Phone size={20} className="text-white" />,
@@ -426,13 +425,13 @@ const contactInfo = [
   {
     icon: <Mail size={20} className="text-white" />,
     title: "Email Us",
-    detail: "info@bookstore.com",
+    detail: "info@candlestore.com",
     subDetail: "24/7 Support"
   },
   {
     icon: <MapPin size={20} className="text-white" />,
     title: "Visit Store",
-    detail: "123 Book Street",
+    detail: "456 Candle Street",
     subDetail: "Mumbai, India"
   },
   {
@@ -443,6 +442,28 @@ const contactInfo = [
   }
 ];
 
+const faqs = [
+  {
+    question: "What are your shipping options?",
+    answer: "We offer standard shipping (5-7 business days) and express shipping (2-3 business days). Free shipping is available on orders over ₹500. International shipping is also available to select countries."
+  },
+  {
+    question: "Can I track my candle order?",
+    answer: "Once your order is shipped, you'll receive a tracking number via email. You can track it on our website or the courier's website."
+  },
+  {
+    question: "What is your return policy?",
+    answer: "We accept returns within 30 days for candles in original condition. Please contact our support team to initiate a return."
+  },
+  {
+    question: "Do you offer bulk discounts?",
+    answer: "Yes! Bulk discounts are available for orders of 10 or more candles. Contact bulk@candlestore.com for quotes."
+  },
+  {
+    question: "Can I cancel or modify my order?",
+    answer: "Orders can be cancelled or modified within 24 hours of placement. Once processed and shipped, orders cannot be cancelled but can be returned per our policy."
+  }
+];
 // Social Links Data
 const socialLinks = [
   {
@@ -475,28 +496,6 @@ const socialLinks = [
   }
 ];
 
-// FAQ Data
-const faqs = [
-  {
-    question: "What are your shipping options?",
-    answer: "We offer standard shipping (5-7 business days) and express shipping (2-3 business days). Free shipping is available on orders over ₹500. International shipping is also available to select countries."
-  },
-  {
-    question: "How can I track my order?",
-    answer: "Once your order is shipped, you'll receive a tracking number via email. You can use this number to track your package on our website or the courier's website."
-  },
-  {
-    question: "What is your return policy?",
-    answer: "We accept returns within 30 days of delivery for books in original condition. E-books and digital content are non-refundable. Please contact our support team to initiate a return."
-  },
-  {
-    question: "Do you offer bulk discounts?",
-    answer: "Yes! We offer special discounts for bulk orders of 10 or more books. Please contact our bulk sales team at bulk@bookstore.com for a custom quote."
-  },
-  {
-    question: "Can I cancel or modify my order?",
-    answer: "Orders can be cancelled or modified within 24 hours of placement. Once the order is processed and shipped, it cannot be cancelled but can be returned as per our return policy."
-  }
-];
+
 
 export default ContactPage;

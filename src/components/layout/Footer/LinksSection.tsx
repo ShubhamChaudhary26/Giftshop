@@ -86,11 +86,7 @@ const footerLinksData: FooterLinks[] = [
     id: 4,
     title: "resources",
     children: [
-      {
-        id: 41,
-        label: "Free eBooks",
-        url: "#",
-      },
+      
       {
         id: 42,
         label: "development tutorial",

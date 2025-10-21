@@ -176,7 +176,7 @@ const Search = () => {
                 'text-3xl md:text-4xl lg:text-5xl text-black uppercase mb-6 text-center',
               ])}
             >
-              Search Books
+              Search Candles
             </h1>
 
             {/* Search Bar */}
@@ -208,7 +208,7 @@ const Search = () => {
                     'Searching...'
                   ) : (
                     <>
-                      <strong className="text-black">{filteredProducts.length}</strong> books found
+                      <strong className="text-black">{filteredProducts.length}</strong> Candles found
                       {searchQuery && ` for "${searchQuery}"`}
                     </>
                   )}
@@ -557,7 +557,7 @@ const Search = () => {
                   className="text-center py-20"
                 >
                   <div className="text-6xl mb-4">🕯️</div>
-                  <h3 className="text-2xl font-bold mb-2">No books found</h3>
+                  <h3 className="text-2xl font-bold mb-2">No Candles found</h3>
                   <p className="text-gray-600 mb-6">
                     {searchQuery
                       ? `No results for "${searchQuery}". Try different keywords.`
@@ -583,7 +583,7 @@ const Search = () => {
                       </Button>
                     )}
                     <Button asChild className="rounded-full">
-                      <Link href="/shop">Browse All Books</Link>
+                      <Link href="/shop">Browse All Candles</Link>
                     </Button>
                   </div>
                 </motion.div>

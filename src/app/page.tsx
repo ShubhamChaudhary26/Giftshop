@@ -87,7 +87,7 @@ export default async function Home() {
     getTopSelling(),
   ]);
 
-  // Filter out any null or deleted books (safety)
+  // Filter out any null or deleted Candles (safety)
   const validNewArrivals = newArrivals.filter((book) => book && book.id);
   const validTopSelling = topSelling.filter((book) => book && book.id);
 
