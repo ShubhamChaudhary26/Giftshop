@@ -1,3 +1,5 @@
+// next.config.mjs (Correct ES Module Syntax)
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -30,4 +32,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default nextConfig;  // ✅ Correct for .mjs

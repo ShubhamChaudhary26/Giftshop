@@ -11,6 +11,9 @@ import { notFound } from "next/navigation";
 export const dynamic = "force-dynamic";
 
 // Fetch new arrivals
+// app/page.tsx
+
+// Fetch new arrivals
 async function getNewArrivals(): Promise<Product[]> {
   const { data, error } = await supabase
     .from("products")
@@ -24,17 +27,23 @@ async function getNewArrivals(): Promise<Product[]> {
   return data.map((item: any) => ({
     id: item.id,
     title: item.title || "",
-    srcUrl: item.src_url || "/images/book1.webp",
+    src_url: item.src_url || "/images/book1.webp",  // ✅ Changed from srcUrl to src_url
+    srcUrl: item.src_url || "/images/book1.webp",   // Keep both for compatibility
     gallery: item.gallery || [item.src_url || "/images/book1.webp"],
     price: item.price || 0,
     discount: {
       amount: item.discount_amount || 0,
       percentage: item.discount_percentage || 0,
     },
+    discount_amount: item.discount_amount || 0,     // Add these too
+    discount_percentage: item.discount_percentage || 0,
     rating: item.rating || 0,
     author: item.author,
     category: item.category,
     stock: item.stock,
+    is_new_arrival: item.is_new_arrival,
+    is_featured: item.is_featured,
+    is_top_selling: item.is_top_selling,
   }));
 }
 
@@ -52,17 +61,23 @@ async function getTopSelling(): Promise<Product[]> {
   return data.map((item: any) => ({
     id: item.id,
     title: item.title || "",
-    srcUrl: item.src_url || "/images/book1.webp",
+    src_url: item.src_url || "/images/book1.webp",  // ✅ Changed from srcUrl to src_url
+    srcUrl: item.src_url || "/images/book1.webp",   // Keep both for compatibility
     gallery: item.gallery || [item.src_url || "/images/book1.webp"],
     price: item.price || 0,
     discount: {
       amount: item.discount_amount || 0,
       percentage: item.discount_percentage || 0,
     },
+    discount_amount: item.discount_amount || 0,
+    discount_percentage: item.discount_percentage || 0,
     rating: item.rating || 0,
     author: item.author,
     category: item.category,
     stock: item.stock,
+    is_new_arrival: item.is_new_arrival,
+    is_featured: item.is_featured,
+    is_top_selling: item.is_top_selling,
   }));
 }
 
