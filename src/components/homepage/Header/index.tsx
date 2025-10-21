@@ -61,7 +61,7 @@ const HeroSection = () => {
   const goToSlide = (index: number) => setCurrentSlide(index);
 
   return (
-    <section className="relative w-full h-[460px] sm:h-[550px] md:h-[600px] lg:h-[600px] xl:h-[650px] overflow-hidden bg-gradient-to-br from-gray-900 to-black">
+    <section className="relative w-full h-[500px] sm:h-[550px] md:h-[600px] lg:h-[600px] xl:h-[650px] overflow-hidden bg-gradient-to-br from-gray-900 to-black">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
