@@ -40,20 +40,20 @@ const ProductCard = ({ data, className }: ProductCardProps) => {
 
   const imageUrl = data.src_url || data.srcUrl || data.image_url || "";
   const fallbackImage =
-    "https://via.placeholder.com/400x600/f0f0f0/666666?text=No+Image";
+    "https://via.placeholder.com/400x400/f0f0f0/666666?text=No+Image";
 
   return (
     <Link
       href={`/shop/product/${data.id}/${createSlug(data.title || "product")}`}
       className={`flex flex-col items-start bg-white rounded-2xl 
-      p-2 sm:p-3 md:p-4 
-      shadow-md hover:shadow-gift-lg transition-all duration-300 ease-in-out group 
-      border-2 border-pink-100 hover:border-purple-300 
-      w-full max-w-[320px] sm:max-w-[360px] md:max-w-[400px] 
+      p-2 sm:p-3 
+      shadow-md  transition-all duration-300 ease-in-out group 
+      border-2  hover:border-rose-300 
+      w-full max-w-[260px] sm:max-w-[320px] md:max-w-[400px] lg:max-w-[440px]
       ${className || ""}`}
     >
       {/* Product Image */}
-      <div className="w-full aspect-[3/4] overflow-hidden relative flex items-center justify-center bg-gradient-to-br from-pink-50 to-purple-50 rounded-lg">
+      <div className="w-full aspect-[1/1] sm:aspect-[4/5] md:aspect-[4/5] overflow-hidden relative flex items-center justify-center bg-gradient-to-br from-pink-50 to-purple-50 rounded-lg">
         {imageUrl ? (
           <Image
             src={imageUrl}
@@ -61,32 +61,15 @@ const ProductCard = ({ data, className }: ProductCardProps) => {
             fill
             className="object-contain transition-transform duration-500 ease-in-out group-hover:scale-105"
             sizes="(max-width: 640px) 80vw, (max-width: 1024px) 40vw, 25vw"
-            quality={85}
+            quality={80}
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.src = fallbackImage;
             }}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-4xl sm:text-6xl text-pink-300">
+          <div className="w-full h-full flex items-center justify-center text-2xl sm:text-3xl text-pink-300">
             🎁
-          </div>
-        )}
-
-        {/* Discount Badge */}
-        {hasDiscount && (
-          <div className="absolute top-2 left-2 bg-gradient-to-r from-pink-500 to-rose-600 text-white text-[10px] sm:text-xs py-1 px-2 rounded-full font-bold shadow-lg">
-            {discountPercentage > 0
-              ? `-${discountPercentage}%`
-              : `-₹${discountAmount}`}
-          </div>
-        )}
-
-        {/* New Arrival Badge */}
-        {data.is_new_arrival && (
-          <div className="absolute top-2 right-2 flex items-center gap-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-[10px] sm:text-xs py-1 px-2 rounded-full font-bold shadow-lg">
-            <Sparkles className="w-2.5 h-2.5" />
-            New
           </div>
         )}
       </div>
@@ -96,10 +79,9 @@ const ProductCard = ({ data, className }: ProductCardProps) => {
         {/* Title */}
         <strong
           className="mt-2 text-sm sm:text-base md:text-lg font-bold 
-          bg-gradient-to-r from-pink-600 to-purple-600 
+          bg-gray-900
           bg-clip-text text-transparent 
           line-clamp-2 leading-snug 
-          h-[40px] sm:h-[48px] md:h-[52px] w-full 
           transition-all"
         >
           {data.title || "Untitled Product"}
@@ -119,28 +101,28 @@ const ProductCard = ({ data, className }: ProductCardProps) => {
               initialValue={data.rating}
               allowFraction
               SVGclassName="inline-block"
-              size={16}
+              size={14}
               readonly
               fillColor="#FF6B9D"
               emptyColor="#FDE6E6"
             />
-            <span className="text-gray-600 text-xs sm:text-sm ml-1.5 font-semibold">
+            <span className="text-gray-600 text-xs sm:text-sm ml-1 font-semibold">
               {data.rating.toFixed(1)}
               <span className="text-gray-400">/5</span>
             </span>
           </div>
         ) : (
-          <div className="h-6 mb-2"></div>
+          <div className="h-5 mb-2"></div>
         )}
 
         {/* Price */}
-        <div className="flex items-center flex-wrap gap-2 mt-auto pt-2 border-t border-pink-100">
-          <span className="font-bold text-base sm:text-lg md:text-xl bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+        <div className="flex items-center flex-wrap gap-2 mt-auto pt-2 border-t border-rose-100">
+          <span className="font-bold text-sm sm:text-base md:text-lg bg-rose-500 bg-clip-text text-transparent">
             ₹{finalPrice.toLocaleString("en-IN")}
           </span>
 
           {hasDiscount && (
-            <span className="font-medium text-gray-400 line-through text-sm sm:text-base md:text-lg">
+            <span className="font-medium text-gray-400 line-through text-xs sm:text-sm md:text-base">
               ₹{(data.price || 0).toLocaleString("en-IN")}
             </span>
           )}

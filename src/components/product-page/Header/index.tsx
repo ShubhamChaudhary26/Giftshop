@@ -34,7 +34,7 @@ const Header = ({ data }: { data: Product }) => {
       <div className="flex flex-col">
         {/* Title */}
         <h1
-          className="text-2xl md:text-[40px] md:leading-[44px] mb-2 capitalize font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent"
+          className="text-2xl md:text-[40px] md:leading-[44px] mb-2 capitalize font-bold font-bold bg-rose-500 bg-clip-text text-transparent"
         >
           {data.title}
         </h1>

@@ -154,7 +154,7 @@ export default function GiftBoxBuilder() {
 
   if (loading) {
     return (
-      <section className="py-8 md:py-12 lg:py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <section className="py-8 md:py-12 lg:py-20 bg-[#fff9fb]">
         <div className="max-w-[1400px] mx-auto px-3 sm:px-4">
           <div className="animate-pulse space-y-4">
             <div className="h-8 sm:h-12 bg-gradient-to-r from-pink-200 to-purple-200 rounded w-48 sm:w-64 mx-auto mb-4"></div>
@@ -170,7 +170,7 @@ export default function GiftBoxBuilder() {
   }
 
   return (
-    <section className="py-8 md:py-12 lg:py-10 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 relative overflow-x-hidden">
+    <section className="py-8 md:py-12 lg:py-10 bg-[#fff9fb] relative overflow-x-hidden">
       
       {/* ✅ Checkout Success Overlay */}
       <AnimatePresence>
@@ -207,7 +207,7 @@ export default function GiftBoxBuilder() {
               </p>
               <div className="w-full bg-gray-200 rounded-full h-2.5">
                 <motion.div
-                  className="bg-gradient-to-r from-pink-500 to-purple-600 h-2.5 rounded-full"
+                  className="bg-rose-500 h-2.5 rounded-full"
                   initial={{ width: "0%" }}
                   animate={{ width: "100%" }}
                   transition={{ duration: 2.5, ease: "linear" }}
@@ -253,7 +253,7 @@ export default function GiftBoxBuilder() {
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-2 rounded-full mb-4 text-sm font-bold uppercase tracking-wider shadow-lg"
+            className="inline-flex items-center gap-2 bg-rose-500 text-white px-5 py-2 rounded-full mb-4 text-sm font-bold uppercase tracking-wider shadow-lg"
           >
             <Package className="w-4 h-4" />
             Create Custom Box
@@ -268,17 +268,17 @@ export default function GiftBoxBuilder() {
             Build Your Gift Box
           </h2>
           <p className="text-gray-700 text-xs sm:text-sm md:text-lg lg:text-xl px-4">
-            Choose 3+ products and get <span className="font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">10% off</span> + Free premium box
+            Choose 3+ products and get <span className="font-bold font-bold bg-rose-500 bg-clip-text text-transparent">10% off</span> + Free premium box
           </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           
           {/* Left: Gift Box Preview */}
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 border-2 border-pink-200 lg:sticky lg:top-4 h-fit shadow-gift-lg">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 border-2 border-pink-200 lg:sticky lg:top-4 h-5/5 ">
             
             <div className="flex items-center justify-between mb-4 sm:mb-6">
-              <h3 className={cn([integralCF.className, "text-base sm:text-lg md:text-xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent"])}>
+              <h3 className={cn([integralCF.className, "text-base sm:text-lg md:text-xl font-bold font-bold bg-rose-500 bg-clip-text text-transparent"])}>
                 Your Gift Box
               </h3>
               <div className="flex items-center gap-1.5 sm:gap-2">
@@ -292,7 +292,7 @@ export default function GiftBoxBuilder() {
                     <span>10% OFF</span>
                   </motion.span>
                 )}
-                <span className="text-sm font-semibold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+                <span className="text-sm font-semibold font-bold bg-rose-500 bg-clip-text text-transparent">
                   {selectedCandles.length}/4
                 </span>
               </div>
@@ -300,7 +300,7 @@ export default function GiftBoxBuilder() {
 
             <div 
               id="gift-box-preview" 
-              className="relative bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl p-4 md:p-6 mb-6 min-h-[350px] md:min-h-[400px] border-2 border-dashed border-pink-300 transition-all duration-300"
+              className="relative bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl p-4 md:p-6 mb-6 min-h-[350px] md:min-h-[570px] border-2 border-dashed border-pink-300 transition-all duration-300"
             >
               {selectedCandles.length === 0 ? (
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400 px-4">
@@ -320,7 +320,7 @@ export default function GiftBoxBuilder() {
                         animate={{ scale: 1 }} 
                         exit={{ scale: 0 }} 
                         transition={{ duration: 0.3 }} 
-                        className="relative bg-white rounded-xl p-3 border-2 border-pink-200 group hover:border-purple-400 transition-all shadow-md hover:shadow-gift"
+                        className="relative bg-white rounded-xl p-3 border-2 border-pink-200 group hover:border-rose-500 transition-all shadow-md hover:shadow-gift"
                       >
                         <button 
                           onClick={() => removeCandle(index)} 
@@ -332,7 +332,7 @@ export default function GiftBoxBuilder() {
                           <Image src={candle.src_url || "/placeholder.png"} alt={candle.title} fill className="object-contain" />
                         </div>
                         <p className="text-xs font-bold text-center line-clamp-1 text-gray-800">{candle.title}</p>
-                        <p className="text-xs text-center font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+                        <p className="text-xs text-center font-bold font-bold bg-rose-500 bg-clip-text text-transparent">
                           ₹{calculateFinalPrice(candle)}
                         </p>
                       </motion.div>
@@ -373,10 +373,10 @@ export default function GiftBoxBuilder() {
               )}
               <div className="h-px bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200" />
               <div className="flex justify-between">
-                <span className={cn([integralCF.className, "font-bold text-lg bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent"])}>
+                <span className={cn([integralCF.className, "font-bold text-lg font-bold bg-rose-500 bg-clip-text text-transparent"])}>
                   Total
                 </span>
-                <span className={cn([integralCF.className, "font-bold text-lg bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent"])}>
+                <span className={cn([integralCF.className, "font-bold text-lg font-bold bg-rose-500 bg-clip-text text-transparent"])}>
                   ₹{finalPrice.toFixed(0)}
                 </span>
               </div>
@@ -411,10 +411,10 @@ export default function GiftBoxBuilder() {
           {/* Right: Choose Products */}
           <div>
             <div className="flex items-center justify-between mb-6">
-              <h3 className={cn([integralCF.className, "text-lg md:text-xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent"])}>
+              <h3 className={cn([integralCF.className, "text-lg md:text-xl font-bold font-bold bg-rose-500 bg-clip-text text-transparent"])}>
                 Choose Products
               </h3>
-              <span className="text-sm font-semibold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="text-sm font-semibold font-bold bg-rose-500 bg-clip-text text-transparent">
                 {availableCandles.length} available
               </span>
             </div>
@@ -431,7 +431,7 @@ export default function GiftBoxBuilder() {
                   return (
                     <motion.div
                       key={candle.id}
-                      className="relative bg-white/90 backdrop-blur-sm rounded-xl p-3 border-2 border-pink-200 group transition-all hover:border-purple-400 hover:shadow-gift"
+                      className="relative bg-white/90 backdrop-blur-sm rounded-xl p-3 border-2 border-pink-200 group transition-all hover:border-rose-500 hover:shadow-gift"
                       whileHover={{ y: -3 }}
                       initial={{ opacity: 0, y: 20 }} 
                       whileInView={{ opacity: 1, y: 0 }} 
@@ -440,7 +440,7 @@ export default function GiftBoxBuilder() {
                     >
                       {timesAdded > 0 && (
                         <div className="absolute top-2 right-2 z-10">
-                          <span className="bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs px-2 py-1 rounded-full font-bold shadow-md">
+                          <span className="bg-rose-500 text-white text-xs px-2 py-1 rounded-full font-bold shadow-md">
                             {timesAdded}x
                           </span>
                         </div>
@@ -455,7 +455,7 @@ export default function GiftBoxBuilder() {
                       </div>
                       <p className="text-xs font-bold text-center line-clamp-1 mb-1 text-gray-800">{candle.title}</p>
       
-                      <p className="text-xs text-center font-bold mb-2 bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+                      <p className="text-xs text-center font-bold mb-2 font-bold bg-rose-500 bg-clip-text text-transparent">
                         ₹{finalCandlePrice}
                       </p>
                       <button
@@ -465,7 +465,7 @@ export default function GiftBoxBuilder() {
                           "w-full py-2 rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-md",
                           isMaxed 
                             ? "bg-gray-200 text-gray-400 cursor-not-allowed" 
-                            : "bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:shadow-gift active:scale-95"
+                            : "bg-rose-500 text-white hover:shadow-gift active:scale-95"
                         )}
                       >
                         <Plus className="w-4 h-4" />

@@ -24,7 +24,7 @@ const ReviewCard = ({
   return (
     <div
       className={cn([
-        "relative bg-white/90 backdrop-blur-sm flex flex-col items-start aspect-auto border-2 border-pink-200 hover:border-purple-400 rounded-[20px] p-6 sm:px-8 sm:py-7 overflow-hidden transition-all duration-300 hover:shadow-gift-lg",
+        "relative bg-white/90 backdrop-blur-sm flex flex-col items-start aspect-auto border-2 border-pink-200 hover:border-rose-500 rounded-[20px] p-6 sm:px-8 sm:py-7 overflow-hidden transition-all duration-300 hover:shadow-gift-lg",
         className,
       ])}
     >
@@ -46,13 +46,13 @@ const ReviewCard = ({
             size="icon"
             className="hover:bg-pink-100 transition-colors duration-300"
           >
-            <IoEllipsisHorizontal className="text-pink-400 hover:text-purple-600 text-2xl transition-colors duration-300" />
+            <IoEllipsisHorizontal className="text-pink-400 hover: text-2xl transition-colors duration-300" />
           </Button>
         )}
       </div>
 
       <div className="flex items-center mb-2 sm:mb-3">
-        <strong className="bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent sm:text-xl mr-1 font-bold">
+        <strong className="font-bold bg-rose-500 bg-clip-text text-transparent sm:text-xl mr-1 font-bold">
           {data.user}
         </strong>
         <IoIosCheckmarkCircle className="text-[#01AB31] text-xl sm:text-2xl flex-shrink-0" />
@@ -63,7 +63,7 @@ const ReviewCard = ({
       </p>
 
       {isDate && (
-        <p className="bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent text-sm font-semibold mt-4 sm:mt-6">
+        <p className="font-bold bg-rose-500 bg-clip-text text-transparent text-sm font-semibold mt-4 sm:mt-6">
           Posted on {data.date}
         </p>
       )}

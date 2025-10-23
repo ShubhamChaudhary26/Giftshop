@@ -32,7 +32,7 @@ interface OrderSummaryProps {
 const EmptyCart = memo(() => (
   <div className="flex items-center flex-col text-purple-300 mt-20 sm:mt-32">
     <TbBasketExclamation strokeWidth={1} className="text-6xl md:text-8xl mb-4" />
-    <span className="block mb-6 text-lg md:text-xl font-semibold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+    <span className="block mb-6 text-lg md:text-xl font-semibold font-bold bg-rose-500 bg-clip-text text-transparent">
       Your shopping cart is empty
     </span>
     <Link href="/shop" className="inline-block bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold px-8 py-3 rounded-full hover:shadow-gift-lg transition-shadow">
@@ -52,19 +52,19 @@ const OrderSummary = memo<OrderSummaryProps>(({
 
   return (
     <div className="w-full lg:max-w-[450px] p-5 md:p-6 flex-col space-y-4 rounded-2xl border-2 border-pink-200 sticky top-24 bg-white/90 backdrop-blur-lg shadow-lg">
-      <h6 className={cn(integralCF.className, "text-xl md:text-2xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent")}>
+      <h6 className={cn(integralCF.className, "text-xl md:text-2xl font-bold font-bold bg-rose-500 bg-clip-text text-transparent")}>
         Order Summary
       </h6>
 
       <div className="flex flex-col space-y-4">
         <InputGroup>
-          <InputGroup.Input type="text" placeholder="Your Name *" value={name} onChange={onNameChange} disabled={isPending} required minLength={2} className="border-pink-200 focus:border-purple-400 bg-white/80" />
+          <InputGroup.Input type="text" placeholder="Your Name *" value={name} onChange={onNameChange} disabled={isPending} required minLength={2} className="border-pink-200 focus:border-rose-500 bg-white/80" />
         </InputGroup>
         <InputGroup>
-          <InputGroup.Input type="tel" placeholder="Phone Number (10 digits) *" value={phone} onChange={onPhoneChange} disabled={isPending} required pattern="[0-9]{10}" maxLength={10} className="border-pink-200 focus:border-purple-400 bg-white/80" />
+          <InputGroup.Input type="tel" placeholder="Phone Number (10 digits) *" value={phone} onChange={onPhoneChange} disabled={isPending} required pattern="[0-9]{10}" maxLength={10} className="border-pink-200 focus:border-rose-500 bg-white/80" />
         </InputGroup>
         <InputGroup>
-          <InputGroup.Input type="text" placeholder="Full Address *" value={address} onChange={onAddressChange} disabled={isPending} required minLength={10} className="border-pink-200 focus:border-purple-400 bg-white/80" />
+          <InputGroup.Input type="text" placeholder="Full Address *" value={address} onChange={onAddressChange} disabled={isPending} required minLength={10} className="border-pink-200 focus:border-rose-500 bg-white/80" />
         </InputGroup>
       </div>
 
@@ -86,7 +86,7 @@ const OrderSummary = memo<OrderSummaryProps>(({
       </div>
 
       <div className="flex items-center justify-between py-2">
-        <span className="text-lg md:text-xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">Total</span>
+        <span className="text-lg md:text-xl font-bold font-bold bg-rose-500 bg-clip-text text-transparent">Total</span>
         <span className="text-xl md:text-2xl font-bold text-gray-800">₹{Math.round(adjustedTotalPrice).toLocaleString('en-IN')}</span>
       </div>
 
@@ -171,7 +171,7 @@ export default function CartPage() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="fixed inset-0 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-[#fff9fb] z-50 flex items-center justify-center p-4"
         >
           <motion.div
             initial={{ scale: 0.8, y: 50 }}
@@ -186,7 +186,7 @@ export default function CartPage() {
               <Check className="w-12 h-12 text-green-600" />
             </motion.div>
             
-            <h2 className={cn([integralCF.className, "text-3xl font-bold mb-3 bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent"])}>
+            <h2 className={cn([integralCF.className, "text-3xl font-bold mb-3 font-bold bg-rose-500 bg-clip-text text-transparent"])}>
               Almost There!
             </h2>
             
@@ -206,7 +206,7 @@ export default function CartPage() {
               </a>
               <Link
                 href="/shop"
-                className="w-full inline-block font-bold text-purple-600 hover:text-pink-600 transition-colors py-2"
+                className="w-full inline-block font-bold  hover:text-pink-600 transition-colors py-2"
               >
                 Continue Shopping
               </Link>
@@ -219,7 +219,7 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <main className="pb-20 min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <main className="pb-20 min-h-screen bg-[#fff9fb]">
         <div className="max-w-frame mx-auto px-4 xl:px-0">
           <EmptyCart />
         </div>
@@ -228,12 +228,12 @@ export default function CartPage() {
   }
 
   return (
-    <main className="pb-20 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+    <main className="pb-20 bg-[#fff9fb]">
       <div className="max-w-frame mx-auto px-4 xl:px-0">
         <BreadcrumbCart />
         
         <div className="flex items-center justify-between mb-5 md:mb-6">
-          <h2 className={cn([integralCF.className, "font-bold text-2xl md:text-4xl bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent uppercase"])}>
+          <h2 className={cn([integralCF.className, "font-bold text-2xl md:text-4xl font-bold bg-rose-500 bg-clip-text text-transparent uppercase"])}>
             Your Cart
           </h2>
           <span className="text-sm md:text-base font-semibold text-purple-800">

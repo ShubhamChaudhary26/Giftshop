@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 import { integralCF } from '@/styles/fonts';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { ArrowLeft, Layers } from 'lucide-react';
+import { ArrowLeft, Layers, ArrowRight } from 'lucide-react';
 
 interface Category {
   id: number;
@@ -29,7 +29,7 @@ interface Subcategory {
 export default function CategoryPage() {
   const params = useParams();
   const categorySlug = params.category as string;
-  
+
   const [category, setCategory] = useState<Category | null>(null);
   const [subcategories, setSubcategories] = useState<Subcategory[]>([]);
   const [loading, setLoading] = useState(true);
@@ -67,7 +67,7 @@ export default function CategoryPage() {
 
           return {
             ...sub,
-            productCount: count || 0
+            productCount: count || 0,
           };
         })
       );
@@ -82,18 +82,23 @@ export default function CategoryPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
-        <div className="animate-spin w-12 h-12 border-4 border-pink-500 border-t-transparent rounded-full"></div>
+      <div className="min-h-screen flex items-center justify-center bg-[#fff9fb]">
+        <div className="text-center">
+          <div className="animate-spin w-12 h-12 border-4 border-pink-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+          <p className="text-gray-600 font-semibold">Loading...</p>
+        </div>
       </div>
     );
   }
 
   if (!category) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
-        <div className="text-center bg-white rounded-3xl p-12 shadow-gift-lg">
-          <p className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-4">Category not found</p>
-          <Link href="/shop" className="text-pink-600 hover:text-purple-600 font-semibold">
+      <div className="min-h-screen flex items-center justify-center bg-[#fff9fb]">
+        <div className="text-center bg-white rounded-3xl p-12 shadow-lg">
+          <p className="text-2xl font-bold bg-rose-500 bg-clip-text text-transparent mb-4">
+            Category not found
+          </p>
+          <Link href="/shop" className="text-pink-600 font-semibold hover:underline">
             Back to Shop →
           </Link>
         </div>
@@ -102,63 +107,42 @@ export default function CategoryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
-      {/* Header */}
-      <div className="relative bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 text-white overflow-hidden">
-        {category.image_url && (
-          <div className="absolute inset-0 opacity-20">
-            <Image
-              src={category.image_url}
-              alt={category.name}
-              fill
-              className="object-cover"
-            />
-          </div>
-        )}
-        
-        <div className="relative max-w-7xl mx-auto px-4 py-12">
-          <Link href="/shop" className="text-white/90 hover:text-white mb-4 inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-all">
+    <div className="min-h-screen bg-[#fff9fb]">
+      {/* Header Section (matches ShopPage style) */}
+      <div className="text-rose-500 py-5 relative overflow-hidden">
+        <div className="absolute inset-0 bg-rose-500/10 backdrop-blur-sm"></div>
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <Link
+            href="/shop"
+            className="inline-flex items-center gap-2  bg-white/30 backdrop-blur-sm border border-rose-500/30 text-rose-500 px-4 py-2 rounded-full mb-4 hover:bg-white/40 transition"
+          >
             <ArrowLeft className="w-4 h-4" />
-            <span className="font-semibold">Back to Categories</span>
+            <span className="text-xs font-bold uppercase">Back</span>
           </Link>
-          
-          <div className="flex items-center gap-6 mt-4">
-            {category.image_url && (
-              <div className="hidden md:block w-24 h-24 rounded-2xl overflow-hidden shadow-gift-lg border-2 border-white/30 bg-white">
-                <Image
-                  src={category.image_url}
-                  alt={category.name}
-                  width={96}
-                  height={96}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-            )}
-            
-            <div>
-              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-white/30 px-4 py-2 rounded-full mb-3">
-                <Layers className="w-4 h-4" />
-                <span className="text-xs font-bold uppercase">Category</span>
-              </div>
-              <h1 className={cn([integralCF.className, "text-4xl md:text-5xl uppercase"])}>
-                {category.name}
-              </h1>
-              {category.description && (
-                <p className="text-white/90 mt-2 max-w-2xl">{category.description}</p>
-              )}
-              <p className="text-white/80 mt-2 font-semibold">
-                {subcategories.length} {subcategories.length === 1 ? 'subcategory' : 'subcategories'}
-              </p>
-            </div>
+
+          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-rose-500/30 text-rose-500 px-4 py-2 rounded-full mb-4">
+            <Layers className="w-4 h-4" />
+            <span className="text-xs font-bold uppercase">Category</span>
           </div>
+
+          <h1 className={cn([integralCF.className, "text-4xl md:text-5xl uppercase mb-2"])}>
+            {category.name}
+          </h1>
+          {category.description && (
+            <p className="text-rose-500/90 max-w-2xl mt-1">{category.description}</p>
+          )}
+          <p className="text-rose-500/90 mt-2 font-semibold">
+            {subcategories.length}{' '}
+            {subcategories.length === 1 ? 'subcategory' : 'subcategories'} available
+          </p>
         </div>
       </div>
 
-      {/* Subcategories Grid */}
+      {/* Subcategories Grid (same design as categories grid) */}
       <div className="max-w-7xl mx-auto px-4 py-12">
         {subcategories.length > 0 ? (
-          <motion.div 
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
@@ -168,56 +152,71 @@ export default function CategoryPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
+                className="h-full"
               >
-                <Link 
+                <Link
                   href={`/shop/${categorySlug}/${subcategory.slug}`}
-                  className="group block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-gift-lg transition-all duration-300 border-2 border-pink-100 hover:border-purple-300"
+                  className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300 border-2 border-pink-100 hover:border-rose-500"
                 >
-                  {/* Subcategory Image */}
-                  <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-pink-100 to-purple-100">
+                  {/* Image */}
+                  <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-pink-100 to-purple-100 flex-shrink-0">
                     {subcategory.image_url ? (
                       <Image
                         src={subcategory.image_url}
                         alt={subcategory.name}
                         fill
                         className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
                         <div className="text-center">
-                          <div className="text-6xl mb-2 opacity-30">🏷️</div>
-                          <p className="text-sm text-gray-400 font-medium px-4">
-                            {subcategory.name}
-                          </p>
+                          <div className="text-7xl mb-3 opacity-20">🏷️</div>
+                          <p className="text-lg font-bold text-gray-400">{subcategory.name}</p>
                         </div>
                       </div>
                     )}
-                    
-                    <div className="absolute inset-0 bg-gradient-to-t from-purple-500/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-pink-500/80 via-purple-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
+                        <p className="font-semibold text-lg">Explore</p>
+                        <ArrowRight className="w-6 h-6 transform group-hover:translate-x-1 transition-transform duration-300" />
+                      </div>
+                    </div>
 
                     {subcategory.productCount !== undefined && subcategory.productCount > 0 && (
-                      <div className="absolute top-2 right-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-2 py-1 rounded-full shadow-md">
+                      <div className="absolute top-3 right-3 bg-rose-500 text-white px-3 py-1 rounded-full shadow-lg">
                         <p className="text-xs font-bold">
-                          {subcategory.productCount}
+                          {subcategory.productCount}{' '}
+                          {subcategory.productCount === 1 ? 'item' : 'items'}
                         </p>
                       </div>
                     )}
                   </div>
 
-                  {/* Subcategory Info */}
-                  <div className="p-4 text-center bg-gradient-to-b from-white to-pink-50/30">
-                    <h3 className="text-lg md:text-xl font-bold mb-1 bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent group-hover:from-purple-600 group-hover:to-pink-600 transition-all line-clamp-1">
-                      {subcategory.name}
-                    </h3>
-                    {subcategory.description && (
-                      <p className="text-xs text-gray-600 mb-2 line-clamp-2">
-                        {subcategory.description}
-                      </p>
-                    )}
-                    <p className="text-xs md:text-sm font-semibold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-                      {subcategory.productCount} {subcategory.productCount === 1 ? 'Product' : 'Products'}
-                    </p>
+                  {/* Info */}
+                  <div className="flex flex-col flex-1 p-6 text-center bg-gradient-to-b from-white to-pink-50/30">
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold mb-2 h-7 overflow-hidden text-gray-900 line-clamp-1">
+                        {subcategory.name}
+                      </h3>
+                      <div className="h-10 mb-3">
+                        {subcategory.description && (
+                          <p className="text-sm text-gray-600 line-clamp-2">
+                            {subcategory.description}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="pt-3 border-t-2 border-pink-100">
+                      <div className="inline-flex items-center gap-2 text-sm font-semibold bg-rose-500 bg-clip-text text-transparent">
+                        <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                        <span>
+                          {subcategory.productCount} Products Available
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </Link>
               </motion.div>
@@ -226,11 +225,13 @@ export default function CategoryPage() {
         ) : (
           <div className="text-center py-20 bg-white rounded-3xl shadow-lg">
             <div className="text-6xl mb-4">📂</div>
-            <p className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-4">No subcategories available</p>
-            <p className="text-gray-600 mb-6">This category doesn't have any subcategories yet</p>
+            <p className="text-2xl font-bold bg-rose-500 bg-clip-text text-transparent mb-4">
+              No subcategories available
+            </p>
+            <p className="text-gray-600">This category doesn’t have any subcategories yet.</p>
             <Link
               href="/shop"
-              className="inline-block px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full hover:shadow-gift-lg transition-all font-bold"
+              className="mt-6 inline-block px-6 py-3 bg-rose-500 text-white rounded-full hover:shadow-lg transition-all font-bold"
             >
               Browse All Categories
             </Link>

@@ -24,12 +24,12 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
         className="w-full bg-white/90 backdrop-blur-sm rounded-2xl p-6 text-left hover:shadow-gift-lg transition-all border-2 border-pink-100 hover:border-purple-300"
       >
         <div className="flex items-center justify-between">
-          <h3 className="font-extrabold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent pr-4">
+          <h3 className="font-extrabold font-bold bg-rose-500 bg-clip-text text-transparent pr-4">
             {question}
           </h3>
           <span
             className={cn(
-              "text-2xl bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent transition-transform duration-300",
+              "text-2xl font-bold bg-rose-500 bg-clip-text text-transparent transition-transform duration-300",
               isOpen ? "rotate-45" : "rotate-0"
             )}
           >
@@ -52,7 +52,7 @@ const InfoRow = ({ icon, title, detail }: { icon: React.ReactNode; title: string
       {icon}
     </div>
     <div>
-      <h4 className="font-extrabold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-1">
+      <h4 className="font-extrabold font-bold bg-rose-500 bg-clip-text text-transparent mb-1">
         {title}
       </h4>
       <p className="text-purple-800/90 text-sm whitespace-pre-line">
@@ -95,10 +95,10 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+    <main className="min-h-screen bg-[#fff9fb]">
       {/* Hero — matches About */}
       <section className="relative text-white py-12 sm:py-14 md:py-16 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600" />
+        <div className="absolute inset-0 bg-rose-500" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.15),transparent_45%)]" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-full mb-4">
@@ -130,7 +130,7 @@ export default function ContactPage() {
                 <div className="w-14 h-14 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-md">
                   {info.icon}
                 </div>
-                <h3 className="font-extrabold text-lg bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-2">
+                <h3 className="font-extrabold text-lg font-bold bg-rose-500 bg-clip-text text-transparent mb-2">
                   {info.title}
                 </h3>
                 <p className="text-purple-800/90 text-sm whitespace-pre-line">{info.detail}</p>
@@ -146,7 +146,7 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Form */}
             <motion.div initial={{ x: -50, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-              <h2 className={cn(integralCF.className, "text-[24px] md:text-[32px] font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-2 uppercase")}>
+              <h2 className={cn(integralCF.className, "text-[24px] md:text-[32px] font-bold font-bold bg-rose-500 bg-clip-text text-transparent mb-2 uppercase")}>
                 Send Us A Message
               </h2>
               <p className="text-purple-800/90 mb-8">Fill out the form and we’ll get back within 24 hours.</p>
@@ -157,7 +157,7 @@ export default function ContactPage() {
                     <label className="block text-sm font-bold text-purple-700 mb-2">Your Name *</label>
                     <input
                       type="text" name="name" value={formData.name} onChange={handleChange} required
-                      className="w-full px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-purple-400 bg-white outline-none transition"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-rose-500 bg-white outline-none transition"
                       placeholder="John Doe"
                     />
                   </div>
@@ -165,7 +165,7 @@ export default function ContactPage() {
                     <label className="block text-sm font-bold text-purple-700 mb-2">Email Address *</label>
                     <input
                       type="email" name="email" value={formData.email} onChange={handleChange} required
-                      className="w-full px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-purple-400 bg-white outline-none transition"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-rose-500 bg-white outline-none transition"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -176,7 +176,7 @@ export default function ContactPage() {
                     <label className="block text-sm font-bold text-purple-700 mb-2">Phone Number</label>
                     <input
                       type="tel" name="phone" value={formData.phone} onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-purple-400 bg-white outline-none transition"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-rose-500 bg-white outline-none transition"
                       placeholder="+91 98765 43210"
                     />
                   </div>
@@ -184,7 +184,7 @@ export default function ContactPage() {
                     <label className="block text-sm font-bold text-purple-700 mb-2">Subject *</label>
                     <select
                       name="subject" value={formData.subject} onChange={handleChange} required
-                      className="w-full px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-purple-400 bg-white outline-none transition"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-rose-500 bg-white outline-none transition"
                     >
                       <option value="">Select Subject</option>
                       <option value="order">Order Inquiry</option>
@@ -200,7 +200,7 @@ export default function ContactPage() {
                   <label className="block text-sm font-bold text-purple-700 mb-2">Message *</label>
                   <textarea
                     name="message" value={formData.message} onChange={handleChange} required rows={6}
-                    className="w-full px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-purple-400 bg-white outline-none transition resize-none"
+                    className="w-full px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-rose-500 bg-white outline-none transition resize-none"
                     placeholder="Tell us how we can help you..."
                   />
                 </div>
@@ -216,7 +216,7 @@ export default function ContactPage() {
 
             {/* Right Info */}
             <motion.div initial={{ x: 50, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="lg:pl-8">
-              <h2 className={cn(integralCF.className, "text-[24px] md:text-[32px] font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-2 uppercase")}>
+              <h2 className={cn(integralCF.className, "text-[24px] md:text-[32px] font-bold font-bold bg-rose-500 bg-clip-text text-transparent mb-2 uppercase")}>
                 Get In Touch
               </h2>
               <p className="text-purple-800/90 mb-8">We’d love to hear from you. Here’s how you can reach us.</p>
@@ -230,13 +230,13 @@ export default function ContactPage() {
 
               {/* Socials */}
               <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 border-2 border-pink-100">
-                <h4 className="font-extrabold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-4">
+                <h4 className="font-extrabold font-bold bg-rose-500 bg-clip-text text-transparent mb-4">
                   Follow Us
                 </h4>
                 <div className="flex gap-3">
                   {socialLinks.map((s, i) => (
                     <a key={i} href={s.url} target="_blank" rel="noopener noreferrer"
-                       className="w-10 h-10 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white flex items-center justify-center hover:shadow-gift transition">
+                       className="w-10 h-10 rounded-full bg-rose-500 text-white flex items-center justify-center hover:shadow-gift transition">
                       {s.icon}
                     </a>
                   ))}
@@ -251,7 +251,7 @@ export default function ContactPage() {
       <section className="py-12 md:py-16 bg-gradient-to-b from-white to-pink-50/60">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-10">
-            <h2 className={cn(integralCF.className, "text-[28px] md:text-[36px] font-extrabold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-4 uppercase")}>
+            <h2 className={cn(integralCF.className, "text-[28px] md:text-[36px] font-extrabold font-bold bg-rose-500 bg-clip-text text-transparent mb-4 uppercase")}>
               Frequently Asked Questions
             </h2>
             <p className="text-purple-800/90 max-w-2xl mx-auto">

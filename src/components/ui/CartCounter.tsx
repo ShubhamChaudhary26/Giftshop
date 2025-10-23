@@ -55,7 +55,7 @@ const CartCounter = ({
       >
         <Minus className="w-4 h-4" />
       </Button>
-      <span className="font-bold text-sm sm:text-base bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+      <span className="font-bold text-sm sm:text-base font-bold bg-rose-500 bg-clip-text text-transparent">
         {!isZeroDelete ? counter : initialValue}
       </span>
       <Button

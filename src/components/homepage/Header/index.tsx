@@ -100,7 +100,7 @@ const slides = [
                   transition={{ delay: 0.2 }}
                   className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6"
                 >
-                  <span className="inline-flex items-center gap-1.5 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[10px] xs:text-xs font-bold uppercase tracking-wide shadow-lg">
+                  <span className="inline-flex items-center gap-1.5 bg-rose-500 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[10px] xs:text-xs font-bold uppercase tracking-wide shadow-lg">
                     <Sparkles className="w-3 h-3 xs:w-3.5 xs:h-3.5" />
                     {slides[currentSlide].badge}
                   </span>
@@ -116,15 +116,15 @@ const slides = [
                   transition={{ delay: 0.3 }}
                   className={cn([
                     integralCF.className,
-                    "text-white mb-3 sm:mb-4 leading-[1.1]"
+                    "text-rose-500 mb-3 sm:mb-4 leading-[1.1]"
                   ])}
                 >
                   {/* Title - First Line */}
-                  <span className="block text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+                  <span className="block text-2xl xs:text-3xl sm:text-4xl md:text-5xl text-rose-300 lg:text-6xl xl:text-7xl">
                     {slides[currentSlide].title}
                   </span>
                   {/* Subtitle - Second Line with Gradient */}
-                  <span className="block text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-6xl mt-1 sm:mt-2 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400">
+                  <span className="block text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-6xl mt-1 sm:mt-2 bg-clip-text  text-gray-200">
                     {slides[currentSlide].subtitle}
                   </span>
                 </motion.h1>
@@ -148,16 +148,16 @@ const slides = [
                 >
                   <Link
                     href={slides[currentSlide].ctaLink}
-                    className="group relative inline-flex items-center justify-center gap-2 bg-white text-gray-900 px-6 py-3 xs:px-7 xs:py-3.5 sm:px-8 sm:py-4 lg:px-10 lg:py-5 rounded-full font-bold text-sm xs:text-base sm:text-lg overflow-hidden shadow-2xl hover:shadow-pink-500/50 transition-all duration-300"
+                    className="group relative inline-flex items-center justify-center gap-2 bg-white text-gray-900 px-6 py-3 xs:px-7 xs:py-3.5 sm:px-8 sm:py-4 lg:px-10 lg:py-5 rounded-full font-bold text-sm xs:text-base sm:text-lg overflow-hidden transition-all duration-300"
                   >
                     <span className="relative z-10">{slides[currentSlide].cta}</span>
                     <ArrowRight className="relative z-10 w-4 h-4 xs:w-5 xs:h-5 group-hover:translate-x-1 transition-transform" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-rose-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </Link>
                   
                   <Link
                     href="/shop"
-                    className="inline-flex items-center justify-center px-6 py-3 xs:px-7 xs:py-3.5 sm:px-8 sm:py-4 lg:px-10 lg:py-5 rounded-full font-bold text-sm xs:text-base sm:text-lg border-2 border-white text-white hover:bg-white hover:text-gray-900 transition-all duration-300 backdrop-blur-sm"
+                    className="inline-flex items-center justify-center px-6 py-3 xs:px-7 xs:py-3.5 sm:px-8 sm:py-4 lg:px-10 lg:py-5 rounded-full font-bold text-sm xs:text-base sm:text-lg border-2 border-rose-300 text-white hover:bg-rose-300 hover:text-gray-900 transition-all duration-300 backdrop-blur-sm"
                   >
                     View All
                   </Link>

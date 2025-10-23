@@ -73,7 +73,7 @@ export default async function CategorySection() {
 
   return (
     <>
-      <section className="py-12 sm:py-16 lg:py-10 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <section className="py-12 sm:py-16 lg:py-10 bg-[#fff9fb]">
         <div className="max-w-frame mx-auto px-4 xl:px-0">
           {/* Section Header */}
           <motion.div
@@ -82,16 +82,7 @@ export default async function CategorySection() {
             viewport={{ once: true }}
             className="text-center mb-10 sm:mb-14"
           >
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-2 rounded-full mb-4 text-sm font-bold uppercase tracking-wider shadow-lg"
-            >
-              <Package className="w-4 h-4" />
-              Explore Categories
-            </motion.div>
+        
             
             <h2
               className={cn([
@@ -122,7 +113,7 @@ export default async function CategorySection() {
                 >
                   <Link
                     href={`/shop/${category.slug}`}
-                    className="group flex flex-col h-full bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg hover:shadow-gift-lg transition-all duration-500 hover:-translate-y-2"
+                    className="group flex flex-col h-full bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg  duration-500 hover:-translate-y-2"
                   >
                     {/* Category Image */}
                     <div className="aspect-[4/3] relative overflow-hidden bg-gradient-to-br from-pink-100 to-purple-100 flex-shrink-0">
@@ -160,13 +151,13 @@ export default async function CategorySection() {
                     {/* Category Info */}
                     <div className="flex flex-col justify-between p-4 sm:p-5 lg:p-6 flex-1 min-h-[140px] sm:min-h-[160px] bg-gradient-to-b from-white to-pink-50/30">
                       <div className="flex-1">
-                        <h3 className="text-base sm:text-lg lg:text-xl font-bold mb-2 text-pink-400 group-hover:text-purple-600 group-hover:bg-gradient-to-r group-hover:from-pink-600 group-hover:to-purple-600 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300 line-clamp-1">
+                        <h3 className="text-base sm:text-lg lg:text-xl font-bold mb-2 text-gray-900   transition-all duration-300 line-clamp-1">
                           {category.name}
                         </h3>
                         
                         <div className="h-10 sm:h-11 mb-3">
                           {category.description ? (
-                            <p className="text-xs sm:text-sm bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent group-hover:from-purple-600 group-hover:to-pink-600 transition-all line-clamp-2 leading-relaxed">
+                            <p className="text-xs sm:text-sm font-bold text-gray-800 transition-all line-clamp-2 leading-relaxed">
                               {category.description}
                             </p>
                           ) : (
@@ -178,10 +169,10 @@ export default async function CategorySection() {
                       </div>
                       
                       <div className="flex items-center justify-between pt-2 border-t border-pink-100">
-                        <span className="text-xs sm:text-sm font-semibold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+                        <span className="text-xs sm:text-sm font-bold bg-rose-500 bg-clip-text text-transparent">
                           {category.productCount} {category.productCount === 1 ? 'Item' : 'Items'}
                         </span>
-                        <ArrowRight className="w-4 h-4 text-pink-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all duration-300" />
+                        <ArrowRight className="w-4 h-4 text-rose-500 group-hover:translate-x-1 transition-all duration-300" />
                       </div>
                     </div>
                   </Link>
@@ -200,7 +191,7 @@ export default async function CategorySection() {
           >
             <Link
               href="/shop"
-             className="group inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 border-2 border-purple-400 text-purple-600 rounded-full hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 hover:text-white hover:border-transparent transition-all duration-300 font-bold text-sm sm:text-base shadow-lg hover:shadow-gift-lg"
+             className="group inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 border-2 border-rose-500  rounded-full hover:text-white hover:bg-rose-500  transition-all duration-300 font-bold text-sm sm:text-base shadow-lg "
             >
               View All Categories
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

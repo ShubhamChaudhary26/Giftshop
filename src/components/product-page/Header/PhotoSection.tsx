@@ -33,7 +33,7 @@ const PhotoSection = ({ data }: { data: Product }) => {
             key={index}
             type="button"
             className={`bg-gradient-to-br from-pink-50 to-purple-50 rounded-lg sm:rounded-xl aspect-square overflow-hidden border-2 transition-all w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 relative group ${
-              selected === photo ? 'border-pink-500 shadow-md' : 'border-pink-200 hover:border-purple-400'
+              selected === photo ? 'border-pink-500 shadow-md' : 'border-pink-200 hover:border-rose-500'
             }`}
             onClick={() => setSelected(photo)}
           >

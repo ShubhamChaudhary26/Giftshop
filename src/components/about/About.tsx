@@ -77,8 +77,8 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
-      <div className="bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 text-white py-12 relative overflow-hidden">
+    <div className="min-h-screen bg-[#fff9fb]">
+      <div className="bg-rose-500 text-white py-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-full mb-4">
@@ -103,18 +103,18 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <div>
               <span className="text-purple-700 font-bold text-xs sm:text-sm tracking-wider uppercase mb-3 inline-block">Our Journey</span>
-              <h2 className={cn(integralCF.className, 'text-3xl sm:text-4xl md:text-5xl mb-5 bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent uppercase')}>From a Spark to a Celebration</h2>
+              <h2 className={cn(integralCF.className, 'text-3xl sm:text-4xl md:text-5xl mb-5 font-bold bg-rose-500 bg-clip-text text-transparent uppercase')}>From a Spark to a Celebration</h2>
               <div className="space-y-4 text-purple-800 leading-relaxed text-sm sm:text-base">
                 <p>We started small — but dreamed big. Today, we make personalized gifts that turn everyday moments into memories.</p>
                 <p>Premium quality, personal touch, fast delivery — that’s the promise we live by at BestGiftEver.</p>
               </div>
               <div className="mt-6 grid grid-cols-2 gap-6">
                 <div className="text-center bg-white/90 rounded-2xl border-2 border-pink-100 p-4">
-                  <p className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">100+</p>
+                  <p className="text-2xl sm:text-3xl font-extrabold font-bold bg-rose-500 bg-clip-text text-transparent">100+</p>
                   <p className="text-purple-700 font-semibold text-xs sm:text-sm">Cities Served</p>
                 </div>
                 <div className="text-center bg-white/90 rounded-2xl border-2 border-pink-100 p-4">
-                  <p className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">5,000+</p>
+                  <p className="text-2xl sm:text-3xl font-extrabold font-bold bg-rose-500 bg-clip-text text-transparent">5,000+</p>
                   <p className="text-purple-700 font-semibold text-xs sm:text-sm">Gift Options</p>
                 </div>
               </div>
@@ -139,10 +139,10 @@ export default function AboutPage() {
       <section className="py-14 sm:py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-10">
-            <span className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">
+            <span className="inline-flex items-center gap-2 bg-rose-500 text-white px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">
               <Package className="w-4 h-4" /> Shop by Categories
             </span>
-            <h3 className={cn(integralCF.className, 'mt-4 text-3xl sm:text-4xl md:text-5xl bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent uppercase')}>Find Your Perfect Gift</h3>
+            <h3 className={cn(integralCF.className, 'mt-4 text-3xl sm:text-4xl md:text-5xl font-bold bg-rose-500 bg-clip-text text-transparent uppercase')}>Find Your Perfect Gift</h3>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
@@ -169,7 +169,7 @@ export default function AboutPage() {
       <section className="py-14 sm:py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h3 className={cn(integralCF.className, 'text-3xl sm:text-4xl md:text-5xl bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent uppercase')}>Why Choose Us</h3>
+            <h3 className={cn(integralCF.className, 'text-3xl sm:text-4xl md:text-5xl font-bold bg-rose-500 bg-clip-text text-transparent uppercase')}>Why Choose Us</h3>
             <p className="mt-3 text-purple-700 font-semibold">Everything that makes us India’s favorite</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -178,7 +178,7 @@ export default function AboutPage() {
                 <div className={cn('w-14 h-14 rounded-2xl text-white flex items-center justify-center shadow-md mb-4', `bg-gradient-to-br ${v.grad}`)}>
                   {v.icon}
                 </div>
-                <h4 className={cn(integralCF.className, 'text-xl bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent')}>{v.title}</h4>
+                <h4 className={cn(integralCF.className, 'text-xl font-bold bg-rose-500 bg-clip-text text-transparent')}>{v.title}</h4>
                 <p className="mt-2 text-purple-800">{v.desc}</p>
               </div>
             ))}
@@ -191,7 +191,7 @@ export default function AboutPage() {
 
       {/* CTA */}
       <section className="py-14 sm:py-8 relative overflow-hidden text-white">
-        <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600" />
+        <div className="absolute inset-0 bg-rose-500" />
         <div className="relative max-w-4xl mx-auto px-4 text-center">
           <h3 className={cn(integralCF.className, 'text-3xl sm:text-4xl md:text-5xl mb-4 uppercase')}>
             Ready to Make Someone Smile?

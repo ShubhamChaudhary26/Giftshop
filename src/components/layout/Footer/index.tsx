@@ -62,7 +62,7 @@ const Footer = () => {
       
 
       {/* Main Footer */}
-      <div className="pt-8 sm:pt-10 md:pt-[40px] bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 px-4 pb-4 relative overflow-hidden">
+      <div className="pt-8 sm:pt-10 md:pt-[40px] bg-[#fff9fb] px-4 pb-4 relative overflow-hidden">
         {/* Decorative gradient circles */}
         <div className="absolute top-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-pink-200/30 rounded-full blur-3xl -z-10" />
         <div className="absolute bottom-0 left-0 w-64 sm:w-96 h-64 sm:h-96 bg-purple-200/30 rounded-full blur-3xl -z-10" />
@@ -75,7 +75,7 @@ const Footer = () => {
               <h1
                 className={cn([
                   integralCF.className,
-                  "text-2xl sm:text-[28px] lg:text-[32px] mb-4 sm:mb-6 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent",
+                  "text-2xl sm:text-[28px] lg:text-[32px] mb-4 sm:mb-6 font-bold bg-rose-500 bg-clip-text text-transparent",
                 ])}
               >
                 BestGiftEver
@@ -90,7 +90,7 @@ const Footer = () => {
                   <Link
                     href={social.url}
                     key={social.id}
-                    className="bg-white hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 hover:text-white transition-all w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-pink-200 hover:border-transparent flex items-center justify-center p-1.5 shadow-md hover:shadow-gift text-sm sm:text-base"
+                    className="bg-white hover:bg-gradient-to-r hover:bg-rose-500 hover:text-white transition-all w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-pink-200 hover:border-transparent flex items-center justify-center p-1.5 shadow-md hover:shadow-gift text-sm sm:text-base"
                   >
                     {social.icon}
                   </Link>
@@ -121,7 +121,7 @@ const Footer = () => {
                   <span>by</span>
                   <Link
                     href="https://github.com/mohammadoftadeh"
-                    className="font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent hover:from-pink-500 hover:to-purple-500 transition-all whitespace-nowrap"
+                    className="font-bold font-bold bg-rose-500 bg-clip-text text-transparent hover:from-pink-500 hover:to-purple-500 transition-all whitespace-nowrap"
                   >
                     Arcenik Technologies
                   </Link>

@@ -32,7 +32,7 @@ const ResTopNavbar = ({ data }: { data: NavMenu }) => {
       
       <SheetContent 
         side="left" 
-        className="overflow-y-auto bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 border-r-2 border-pink-200 w-[280px] sm:w-[320px]"
+        className="overflow-y-auto bg-[#fff9fb] border-r-2 border-pink-200 w-[280px] sm:w-[320px]"
       >
         <SheetHeader className="mb-8 border-b-2 border-pink-200 pb-4">
           <SheetTitle asChild>
@@ -41,7 +41,7 @@ const ResTopNavbar = ({ data }: { data: NavMenu }) => {
                 href="/" 
                 className={cn([
                   integralCF.className, 
-                  "text-2xl bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent hover:from-pink-500 hover:via-purple-500 hover:to-blue-500 transition-all"
+                  "text-2xl font-bold bg-rose-500 bg-clip-text text-transparent hover:from-pink-500 hover:via-purple-500 hover:to-blue-500 transition-all"
                 ])}
               >
                 BestGiftEver
@@ -61,7 +61,7 @@ const ResTopNavbar = ({ data }: { data: NavMenu }) => {
                   className="group w-full flex items-center gap-3 text-base font-bold text-gray-700 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-600 hover:to-purple-600 transition-all duration-300 p-3 rounded-xl hover:bg-white/80 backdrop-blur-sm border-2 border-transparent hover:border-pink-200 hover:shadow-md"
                 >
                   <div className="p-2 rounded-lg bg-gradient-to-r from-pink-100 to-purple-100 group-hover:from-pink-200 group-hover:to-purple-200 transition-all">
-                    <IconComponent className="w-5 h-5 text-pink-600 group-hover:text-purple-600" />
+                    <IconComponent className="w-5 h-5 text-pink-600 group-hover:" />
                   </div>
                   <span>{item.label}</span>
                 </Link>

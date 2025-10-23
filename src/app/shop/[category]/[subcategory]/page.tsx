@@ -148,10 +148,10 @@ export default function SubcategoryPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <div className="min-h-screen flex items-center justify-center bg-[#fff9fb]">
         <div className="text-center">
           <div className="animate-spin w-12 h-12 border-4 border-pink-500 border-t-transparent rounded-full mx-auto mb-4"></div>
-          <p className="text-xl font-semibold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">Loading products...</p>
+          <p className="text-xl font-semibold font-bold bg-rose-500 bg-clip-text text-transparent">Loading products...</p>
         </div>
       </div>
     );
@@ -159,11 +159,11 @@ export default function SubcategoryPage() {
 
   if (!category || !subcategory) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <div className="min-h-screen flex items-center justify-center bg-[#fff9fb]">
         <div className="text-center bg-white rounded-3xl p-12 shadow-gift-lg">
           <div className="text-6xl mb-4">😕</div>
-          <p className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-4">Page not found</p>
-          <Link href="/shop" className="inline-block px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full hover:shadow-gift-lg transition-all font-bold">
+          <p className="text-2xl font-bold font-bold bg-rose-500 bg-clip-text text-transparent mb-4">Page not found</p>
+          <Link href="/shop" className="inline-block px-6 py-3 bg-rose-500 text-white rounded-full hover:shadow-gift-lg transition-all font-bold">
             Back to Shop
           </Link>
         </div>
@@ -172,9 +172,9 @@ export default function SubcategoryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+    <div className="min-h-screen bg-[#fff9fb]">
       {/* Header */}
-      <div className="relative bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 text-white overflow-hidden">
+      <div className="relative bg-rose-500 text-white overflow-hidden">
         {subcategory.image_url && (
           <div className="absolute inset-0 opacity-20">
             <Image src={subcategory.image_url} alt={subcategory.name} fill className="object-cover" priority />
@@ -236,17 +236,17 @@ export default function SubcategoryPage() {
           <div className="max-w-7xl mx-auto px-4 py-4">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div className="text-sm text-gray-700">
-                Showing <span className="font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">{products.length}</span> results
+                Showing <span className="font-bold font-bold bg-rose-500 bg-clip-text text-transparent">{products.length}</span> results
               </div>
               <div className="flex items-center gap-3 w-full sm:w-auto">
-                <label className="text-sm font-semibold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent whitespace-nowrap flex items-center gap-1">
+                <label className="text-sm font-semibold font-bold bg-rose-500 bg-clip-text text-transparent whitespace-nowrap flex items-center gap-1">
                   <Filter className="w-4 h-4" />
                   Sort by:
                 </label>
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="flex-1 sm:flex-initial px-4 py-2 border-2 border-pink-200 rounded-lg focus:outline-none focus:border-purple-400 transition min-w-[200px] bg-white text-gray-700 font-medium"
+                  className="flex-1 sm:flex-initial px-4 py-2 border-2 border-pink-200 rounded-lg focus:outline-none focus:border-rose-500 transition min-w-[200px] bg-white text-gray-700 font-medium"
                 >
                   <option value="newest">Newest First</option>
                   <option value="priceLow">Price: Low to High</option>
@@ -283,18 +283,18 @@ export default function SubcategoryPage() {
         ) : (
           <div className="text-center py-20 bg-white rounded-3xl shadow-lg">
             <div className="text-6xl mb-4">📦</div>
-            <p className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-4">No products available</p>
+            <p className="text-2xl font-bold font-bold bg-rose-500 bg-clip-text text-transparent mb-4">No products available</p>
             <p className="text-gray-600 mb-6">We're adding new items to this collection soon. Check back later!</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href={`/shop/${categorySlug}`}
-                className="inline-block px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full hover:shadow-gift-lg transition-all font-bold"
+                className="inline-block px-6 py-3 bg-rose-500 text-white rounded-full hover:shadow-gift-lg transition-all font-bold"
               >
                 Back to {category.name}
               </Link>
               <Link
                 href="/shop"
-                className="inline-block px-6 py-3 border-2 border-purple-400 text-purple-600 rounded-full hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 hover:text-white hover:border-transparent transition-all font-bold"
+                className="inline-block px-6 py-3 border-2 border-rose-500  rounded-full hover:bg-gradient-to-r hover:bg-rose-500 hover:text-white hover:border-transparent transition-all font-bold"
               >
                 Browse All Categories
               </Link>
@@ -309,19 +309,19 @@ export default function SubcategoryPage() {
           <div className="max-w-7xl mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
               <div>
-                <p className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">{products.length}</p>
+                <p className="text-3xl font-bold font-bold bg-rose-500 bg-clip-text text-transparent">{products.length}</p>
                 <p className="text-sm font-semibold text-gray-700 mt-1">Total Products</p>
               </div>
               <div>
-                <p className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">{products.filter((p) => (p.stock ?? 0) > 0).length}</p>
+                <p className="text-3xl font-bold font-bold bg-rose-500 bg-clip-text text-transparent">{products.filter((p) => (p.stock ?? 0) > 0).length}</p>
                 <p className="text-sm font-semibold text-gray-700 mt-1">In Stock</p>
               </div>
               <div>
-                <p className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">{products.filter((p) => p.is_new_arrival).length}</p>
+                <p className="text-3xl font-bold font-bold bg-rose-500 bg-clip-text text-transparent">{products.filter((p) => p.is_new_arrival).length}</p>
                 <p className="text-sm font-semibold text-gray-700 mt-1">New Arrivals</p>
               </div>
               <div>
-                <p className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">₹{Math.min(...products.map((p) => getDiscountedPrice(p))).toLocaleString("en-IN")}+</p>
+                <p className="text-3xl font-bold font-bold bg-rose-500 bg-clip-text text-transparent">₹{Math.min(...products.map((p) => getDiscountedPrice(p))).toLocaleString("en-IN")}+</p>
                 <p className="text-sm font-semibold text-gray-700 mt-1">Starting Price</p>
               </div>
             </div>
@@ -342,7 +342,7 @@ export default function SubcategoryPage() {
             </Link>
             <Link
               href="/shop"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm border-2 border-purple-200 text-purple-600 rounded-full hover:bg-purple-500 hover:text-white hover:border-purple-500 transition-all text-sm font-semibold shadow-md"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm border-2 border-purple-200  rounded-full hover:bg-purple-500 hover:text-white hover:border-purple-500 transition-all text-sm font-semibold shadow-md"
             >
               <Home className="w-4 h-4" />
               <span>All Categories</span>

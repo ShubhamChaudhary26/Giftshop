@@ -41,7 +41,7 @@ const Reviews = () => { // ✅ No props
   if (!isClient) return null;
 
   return (
-    <section className="overflow-hidden py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 relative">
+    <section className="overflow-hidden py-12 sm:py-16 lg:py-20 bg-[#fff9fb] relative">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-pink-200/30 rounded-full blur-3xl -z-10" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200/30 rounded-full blur-3xl -z-10" />
@@ -89,25 +89,25 @@ const Reviews = () => { // ✅ No props
               <div className="flex items-center gap-2">
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400" />
+                    <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-rose-400 text-rose-400" />
                   ))}
                 </div>
-                <span className="font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+                <span className="font-bold font-bold bg-rose-500 bg-clip-text text-transparent">
                   4.9/5
                 </span>
               </div>
               <div className="h-4 w-px bg-gradient-to-b from-pink-300 to-purple-300" />
-              <div className="font-semibold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+              <div className="font-semibold font-bold bg-rose-500 bg-clip-text text-transparent">
                 {reviewsData.length}+ Reviews
               </div>
             </motion.div>
 
             {/* Navigation Arrows */}
             <div className="hidden absolute right-4 xl:right-0 top-1/2 -translate-y-1/2 items-center gap-2">
-              <CarouselPrevious className="bg-white/80 backdrop-blur-sm hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 text-pink-600 hover:text-white border-2 border-pink-200 hover:border-transparent transition-all duration-300 shadow-md hover:shadow-lg w-10 h-10 sm:w-12 sm:h-12 rounded-full">
+              <CarouselPrevious className="bg-white/80 backdrop-blur-sm hover:bg-gradient-to-r hover:bg-rose-500 text-pink-600 hover:text-white border-2 border-pink-200 hover:border-transparent transition-all duration-300 shadow-md hover:shadow-lg w-10 h-10 sm:w-12 sm:h-12 rounded-full">
                 <FaArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </CarouselPrevious>
-              <CarouselNext className="bg-white/80 backdrop-blur-sm hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600 text-pink-600 hover:text-white border-2 border-pink-200 hover:border-transparent transition-all duration-300 shadow-md hover:shadow-lg w-10 h-10 sm:w-12 sm:h-12 rounded-full">
+              <CarouselNext className="bg-white/80 backdrop-blur-sm hover:bg-gradient-to-r hover:bg-rose-500 text-pink-600 hover:text-white border-2 border-pink-200 hover:border-transparent transition-all duration-300 shadow-md hover:shadow-lg w-10 h-10 sm:w-12 sm:h-12 rounded-full">
                 <FaArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </CarouselNext>
             </div>
@@ -174,7 +174,7 @@ const Reviews = () => { // ✅ No props
               className={cn([
                 "h-2 rounded-full transition-all duration-300",
                 current === index + 1
-                  ? "w-8 bg-gradient-to-r from-pink-500 to-purple-600 shadow-md"
+                  ? "w-8 bg-rose-500 shadow-md"
                   : "w-2 bg-pink-300 hover:bg-gradient-to-r hover:from-pink-400 hover:to-purple-500"
               ])}
               aria-label={`Go to review ${index + 1}`}
@@ -182,28 +182,6 @@ const Reviews = () => { // ✅ No props
           ))}
         </motion.div>
 
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.9 }}
-          className="text-center"
-        >
-          <p className="text-gray-600 mb-4 text-sm sm:text-base">
-            <span className="font-semibold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-              Join thousands of satisfied customers!
-            </span>
-          </p>
-          <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border-2 border-pink-200 px-6 py-3 rounded-full font-semibold text-sm sm:text-base shadow-md hover:shadow-lg transition-all duration-300">
-            <Sparkles className="w-4 h-4 text-pink-500" />
-            <span className="bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-              Trusted by{" "}
-              <span className="font-bold">50,000+</span>{" "}
-              Gift Lovers
-            </span>
-          </div>
-        </motion.div>
       </motion.div>
     </section>
   );

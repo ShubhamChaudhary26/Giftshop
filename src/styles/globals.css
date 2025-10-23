@@ -159,11 +159,12 @@
 
 /* 🎨 Gradient Text */
 .gradient-text {
-  background: linear-gradient(135deg, #FF6B9D, #C75AF6, #4F46E5);
+  background: #f43f5e; /* Tailwind's rose-500 color */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
 
 @layer utilities {
   /* ... baki utility classes ... */

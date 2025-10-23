@@ -97,10 +97,10 @@ export default function ProductPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <div className="min-h-screen flex items-center justify-center bg-[#fff9fb]">
         <div className="text-center">
           <div className="animate-spin w-12 h-12 border-4 border-pink-500 border-t-transparent rounded-full mx-auto mb-4"></div>
-          <p className="text-xl font-semibold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">Loading product...</p>
+          <p className="text-xl font-semibold font-bold bg-rose-500 bg-clip-text text-transparent">Loading product...</p>
         </div>
       </div>
     );
@@ -125,7 +125,7 @@ export default function ProductPage() {
               <ChevronRight className="w-4 h-4 text-pink-300" />
               <span className="text-gray-400 font-bold">...</span>
               <ChevronRight className="w-4 h-4 text-pink-300" />
-              <span className="font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent truncate max-w-[200px]">
+              <span className="font-bold font-bold bg-rose-500 bg-clip-text text-transparent truncate max-w-[200px]">
                 {productData.title}
               </span>
             </>
@@ -156,7 +156,7 @@ export default function ProductPage() {
                 </>
               )}
               <ChevronRight className="w-4 h-4 text-pink-300" />
-              <span className="font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent truncate max-w-[150px] sm:max-w-[200px]">
+              <span className="font-bold font-bold bg-rose-500 bg-clip-text text-transparent truncate max-w-[150px] sm:max-w-[200px]">
                 {productData.title}
               </span>
             </>

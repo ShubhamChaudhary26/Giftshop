@@ -26,15 +26,15 @@ const CartBtn = () => {
       <motion.div
         animate={animate ? { scale: [1, 1.3, 1], rotate: [0, -10, 10, 0] } : { scale: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="relative w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-r from-pink-100 to-purple-100 hover:from-pink-200 hover:to-purple-200 transition-all shadow-md hover:shadow-gift"
+        className="relative w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-r from-rose-100 to-purple-100 hover:from-rose-200 hover:to-purple-200 transition-all shadow-md hover:shadow-gift"
       >
-        <ShoppingCart className="w-5 h-5 text-pink-600" />
+        <ShoppingCart className="w-5 h-5 text-rose-600" />
         
         {cart && cart.totalQuantities > 0 && (
           <motion.span
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            className="absolute -top-1 -right-1 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold shadow-lg border-2 border-white"
+            className="absolute -top-1 -right-1 bg-rose-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold shadow-lg border-2 border-white"
           >
             {cart.totalQuantities > 99 ? '99+' : cart.totalQuantities}
           </motion.span>

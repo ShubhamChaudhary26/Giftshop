@@ -20,7 +20,7 @@ export default function Tabs({ product }: TabsProps) {
 
   const activeTabIndicator = (tabName: string) => {
     return activeTab === tabName && (
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 to-purple-600 rounded-t-full"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-rose-500 rounded-t-full"></div>
     );
   };
 
@@ -58,7 +58,7 @@ export default function Tabs({ product }: TabsProps) {
           <div className="prose max-w-none text-gray-700">
             {product?.description ? (
               <div>
-                <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">Product Description</h3>
+                <h3 className="text-xl font-bold mb-4 font-bold bg-rose-500 bg-clip-text text-transparent">Product Description</h3>
                 <p className="whitespace-pre-wrap leading-relaxed">
                   {product.description}
                 </p>
@@ -94,12 +94,12 @@ export default function Tabs({ product }: TabsProps) {
             <div className="text-5xl mb-4">⭐</div>
             {product?.rating && product.rating > 0 ? (
               <div className="mb-6">
-                <p className="text-4xl font-bold mb-2 bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">{product.rating.toFixed(1)}/5</p>
+                <p className="text-4xl font-bold mb-2 font-bold bg-rose-500 bg-clip-text text-transparent">{product.rating.toFixed(1)}/5</p>
                 <p className="text-gray-600 font-semibold">Average Rating</p>
               </div>
             ) : null}
             <p className="text-gray-500 mb-4">No reviews yet.</p>
-            <button className="px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full hover:shadow-gift-lg transition font-bold">
+            <button className="px-6 py-3 bg-rose-500 text-white rounded-full hover:shadow-gift-lg transition font-bold">
               Be the first to review
             </button>
           </div>

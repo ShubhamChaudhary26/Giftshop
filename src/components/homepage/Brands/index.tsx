@@ -33,11 +33,11 @@ const giftBrandsData = [
 
 const Brands = () => {
   return (
-    <section className="py-10 sm:py-12 lg:py-16 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 overflow-hidden">
+    <section className="py-10 sm:py-12 lg:py-10 bg-[#fff9fb] overflow-hidden">
       <div className="max-w-frame mx-auto px-4 xl:px-0 mb-8">
-        <h2 className="text-center text-sm sm:text-base font-bold text-gray-500 uppercase tracking-wider">
+        {/* <h2 className="text-center text-sm sm:text-base font-bold text-gray-500 uppercase tracking-wider">
           Browse Our Popular Collections
-        </h2>
+        </h2> */}
       </div>
 
       <div className="relative w-full">
@@ -55,12 +55,12 @@ const Brands = () => {
                 whileHover={{ scale: 1.05, y: -4 }}
                 className="flex-shrink-0 mx-2 sm:mx-3"
               >
-                <div className="group bg-white border-2 border-gray-200 hover:border-pink-400 hover:bg-gradient-to-br hover:from-pink-50 hover:to-purple-50 rounded-2xl px-5 sm:px-7 py-3 sm:py-4 shadow-sm hover:shadow-2xl transition-all duration-300 cursor-pointer">
+                <div className="group bg-white border-2 border-gray-200 hover:border-rose-400 hover:bg-gradient-to-br hover:from-rose-50 hover:to-purple-50 rounded-2xl px-5 sm:px-7 py-3 sm:py-4 shadow-sm  transition-all duration-300 cursor-pointer">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-xl bg-gradient-to-br from-pink-100 to-purple-100 group-hover:from-pink-200 group-hover:to-purple-200 transition-all duration-300">
-                      <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-pink-600 group-hover:text-purple-600 group-hover:scale-110 transition-all duration-300" />
+                    <div className="p-2 rounded-xl bg-gradient-to-br from-rose-100 to-purple-100 group-hover:from-rose-200 group-hover:to-purple-200 transition-all duration-300">
+                      <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-rose-600 group-hover: group-hover:scale-110 transition-all duration-300" />
                     </div>
-                    <span className="text-sm sm:text-base font-bold text-gray-800 group-hover:text-pink-600 whitespace-nowrap transition-colors">
+                    <span className="text-sm sm:text-base font-bold text-gray-800 group-hover:text-rose-600 whitespace-nowrap transition-colors">
                       {brand.name}
                     </span>
                   </div>
