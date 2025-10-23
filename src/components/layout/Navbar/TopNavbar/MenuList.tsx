@@ -18,11 +18,11 @@ export type MenuListProps = {
 export function MenuList({ data, label }: MenuListProps) {
   return (
     <NavigationMenuItem>
-      <NavigationMenuTrigger className="font-normal px-3">
+      <NavigationMenuTrigger className="font-bold px-3 text-gray-700 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-600 hover:to-purple-600 transition-all">
         {label}
       </NavigationMenuTrigger>
       <NavigationMenuContent>
-        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-white/95 backdrop-blur-lg border-2 border-pink-100 rounded-2xl shadow-gift-lg">
           {data.map((item) => (
             <ListItem key={item.id} title={item.label} href={item.url ?? "/"}>
               {item.description ?? ""}
@@ -44,13 +44,15 @@ const ListItem = React.forwardRef<
         <Link
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "block select-none space-y-1 rounded-xl p-3 leading-none no-underline outline-none transition-all duration-300 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 border-2 border-transparent hover:border-pink-200 group",
             className
           )}
           {...props}
         >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          <div className="text-sm font-bold leading-none text-gray-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-pink-600 group-hover:to-purple-600">
+            {title}
+          </div>
+          <p className="line-clamp-2 text-sm leading-snug text-gray-600">
             {children}
           </p>
         </Link>

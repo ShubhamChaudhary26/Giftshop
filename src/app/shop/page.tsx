@@ -1,223 +1,182 @@
-// app/shop/page.tsx
 'use client'
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
-import ProductCard from '@/components/common/ProductCard';
-import { Product } from '@/types/product.types';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { integralCF } from '@/styles/fonts';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { Package, ArrowRight } from 'lucide-react';
+
+interface Category {
+  id: number;
+  name: string;
+  slug: string;
+  description?: string;
+  image_url?: string;
+  productCount?: number;
+}
 
 export default function ShopPage() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<string[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
-  const [sortBy, setSortBy] = useState('newest');
 
   useEffect(() => {
-    fetchProducts();
+    fetchCategories();
   }, []);
 
-  useEffect(() => {
-    filterAndSortProducts();
-  }, [selectedCategory, sortBy, products]);
-
-  async function fetchProducts() {
+  async function fetchCategories() {
     try {
-      const { data, error } = await supabase
-        .from('products')
+      const { data: categoriesData, error: catError } = await supabase
+        .from('categories')
         .select('*')
-        .order('created_at', { ascending: false });
+        .eq('is_active', true)
+        .order('name');
 
-      if (error) throw error;
+      if (catError) throw catError;
 
-      const formattedProducts: Product[] = (data || []).map(item => ({
-        id: item.id,
-        title: item.title || '',
-        src_url: item.src_url || '/images/book1.webp',      // ✅ Add this
-        srcUrl: item.src_url || '/images/book1.webp',
-        gallery: item.gallery || [item.src_url || '/images/book1.webp'],
-        price: item.price || 0,
-        discount: {
-          amount: item.discount_amount || 0,
-          percentage: item.discount_percentage || 0
-        },
-        discount_amount: item.discount_amount || 0,          // ✅ Add database columns
-        discount_percentage: item.discount_percentage || 0,  // ✅ Add database columns
-        rating: item.rating || 0,
-        author: item.author,
-        category: item.category,
-        stock: item.stock,
-        is_new_arrival: item.is_new_arrival,
-        is_featured: item.is_featured,
-        is_top_selling: item.is_top_selling,
-      }));
+      const categoriesWithCount = await Promise.all(
+        (categoriesData || []).map(async (cat) => {
+          const { count } = await supabase
+            .from('products')
+            .select('*', { count: 'exact', head: true })
+            .eq('category_id', cat.id);
 
-      setProducts(formattedProducts);
-      
-      // Extract unique categories
-      const uniqueCategories = Array.from(new Set(data?.map(p => p.category).filter(Boolean)));
-      setCategories(uniqueCategories);
-      
+          return {
+            ...cat,
+            productCount: count || 0
+          };
+        })
+      );
+
+      setCategories(categoriesWithCount);
     } catch (error) {
-      console.error('Error fetching products:', error);
+      console.error('Error fetching categories:', error);
     } finally {
       setLoading(false);
     }
   }
 
-  // ✅ Helper function for safe price calculation
-  const getDiscountedPrice = (product: Product): number => {
-    const price = product.price || 0;
-    const discountPercent = product.discount?.percentage || 0;
-    
-    if (discountPercent > 0) {
-      return price - (price * discountPercent / 100);
-    }
-    return price;
-  };
-
-  function filterAndSortProducts() {
-    let filtered = [...products];
-
-    // Filter by category
-    if (selectedCategory !== 'All') {
-      filtered = filtered.filter(p => p.category === selectedCategory);
-    }
-
-    // ✅ FIXED: Sort products with safe discount handling
-    switch (sortBy) {
-      case 'priceLow':
-        filtered.sort((a, b) => getDiscountedPrice(a) - getDiscountedPrice(b));
-        break;
-
-      case 'priceHigh':
-        filtered.sort((a, b) => getDiscountedPrice(b) - getDiscountedPrice(a));
-        break;
-
-      case 'rating':
-        filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
-        break;
-
-      case 'newest':
-      default:
-        // Already sorted by newest from database
-        break;
-    }
-
-    setFilteredProducts(filtered);
-  }
-
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
         <div className="text-center">
-          <div className="animate-spin inline-block w-12 h-12 border-4 border-black border-t-transparent rounded-full mb-4"></div>
-          <p className="text-xl text-gray-600">Loading products...</p>
+          <div className="animate-spin w-12 h-12 border-4 border-pink-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+          <p className="text-gray-600 font-semibold">Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
       {/* Header */}
-      <div className="bg-black text-white py-12">
-        <div className="max-w-7xl mx-auto px-4">
-          <h1 className={cn([integralCF.className, "text-4xl md:text-5xl uppercase"])}>
-            Shop All Candles
+      <div className="bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 text-white py-12 relative overflow-hidden">
+        <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-full mb-4">
+            <Package className="w-4 h-4" />
+            <span className="text-xs font-bold uppercase">All Categories</span>
+          </div>
+          <h1 className={cn([integralCF.className, "text-4xl md:text-5xl uppercase mb-2"])}>
+            Shop by Category
           </h1>
-          <p className="text-gray-400 mt-2">
-            {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} available
+          <p className="text-white/90 mt-2">
+            {categories.length} {categories.length === 1 ? 'category' : 'categories'} available
           </p>
         </div>
       </div>
 
-      {/* Filters and Sort */}
-      <div className=" top-0 bg-white border-b z-40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex flex-col lg:flex-row gap-4 justify-between items-start lg:items-center">
-            {/* Category Filter */}
-            <div className="flex flex-wrap gap-2 overflow-x-auto max-w-full">
-              <button
-                onClick={() => setSelectedCategory('All')}
-                className={cn([
-                  "px-4 py-2 rounded-full transition-all whitespace-nowrap",
-                  selectedCategory === 'All' 
-                    ? "bg-black text-white" 
-                    : "bg-gray-100 hover:bg-gray-200"
-                ])}
-              >
-                All ({products.length})
-              </button>
-              {categories.map(category => {
-                const count = products.filter(p => p.category === category).length;
-                return (
-                  <button
-                    key={category}
-                    onClick={() => setSelectedCategory(category)}
-                    className={cn([
-                      "px-4 py-2 rounded-full transition-all whitespace-nowrap",
-                      selectedCategory === category 
-                        ? "bg-black text-white" 
-                        : "bg-gray-100 hover:bg-gray-200"
-                    ])}
-                  >
-                    {category} ({count})
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Sort Dropdown */}
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-black min-w-[200px]"
-            >
-              <option value="newest">Newest First</option>
-              <option value="priceLow">Price: Low to High</option>
-              <option value="priceHigh">Price: High to Low</option>
-              <option value="rating">Highest Rated</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      {/* Products Grid */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        {filteredProducts.length > 0 ? (
+      {/* Categories Grid */}
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        {categories.length > 0 ? (
           <motion.div 
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
           >
-            {filteredProducts.map((product, index) => (
+            {categories.map((category, index) => (
               <motion.div
-                key={product.id}
+                key={category.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05, duration: 0.3 }}
+                transition={{ delay: index * 0.1 }}
+                className="h-full" // ✅ Full height for motion wrapper
               >
-                <ProductCard data={product} />
+                <Link 
+                  href={`/shop/${category.slug}`}
+                  className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-gift-lg transition-all duration-300 border-2 border-pink-100 hover:border-purple-300"
+                >
+                  {/* Category Image */}
+                  <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-pink-100 to-purple-100 flex-shrink-0">
+                    {category.image_url ? (
+                      <Image
+                        src={category.image_url}
+                        alt={category.name}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <div className="text-center">
+                          <div className="text-8xl mb-4 opacity-20">🎁</div>
+                          <p className="text-xl font-bold text-gray-400">{category.name}</p>
+                        </div>
+                      </div>
+                    )}
+                    
+                    <div className="absolute inset-0 bg-gradient-to-t from-pink-500/80 via-purple-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
+                        <p className="font-semibold text-lg">Explore</p>
+                        <ArrowRight className="w-6 h-6 transform group-hover:translate-x-1 transition-transform duration-300" />
+                      </div>
+                    </div>
+
+                    {category.productCount !== undefined && category.productCount > 0 && (
+                      <div className="absolute top-3 right-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-3 py-1 rounded-full shadow-lg">
+                        <p className="text-xs font-bold">
+                          {category.productCount} {category.productCount === 1 ? 'item' : 'items'}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Category Details */}
+                  <div className="flex flex-col flex-1 p-6 text-center bg-gradient-to-b from-white to-pink-50/30">
+                    {/* Top Content (Title & Desc) */}
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold mb-2 h-7 overflow-hidden bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent group-hover:from-purple-600 group-hover:to-pink-600 transition-all line-clamp-1">
+                        {category.name}
+                      </h3>
+                      
+                      {/* Fixed height description container */}
+                      <div className="h-10 mb-3">
+                        {category.description && (
+                          <p className="text-sm text-gray-600 line-clamp-2">
+                            {category.description}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Bottom Content (Product Count) */}
+                    <div className="pt-3 border-t-2 border-pink-100">
+                      <div className="inline-flex items-center gap-2 text-sm font-semibold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
+                        <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                        <span>{category.productCount} Products Available</span>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </motion.div>
         ) : (
-          <div className="text-center py-20">
-            <div className="text-6xl mb-4">🕯️</div>
-            <p className="text-gray-500 text-xl mb-4">
-              No products found in "{selectedCategory}" category
-            </p>
-            <button
-              onClick={() => setSelectedCategory('All')}
-              className="px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors"
-            >
-              View all products
-            </button>
+          <div className="text-center py-20 bg-white rounded-3xl shadow-lg">
+            <div className="text-6xl mb-4">📦</div>
+            <p className="text-2xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-4">No categories available yet</p>
+            <p className="text-gray-600">Check back soon for new products!</p>
           </div>
         )}
       </div>

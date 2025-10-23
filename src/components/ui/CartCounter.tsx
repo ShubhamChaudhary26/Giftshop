@@ -1,8 +1,8 @@
-"use client";
+ "use client";
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { FaMinus, FaPlus } from "react-icons/fa6";
+import { Minus, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type CartCounterProps = {
@@ -42,7 +42,7 @@ const CartCounter = ({
   return (
     <div
       className={cn(
-        "bg-[#F0F0F0] w-full min-w-[110px] max-w-[110px] sm:max-w-[170px] py-3 md:py-3.5 px-4 sm:px-5 rounded-full flex items-center justify-between",
+        "bg-gradient-to-r from-pink-50 to-purple-50 w-full min-w-[110px] max-w-[120px] sm:max-w-[170px] py-3 md:py-3.5 px-3 sm:px-5 rounded-full flex items-center justify-between border-2 border-pink-200",
         className
       )}
     >
@@ -50,22 +50,22 @@ const CartCounter = ({
         variant="ghost"
         size="icon"
         type="button"
-        className="h-5 w-5 sm:h-6 sm:w-6 text-xl hover:bg-transparent"
+        className="h-6 w-6 sm:h-7 sm:h-7 text-pink-600  rounded-full transition-all"
         onClick={() => remove()}
       >
-        <FaMinus />
+        <Minus className="w-4 h-4" />
       </Button>
-      <span className="font-medium text-sm sm:text-base">
+      <span className="font-bold text-sm sm:text-base bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
         {!isZeroDelete ? counter : initialValue}
       </span>
       <Button
         variant="ghost"
         size="icon"
         type="button"
-        className="h-5 w-5 sm:h-6 sm:w-6 text-xl hover:bg-transparent"
+        className="h-6 w-6 sm:h-7 sm:h-7 text-pink-600  rounded-full transition-all"
         onClick={() => addToCart()}
       >
-        <FaPlus />
+        <Plus className="w-4 h-4" />
       </Button>
     </div>
   );

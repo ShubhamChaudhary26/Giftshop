@@ -10,8 +10,8 @@ import Providers from "./providers";
 import AdminWrapper from "@/components/layout/AdminWrapper";
 
 export const metadata: Metadata = {
-  title: "Candle.Store",
-  description: "Candle.Store - Your Gateway to a World of Candles",
+  title: "BestGiftEver",
+  description: "BestGiftEver - Your Gateway to a World of Candles",
 };
 
 export const viewport: Viewport = {
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={satoshi.className}>
-        <HolyLoader color="#868686" />
+        <HolyLoader color="#FBBF24" />
         <Providers>
           <AdminWrapper>
             {children}

@@ -1,643 +1,214 @@
-'use client'
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { cn } from "@/lib/utils";
-import { integralCF } from "@/styles/fonts";
+'use client';
 
-// Counter animation hook
-const useCounter = (end: number, duration: number = 2) => {
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { cn } from '@/lib/utils';
+import { integralCF } from '@/styles/fonts';
+import {
+  Gift, Sparkles, Users, Star, Package, ShieldCheck, Heart, Leaf,
+  BadgeCheck, Truck, Wrench, Crown, ThumbsUp, Sparkle, Layers,
+} from 'lucide-react';
+import Reviews from '../homepage/Reviews';
+
+// Animated Counter
+function useCounter(end: number, duration = 2) {
   const [count, setCount] = useState(0);
-  const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: true });
+  const [ref, inView] = useInView({ threshold: 0.35, triggerOnce: true });
 
   useEffect(() => {
-    if (inView) {
-      let startTime: number | null = null;
-      const animate = (currentTime: number) => {
-        if (!startTime) startTime = currentTime;
-        const progress = (currentTime - startTime) / (duration * 1000);
-        
-        if (progress < 1) {
-          setCount(Math.floor(end * progress));
-          requestAnimationFrame(animate);
-        } else {
-          setCount(end);
-        }
-      };
-      requestAnimationFrame(animate);
-    }
+    if (!inView) return;
+    let startTime: number | null = null;
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
+      setCount(Math.floor(end * progress));
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
   }, [inView, end, duration]);
 
   return { count, ref };
-};
+}
 
-const AboutPage = () => {
-  const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3]);
+export default function AboutPage() {
+  // Counters
+  const { count: c1, ref: r1 } = useCounter(50000, 2.2);   // Happy customers
+  const { count: c2, ref: r2 } = useCounter(100000, 2.2);  // Gifts delivered
+  const { count: c3, ref: r3 } = useCounter(4900, 2.2);    // 4.9★ (x1000 formatting)
 
-  // Animation variants
-  const fadeInUp = {
-    initial: { y: 60, opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
-  };
-
-  const fadeInLeft = {
-    initial: { x: -60, opacity: 0 },
-    animate: { x: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
-  };
-
-  const fadeInRight = {
-    initial: { x: 60, opacity: 0 },
-    animate: { x: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
-  };
-
-  const staggerContainer = {
-    animate: {
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const scaleIn = {
-    initial: { scale: 0.8, opacity: 0 },
-    animate: { scale: 1, opacity: 1, transition: { duration: 0.5 } },
-  };
-
+  // Cards data
   const values = [
-    {
-      icon: (
-        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-        </svg>
-      ),
-      title: "Our Mission",
-      description: "To bring warmth and tranquility to every home through premium handcrafted candles at affordable prices.",
-    },
-    {
-      icon: (
-        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-        </svg>
-      ),
-      title: "Our Vision", 
-      description: "To become India's most trusted candle brand, creating memorable experiences through exceptional fragrances.",
-    },
-    {
-      icon: (
-        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-        </svg>
-      ),
-      title: "Quality Promise",
-      description: "Every candle is handcrafted with premium soy wax, natural essential oils, and cotton wicks for a clean burn.",
-    },
-    {
-      icon: (
-        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.5 9.5l15 15" />
-        </svg>
-      ),
-      title: "Sustainability",
-      description: "Eco-friendly materials, recyclable packaging, and sustainable practices for a greener tomorrow.",
-    },
-    {
-      icon: (
-        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-      ),
-      title: "Community First",
-      description: "Building a community of candle lovers through workshops, custom orders, and personalized gifts.",
-    },
-    {
-      icon: (
-        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-      ),
-      title: "Trust & Security",
-      description: "100% secure payments, easy returns, and complete customer satisfaction guarantee.",
-    },
+    { icon: <Heart className="w-7 h-7" />, title: 'Made With Love', desc: 'Har gift me personal touch — photos, names & messages.', grad: 'from-pink-500 to-rose-500' },
+    { icon: <ShieldCheck className="w-7 h-7" />, title: 'Secure & Trusted', desc: '100% safe payments, easy returns, fast support.', grad: 'from-purple-500 to-indigo-500' },
+    { icon: <Leaf className="w-7 h-7" />, title: 'Eco Friendly', desc: 'Mindful packaging & sustainable practices.', grad: 'from-green-500 to-emerald-600' },
+    { icon: <BadgeCheck className="w-7 h-7" />, title: 'Premium Quality', desc: 'High-grade materials, sharp prints & finishes.', grad: 'from-amber-500 to-orange-500' },
+    { icon: <Truck className="w-7 h-7" />, title: 'Fast Delivery', desc: 'Pan-India shipping with live tracking.', grad: 'from-blue-500 to-cyan-500' },
+    { icon: <Crown className="w-7 h-7" />, title: 'Top-rated', desc: '4.9★ avg. rating from verified customers.', grad: 'from-fuchsia-500 to-purple-600' },
   ];
 
-  const milestones = [
-    { year: "2020", event: "Company Founded", description: "Started with just 50 handcrafted candles" },
-    { year: "2021", event: "10K Customers", description: "Reached our first milestone" },
-    { year: "2022", event: "Pan-India Delivery", description: "Expanded to all 28 states" },
-    { year: "2023", event: "Eco Certified", description: "Received eco-friendly certification" },
-    { year: "2024", event: "5000+ Candles", description: "Largest scented candle collection" },
+  const categories = [
+    { name: 'Personalized Mugs', slug: 'mugs', image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=900&q=80', grad: 'from-pink-500 to-rose-600' },
+    { name: 'Photo Frames', slug: 'frames', image: 'https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=900&q=80', grad: 'from-purple-500 to-indigo-600' },
+    { name: 'Custom Keyrings', slug: 'keyrings', image: 'https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=900&q=80', grad: 'from-blue-500 to-cyan-600' },
+    { name: 'Gift Sets', slug: 'gift-sets', image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=900&q=80', grad: 'from-amber-500 to-orange-600' },
   ];
 
-  const team = [
-    {
-      name: "Rahul Sharma",
-      role: "Founder & CEO",
-      bio: "Aromatherapy expert with 15 years in fragrance industry",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
-      linkedin: "#",
-    },
-    {
-      name: "Priya Patel",
-      role: "Chief Fragrance Officer",
-      bio: "Master perfumer trained in Paris",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
-      linkedin: "#",
-    },
-    {
-      name: "Arjun Singh",
-      role: "Chief Technology Officer",
-      bio: "Ex-Amazon, Built e-commerce platforms for millions",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
-      linkedin: "#",
-    },
-    {
-      name: "Sneha Reddy",
-      role: "Head of Operations",
-      bio: "Supply chain expert with 10+ years experience",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
-      linkedin: "#",
-    },
+  const steps = [
+    { title: 'Pick a Product', text: 'Choose mugs, frames, keyrings & gift sets.', icon: <Layers className="w-5 h-5" /> },
+    { title: 'Personalize', text: 'Add photos, names & messages in seconds.', icon: <Sparkles className="w-5 h-5" /> },
+    { title: 'We Craft It', text: 'Premium print & finishing by our experts.', icon: <Wrench className="w-5 h-5" /> },
+    { title: 'Delivered Fast', text: 'Pan-India delivery with live tracking.', icon: <Truck className="w-5 h-5" /> },
+  ];
+
+  const testimonials = [
+    { name: 'Priya Sharma', text: 'Magic mug quality next level! Hubby loved it 😍', img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80' },
+    { name: 'Rahul Verma', text: 'Photo frame finish is super premium. Perfect gift.', img: 'https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=200&q=80' },
+    { name: 'Kavya Iyer', text: 'Keyring print is crystal clear, loved the packaging!', img: 'https://images.unsplash.com/photo-1548142813-c348350df52b?w=200&q=80' },
+  ];
+
+  const faqs = [
+    { q: 'Delivery kitni fast hai?', a: 'Standard 3–6 days, metro cities me 2–4 days. Same-day customization on select products.' },
+    { q: 'Customization kaise hoti hai?', a: 'Upload photo/add name on product page. Live preview dekh kar order place karein.' },
+    { q: 'Returns/Refunds?', a: 'Manufacturing defects pe 7 days replacement. Non-custom products pe easy return.' },
   ];
 
   return (
-    <div className="min-h-screen bg-white overflow-hidden">
-      <section className="relative bg-black text-white py-20 md:py-32 overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px)`
-          }} />
-        </div>
-
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+      <div className="bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 text-white py-12 relative overflow-hidden">
+        <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
         <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <motion.div 
-            className="text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.h1 
-              className={cn([
-                integralCF.className,
-                "text-5xl md:text-6xl lg:text-7xl mb-6 uppercase"
-              ])}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              About Us
-            </motion.h1>
-            <motion.p 
-              className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              Passionate about candles, driven by community, committed to excellence
-            </motion.p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Animated Story Section */}
-      <section id="our-story" className="py-20 md:py-12 bg-gradient-to-b from-white to-[#F0EEED]/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <motion.span 
-                className="text-gray-700 font-semibold text-lg mb-4 block uppercase tracking-wider"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                viewport={{ once: true }}
-              >
-                Our Journey
-              </motion.span>
-              
-              <motion.h2 
-                className={cn([
-                  integralCF.className,
-                  "text-4xl md:text-5xl text-black mb-8 uppercase"
-                ])}
-                initial={{ y: 30, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                From a dream to Indias favorite candle store
-              </motion.h2>
-              
-              <motion.div 
-                className="space-y-6 text-black/70 text-lg leading-relaxed"
-                initial={{ y: 30, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                viewport={{ once: true }}
-              >
-                <p>
-                  What started as a small dream in a Mumbai apartment has grown into India's 
-                  most loved candle brand. Our founder, Rahul Sharma, a passionate aromatherapy 
-                  enthusiast, noticed how difficult it was to find quality handcrafted candles at reasonable prices.
-                </p>
-                <p>
-                  In 2020, during the pandemic, when the world turned to candles for comfort and 
-                  peace, we launched with just 50 handcrafted candles. Today, we're proud to offer over 
-                  5,000 premium scented candles across 100+ fragrances, serving customers in every corner of India.
-                </p>
-                <p>
-                  But we're more than just a candle store. We're building a community of fragrance lovers, 
-                  hosting candle-making workshops, custom orders, and gifting solutions. We believe that 
-                  candles have the power to transform spaces and moods, and we're committed to making that 
-                  experience accessible to everyone.
-                </p>
-              </motion.div>
-              
-              <motion.div 
-                className="mt-8 flex items-center gap-8"
-                initial={{ scale: 0.8, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <motion.div whileHover={{ scale: 1.1 }} className="cursor-pointer">
-                  <p className="text-3xl text-gray-700 font-extrabold">4.9/5</p>
-                  <p className="text-black/60 font-medium">Average Rating</p>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.1 }} className="cursor-pointer">
-                  <p className="text-3xl text-gray-700 font-extrabold">20K+</p>
-                  <p className="text-black/60 font-medium">Reviews</p>
-                </motion.div>
-              </motion.div>
-            </motion.div>
-            
-            {/* Animated Image Grid */}
-            <motion.div 
-              className="relative"
-              initial={{ x: 100, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  "https://images.unsplash.com/photo-1602874801006-95926fc7e8b8?w=400&h=300&fit=crop",
-                  "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=400&h=300&fit=crop",
-                  "https://images.unsplash.com/photo-1588854337115-1c67d9247e4d?w=400&h=300&fit=crop",
-                  "https://images.unsplash.com/photo-1609709295948-17d77cb2a69b?w=400&h=300&fit=crop",
-                ].map((src, index) => (
-                  <motion.img
-                    key={index}
-                    src={src}
-                    alt={`Candle Gallery ${index + 1}`}
-                    className={`rounded-2xl shadow-lg hover:shadow-2xl transition-all ${
-                      index % 2 === 1 ? 'mt-8' : ''
-                    }`}
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.1 * index }}
-                    whileHover={{ scale: 1.05, rotate: index % 2 === 0 ? 2 : -2 }}
-                    viewport={{ once: true }}
-                  />
-                ))}
-              </div>
-            </motion.div>
+          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-full mb-4">
+            <Gift className="w-4 h-4" />
+            <span className="text-xs font-bold uppercase">BestGiftEver</span>
           </div>
+          <h1 className={cn([integralCF.className, "text-4xl md:text-5xl uppercase mb-2"])}>
+           Gifts That Tell Your Story
+          </h1>
+          <p className="text-white/90 mt-2">
+           Personalized mugs, frames, keyrings & gift sets crafted with love — for every moment that matters
+          </p>
         </div>
-      </section>
+      </div>
 
-      {/* Animated Timeline Section */}
-      <section className="py-20 bg-white hidden md:block">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className={cn([
-              integralCF.className,
-              "text-4xl md:text-5xl text-black mb-4 uppercase"
-            ])}>
-              Our Milestones
-            </h2>
-            <p className="text-xl text-black/70">
-              Key moments in our journey of growth
-            </p>
-          </motion.div>
-          
-          <div className="relative">
-            <motion.div 
-              className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-900"
-              initial={{ height: 0 }}
-              whileInView={{ height: "100%" }}
-              transition={{ duration: 1.5 }}
-              viewport={{ once: true }}
-            />
-            
-            <div className="space-y-12">
-              {milestones.map((milestone, index) => (
-                <motion.div 
-                  key={index} 
-                  className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="w-1/2 px-8">
-                    <motion.div 
-                      className={`bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all ${
-                        index % 2 === 0 ? 'text-right' : 'text-left'
-                      }`}
-                      whileHover={{ scale: 1.05, rotate: index % 2 === 0 ? -1 : 1 }}
-                    >
-                      <span className="text-gray-700 text-2xl font-extrabold">{milestone.year}</span>
-                      <h3 className="text-xl font-bold text-black mt-2">{milestone.event}</h3>
-                      <p className="text-black/60 mt-2">{milestone.description}</p>
-                    </motion.div>
-                  </div>
-                  
-                  <motion.div 
-                    className="w-12 h-12 bg-gradient-to-r from-gray-500 to-gray-800 rounded-full flex items-center justify-center z-10"
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 + 0.3 }}
-                    viewport={{ once: true }}
-                    whileHover={{ scale: 1.2, rotate: 360 }}
-                  >
-                    <div className="w-6 h-6 bg-white rounded-full"></div>
-                  </motion.div>
-                  <div className="w-1/2"></div>
-                </motion.div>
+
+
+
+      {/* OUR STORY */}
+      <section className="py-14 sm:py-16 bg-gradient-to-b from-white to-pink-50/40">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            <div>
+              <span className="text-purple-700 font-bold text-xs sm:text-sm tracking-wider uppercase mb-3 inline-block">Our Journey</span>
+              <h2 className={cn(integralCF.className, 'text-3xl sm:text-4xl md:text-5xl mb-5 bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent uppercase')}>From a Spark to a Celebration</h2>
+              <div className="space-y-4 text-purple-800 leading-relaxed text-sm sm:text-base">
+                <p>We started small — but dreamed big. Today, we make personalized gifts that turn everyday moments into memories.</p>
+                <p>Premium quality, personal touch, fast delivery — that’s the promise we live by at BestGiftEver.</p>
+              </div>
+              <div className="mt-6 grid grid-cols-2 gap-6">
+                <div className="text-center bg-white/90 rounded-2xl border-2 border-pink-100 p-4">
+                  <p className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">100+</p>
+                  <p className="text-purple-700 font-semibold text-xs sm:text-sm">Cities Served</p>
+                </div>
+                <div className="text-center bg-white/90 rounded-2xl border-2 border-pink-100 p-4">
+                  <p className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">5,000+</p>
+                  <p className="text-purple-700 font-semibold text-xs sm:text-sm">Gift Options</p>
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                'https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=900&q=80',
+                'https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=900&q=80',
+                'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=900&q=80',
+                'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=900&q=80',
+              ].map((src, i) => (
+                <div key={i} className={cn('overflow-hidden rounded-2xl shadow-md', i % 2 === 1 ? 'mt-6' : '')}>
+                  <Image src={src} alt={`Gallery ${i + 1}`} width={900} height={700} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                </div>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Animated Values Section */}
-      <section className="py-20 md:py-10 bg-gradient-to-b from-[#F0EEED] to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <motion.span 
-              className="text-gray-700 font-semibold text-lg mb-4 block uppercase tracking-wider"
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              Our Values
-            </motion.span>
-            <h2 className={cn([
-              integralCF.className,
-              "text-4xl md:text-5xl text-black mb-4 uppercase"
-            ])}>
-              What Drives Us Forward
-            </h2>
-            <p className="text-xl text-black/70 max-w-3xl mx-auto">
-              Our core values guide every decision we make and every candle we craft
-            </p>
-          </motion.div>
-          
-          <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-          >
-            {values.map((value, index) => (
-              <motion.div 
-                key={index}
-                className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all group"
-                variants={fadeInUp}
-                whileHover={{ 
-                  scale: 1.05,
-                  transition: { type: "spring", stiffness: 300 }
-                }}
-              >
-                <motion.div 
-                  className="text-gray-700 mb-6"
-                  initial={{ rotate: -180, opacity: 0 }}
-                  whileInView={{ rotate: 0, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  viewport={{ once: true }}
-                  whileHover={{ 
-                    rotate: [0, -10, 10, -10, 10, 0],
-                    transition: { duration: 0.5 }
-                  }}
-                >
-                  {value.icon}
-                </motion.div>
-                <h3 className={cn([integralCF.className, "text-2xl text-black mb-4"])}>
-                  {value.title}
-                </h3>
-                <p className="text-black/60 leading-relaxed text-lg">
-                  {value.description}
-                </p>
-              </motion.div>
+      {/* CATEGORIES */}
+      <section className="py-14 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <span className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">
+              <Package className="w-4 h-4" /> Shop by Categories
+            </span>
+            <h3 className={cn(integralCF.className, 'mt-4 text-3xl sm:text-4xl md:text-5xl bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent uppercase')}>Find Your Perfect Gift</h3>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            {categories.map((cat, idx) => (
+              <Link key={idx} href={`/shop/${cat.slug}`} className="group relative rounded-2xl overflow-hidden border-2 border-pink-100 hover:border-purple-300 shadow-md hover:shadow-gift-lg transition">
+                <div className="relative aspect-square">
+                  <Image src={cat.image} alt={cat.name} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                  <div className={cn('absolute inset-0 bg-gradient-to-t opacity-70 group-hover:opacity-90 transition', cat.grad)} />
+                </div>
+                <div className="absolute inset-0 p-4 flex items-end">
+                  <div className="text-white">
+                    <p className="text-sm font-semibold">Explore</p>
+                    <h4 className="text-lg sm:text-xl font-extrabold">{cat.name}</h4>
+                  </div>
+                </div>
+              </Link>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Animated Team Section */}
-      <section className="py-20 md:py-10 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <motion.span 
-              className="text-gray-700 font-semibold text-lg mb-4 block uppercase tracking-wider"
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              Leadership
-            </motion.span>
-            <h2 className={cn([
-              integralCF.className,
-              "text-4xl md:text-5xl text-black mb-4 uppercase"
-            ])}>
-              Meet the Visionaries
-            </h2>
-            <p className="text-xl text-black/70 max-w-3xl mx-auto">
-              Passionate leaders with decades of combined experience in fragrance, aromatherapy, and e-commerce
-            </p>
-          </motion.div>
-          
-          <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-10"
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-          >
-            {team.map((member, index) => (
-              <motion.div 
-                key={index} 
-                className="group"
-                variants={fadeInUp}
-                whileHover={{ y: -10 }}
-              >
-                <motion.div 
-                  className="relative overflow-hidden rounded-3xl mb-6"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-80 object-cover"
-                  />
-                  <motion.div 
-                    className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <motion.a 
-                        href={member.linkedin} 
-                        className="text-white hover:text-gray-300"
-                        whileHover={{ scale: 1.2 }}
-                      >
-                        <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                        </svg>
-                      </motion.a>
-                    </div>
-                  </motion.div>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: index * 0.1 + 0.3 }}
-                  viewport={{ once: true }}
-                >
-                  <h3 className={cn([integralCF.className, "text-2xl text-black mb-2"])}>
-                    {member.name}
-                  </h3>
-                  <p className="text-gray-700 font-semibold mb-3">{member.role}</p>
-                  <p className="text-black/60 text-sm leading-relaxed">{member.bio}</p>
-                </motion.div>
-              </motion.div>
+
+      {/* VALUES */}
+      <section className="py-14 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h3 className={cn(integralCF.className, 'text-3xl sm:text-4xl md:text-5xl bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent uppercase')}>Why Choose Us</h3>
+            <p className="mt-3 text-purple-700 font-semibold">Everything that makes us India’s favorite</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {values.map((v, i) => (
+              <div key={i} className="bg-white p-6 rounded-3xl border-2 border-pink-100 hover:border-purple-300 shadow-md hover:shadow-gift-lg transition">
+                <div className={cn('w-14 h-14 rounded-2xl text-white flex items-center justify-center shadow-md mb-4', `bg-gradient-to-br ${v.grad}`)}>
+                  {v.icon}
+                </div>
+                <h4 className={cn(integralCF.className, 'text-xl bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent')}>{v.title}</h4>
+                <p className="mt-2 text-purple-800">{v.desc}</p>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Animated CTA Section */}
-      <motion.section 
-        className="py-20 md:py-32 bg-black text-white relative overflow-hidden"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        {/* Animated background elements */}
-        <motion.div
-          className="absolute top-0 left-0 w-96 h-96 bg-gray-700/20 rounded-full filter blur-3xl"
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -100, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-        <motion.div
-          className="absolute bottom-0 right-0 w-96 h-96 bg-gray-500/20 rounded-full filter blur-3xl"
-          animate={{
-            x: [0, -100, 0],
-            y: [0, 100, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-        
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <motion.h2 
-            className={cn([
-              integralCF.className,
-              "text-4xl md:text-5xl lg:text-6xl mb-6 uppercase"
-            ])}
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Ready to Light Up Your Space?
-          </motion.h2>
-          
-          <motion.p 
-            className="text-xl md:text-2xl text-white/80 mb-10 leading-relaxed"
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            Join thousands of happy customers who have made us their trusted candle companion. 
-            Your perfect fragrance is just a click away!
-          </motion.p>
-          
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-6 justify-center"
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link 
-                href="/shop"
-                className="inline-block bg-white text-black px-10 py-5 rounded-full hover:bg-white/90 transition-all font-bold text-lg"
-              >
-                Explore 5,000+ Candles
-              </Link>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link 
-                href="/contact"
-                className="inline-block border-2 border-white text-white px-10 py-5 rounded-full hover:bg-white hover:text-black transition-all font-bold text-lg"
-              >
-                Get in Touch
-              </Link>
-            </motion.div>
-          </motion.div>
+<Reviews/>
+
+
+      {/* CTA */}
+      <section className="py-14 sm:py-8 relative overflow-hidden text-white">
+        <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600" />
+        <div className="relative max-w-4xl mx-auto px-4 text-center">
+          <h3 className={cn(integralCF.className, 'text-3xl sm:text-4xl md:text-5xl mb-4 uppercase')}>
+            Ready to Make Someone Smile?
+          </h3>
+          <p className="text-white/90 text-base sm:text-lg mb-8">
+            Pick a gift that tells your story — crafted with love, delivered with care.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/shop" className="bg-white text-purple-700 font-bold px-8 py-3 rounded-full hover:shadow-gift-lg transition">
+              Explore Gifts
+            </Link>
+            <Link href="/contact" className="border-2 border-white text-white font-bold px-8 py-3 rounded-full hover:bg-white hover:text-purple-700 transition">
+              Get in Touch
+            </Link>
+          </div>
         </div>
-      </motion.section>
+      </section>
     </div>
   );
-};
-
-export default AboutPage;
+}

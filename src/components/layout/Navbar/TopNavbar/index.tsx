@@ -15,6 +15,7 @@ import InputGroup from "@/components/ui/input-group";
 import ResTopNavbar from "./ResTopNavbar";
 import CartBtn from "./CartBtn";
 import { supabase } from "@/lib/supabase";
+import { Search, Sparkles } from "lucide-react";
 
 type NavMenuItem = {
   id: number;
@@ -28,7 +29,6 @@ const data: NavMenuItem[] = [
   { id: 0, type: "MenuItem", label: "Home", url: "/", children: [] },
   { id: 3, type: "MenuItem", label: "Shop", url: "/shop", children: [] },
   { id: 1, type: "MenuItem", label: "About", url: "/about", children: [] },
-  { id: 2, type: "MenuItem", label: "Services", url: "/service", children: [] },
   { id: 4, type: "MenuItem", label: "Contact", url: "/contact", children: [] },
 ];
 
@@ -106,7 +106,6 @@ const TopNavbar = () => {
   };
 
   const getImageUrl = (product: any) => {
-    // ✅ Fixed: Use src_url (snake_case) to match database
     return product.src_url || product.image_url || product.imageUrl || "";
   };
 
@@ -120,7 +119,7 @@ const TopNavbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 bg-white z-20 shadow-sm">
+    <nav className="sticky top-0 bg-white/95 backdrop-blur-lg z-20 shadow-md border-b-2 border-pink-100">
       <div className="flex items-center justify-between max-w-frame mx-auto py-3 px-4 sm:px-2 lg:px-0 gap-2">
         <div className="flex items-center gap-2 flex-shrink-0">
           <div className="block md:hidden">
@@ -131,10 +130,10 @@ const TopNavbar = () => {
             href="/"
             className={cn(
               integralCF.className,
-              "text-lg sm:text-xl lg:text-[32px] font-bold leading-none tracking-tight ml-1"
+              "text-lg sm:text-xl lg:text-[32px] font-bold leading-none tracking-tight ml-1 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent hover:from-pink-500 hover:via-purple-500 hover:to-blue-500 transition-all"
             )}
           >
-            Candle.Store
+            BestGiftEver
           </Link>
         </div>
 
@@ -151,16 +150,10 @@ const TopNavbar = () => {
         <div className="flex items-center gap-3">
           <div className="hidden md:block relative" ref={searchRef}>
             <form onSubmit={handleSearchSubmit}>
-              <div className="flex-1 max-w-[350px] bg-[#F0F0F0] rounded-full">
+              <div className="flex-1 max-w-[350px] bg-gradient-to-r from-pink-50 to-purple-50 rounded-full border-2 border-pink-200 hover:border-purple-300 transition-all">
                 <InputGroup className="w-full">
                   <InputGroup.Text className="pl-4">
-                    <Image
-                      priority
-                      src="/icons/search.svg"
-                      height={20}
-                      width={20}
-                      alt="search"
-                    />
+                    <Search className="w-5 h-5 text-pink-500" />
                   </InputGroup.Text>
                   <InputGroup.Input
                     type="search"
@@ -168,8 +161,8 @@ const TopNavbar = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onFocus={() => searchQuery && setShowResults(true)}
-                    placeholder="Search for products..."
-                    className="bg-transparent placeholder:text-black/40 w-full"
+                    placeholder="Search gifts..."
+                    className="bg-transparent placeholder:text-purple-400 w-full text-gray-700 font-medium"
                     autoComplete="off"
                   />
                 </InputGroup>
@@ -177,36 +170,36 @@ const TopNavbar = () => {
             </form>
 
             {showResults && (
-              <div className="absolute top-full mt-2 w-full min-w-[350px] max-w-md bg-white border border-gray-200 rounded-2xl shadow-2xl max-h-96 overflow-y-auto z-50">
+              <div className="absolute top-full mt-2 w-full min-w-[350px] max-w-md bg-white/95 backdrop-blur-lg border-2 border-pink-200 rounded-2xl shadow-gift-lg max-h-96 overflow-y-auto z-50">
                 {loading ? (
                   <div className="p-6 text-center">
-                    <div className="animate-spin inline-block w-6 h-6 border-2 border-black border-t-transparent rounded-full mb-2"></div>
-                    <p className="text-gray-500 text-sm">Searching...</p>
+                    <div className="animate-spin inline-block w-6 h-6 border-2 border-pink-500 border-t-transparent rounded-full mb-2"></div>
+                    <p className="text-gray-600 text-sm">Searching...</p>
                   </div>
                 ) : searchResults.length === 0 ? (
                   <div className="p-6 text-center">
-                    <div className="text-5xl mb-3">🕯️</div>
-                    <p className="text-gray-600">
+                    <div className="text-5xl mb-3">🎁</div>
+                    <p className="font-semibold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
                       No results for "{searchQuery}"
                     </p>
                   </div>
                 ) : (
                   <>
-                    <div className="p-3 border-b bg-gray-50 flex items-center justify-between sticky top-0 z-10">
-                      <span className="text-sm font-semibold text-gray-700">
+                    <div className="p-3 border-b-2 border-pink-100 bg-gradient-to-r from-pink-50 to-purple-50 flex items-center justify-between sticky top-0 z-10">
+                      <span className="text-sm font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
                         {searchResults.length} result
                         {searchResults.length !== 1 ? "s" : ""}
                       </span>
                       <button
                         type="button"
                         onClick={() => setShowResults(false)}
-                        className="text-gray-500 hover:text-black w-6 h-6 flex items-center justify-center rounded-full hover:bg-gray-200"
+                        className="text-pink-500 hover:text-purple-600 w-6 h-6 flex items-center justify-center rounded-full hover:bg-pink-100 transition-all"
                       >
                         ✕
                       </button>
                     </div>
 
-                    <div className="divide-y">
+                    <div className="divide-y divide-pink-100">
                       {searchResults.map((product) => {
                         const imageUrl = getImageUrl(product);
                         const productSlug = createSlug(product.title);
@@ -216,10 +209,9 @@ const TopNavbar = () => {
                             key={product.id}
                             href={`/shop/product/${product.id}/${productSlug}`}
                             onClick={handleProductClick}
-                            className="flex gap-3 p-3 hover:bg-gray-50 transition-colors"
+                            className="flex gap-3 p-3 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 transition-all"
                           >
-                            {/* Product Image */}
-                            <div className="w-16 h-24 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg flex-shrink-0 overflow-hidden border border-gray-200">
+                            <div className="w-16 h-24 bg-gradient-to-br from-pink-100 to-purple-100 rounded-lg flex-shrink-0 overflow-hidden border-2 border-pink-200">
                               {imageUrl ? (
                                 <img
                                   src={imageUrl}
@@ -232,18 +224,17 @@ const TopNavbar = () => {
                                     const parent = img.parentElement;
                                     if (parent) {
                                       parent.innerHTML =
-                                        '<div class="w-full h-full flex items-center justify-center text-3xl">🕯️</div>';
+                                        '<div class="w-full h-full flex items-center justify-center text-3xl">🎁</div>';
                                     }
                                   }}
                                 />
                               ) : (
                                 <div className="w-full h-full flex items-center justify-center text-3xl">
-                                  🕯️
+                                  🎁
                                 </div>
                               )}
                             </div>
 
-                            {/* Product Info */}
                             <div className="flex-1 min-w-0">
                               <h4 className="font-bold text-sm line-clamp-2 mb-1 leading-tight text-gray-900">
                                 {product.title || "Untitled"}
@@ -254,13 +245,13 @@ const TopNavbar = () => {
                                 </p>
                               )}
                               <div className="flex items-center gap-2">
-                                <p className="font-semibold text-black text-sm">
+                                <p className="font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent text-sm">
                                   ₹
                                   {product.price?.toLocaleString("en-IN") ||
                                     "0"}
                                 </p>
                                 {product.rating && product.rating > 0 && (
-                                  <span className="text-xs text-gray-600">
+                                  <span className="text-xs text-yellow-500 font-semibold">
                                     ★ {product.rating.toFixed(1)}
                                   </span>
                                 )}
@@ -280,7 +271,7 @@ const TopNavbar = () => {
                         setShowResults(false);
                         setSearchQuery("");
                       }}
-                      className="w-full p-3 text-center bg-gray-50 hover:bg-gray-100 font-semibold text-black text-sm border-t transition-colors"
+                      className="w-full p-3 text-center bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold text-sm border-t-2 border-pink-200 transition-all"
                     >
                       View All Results →
                     </button>
@@ -291,7 +282,7 @@ const TopNavbar = () => {
 
             {showResults && (
               <div
-                className="fixed inset-0 bg-black/10 z-40"
+                className="fixed inset-0 bg-black/20 z-40"
                 onClick={() => setShowResults(false)}
               />
             )}
@@ -299,14 +290,8 @@ const TopNavbar = () => {
 
           <div className="flex items-center gap-2 sm:gap-5 flex-shrink-0">
             <Link href="/search" className="block md:hidden ml-1">
-              <div className="w-9 h-9 flex items-center justify-center rounded-full">
-                <Image
-                  priority
-                  src="/icons/search-black.svg"
-                  height={22}
-                  width={22}
-                  alt="search"
-                />
+              <div className="w-9 h-9 flex items-center justify-center rounded-full bg-gradient-to-r from-pink-100 to-purple-100 hover:from-pink-200 hover:to-purple-200 transition-all">
+                <Search className="w-5 h-5 text-pink-600" />
               </div>
             </Link>
             <CartBtn />

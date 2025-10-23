@@ -2,10 +2,10 @@
 
 import { useAppSelector } from "@/lib/hooks/redux";
 import { RootState } from "@/lib/store";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { ShoppingCart } from "lucide-react";
 
 const CartBtn = () => {
   const { cart } = useAppSelector((state) => (state as RootState).carts);
@@ -15,30 +15,29 @@ const CartBtn = () => {
   useEffect(() => {
     if (cart && cart.totalQuantities > prevQuantity) {
       setAnimate(true);
-      const timer = setTimeout(() => setAnimate(false), 500); // animation duration
+      const timer = setTimeout(() => setAnimate(false), 500);
       return () => clearTimeout(timer);
     }
     setPrevQuantity(cart?.totalQuantities || 0);
   }, [cart?.totalQuantities, prevQuantity]);
 
   return (
-    <Link href="/cart" className="relative mr-[14px] p-1">
+    <Link href="/cart" className="relative">
       <motion.div
-        animate={animate ? { scale: [1, 1.4, 1] } : { scale: 1 }}
+        animate={animate ? { scale: [1, 1.3, 1], rotate: [0, -10, 10, 0] } : { scale: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
+        className="relative w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-r from-pink-100 to-purple-100 hover:from-pink-200 hover:to-purple-200 transition-all shadow-md hover:shadow-gift"
       >
-        <Image
-          priority
-          src="/icons/cart.svg"
-          height={100}
-          width={100}
-          alt="cart"
-          className="max-w-[22px] max-h-[22px]"
-        />
+        <ShoppingCart className="w-5 h-5 text-pink-600" />
+        
         {cart && cart.totalQuantities > 0 && (
-          <span className="border bg-black text-white rounded-full w-fit-h-fit px-1 text-xs absolute -top-3 left-1/2 -translate-x-1/2">
-            {cart.totalQuantities}
-          </span>
+          <motion.span
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="absolute -top-1 -right-1 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold shadow-lg border-2 border-white"
+          >
+            {cart.totalQuantities > 99 ? '99+' : cart.totalQuantities}
+          </motion.span>
         )}
       </motion.div>
     </Link>

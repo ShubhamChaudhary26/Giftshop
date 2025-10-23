@@ -1,19 +1,17 @@
+// app/page.tsx
 import ProductListSec from "@/components/common/ProductListSec";
 import Brands from "@/components/homepage/Brands";
 import Header from "@/components/homepage/Header";
 import Reviews from "@/components/homepage/Reviews";
 import { Product } from "@/types/product.types";
 import { supabase } from "@/lib/supabase";
-import { reviewsData } from "@/lib/static-data";
-import { notFound } from "next/navigation";
-import TrustBadges from "@/components/TrustBadges/TrustBadges";
 import GiftBoxBuilder from "@/components/ScentIntensitySelector/ScentIntensitySelector";
+import CategorySection from "@/components/homepage/CategorySection";
+import WhyChooseUs from "@/components/homepage/WhyChooseUs";
 
-// Make page dynamic (no static caching)
 export const dynamic = "force-dynamic";
 
-
-// Fetch new arrivals
+// Fetch new arrivals (Gift Products)
 async function getNewArrivals(): Promise<Product[]> {
   const { data, error } = await supabase
     .from("products")
@@ -27,19 +25,20 @@ async function getNewArrivals(): Promise<Product[]> {
   return data.map((item: any) => ({
     id: item.id,
     title: item.title || "",
-    src_url: item.src_url || "/images/book1.webp", // ✅ Changed from srcUrl to src_url
-    srcUrl: item.src_url || "/images/book1.webp", // Keep both for compatibility
-    gallery: item.gallery || [item.src_url || "/images/book1.webp"],
+    src_url: item.src_url || "/images/placeholder.png",
+    srcUrl: item.src_url || "/images/placeholder.png",
+    gallery: item.gallery || [item.src_url],
     price: item.price || 0,
     discount: {
       amount: item.discount_amount || 0,
       percentage: item.discount_percentage || 0,
     },
-    discount_amount: item.discount_amount || 0, // Add these too
+    discount_amount: item.discount_amount || 0,
     discount_percentage: item.discount_percentage || 0,
     rating: item.rating || 0,
     author: item.author,
-    category: item.category,
+    category_id: item.category_id,
+    subcategory_id: item.subcategory_id,
     stock: item.stock,
     is_new_arrival: item.is_new_arrival,
     is_featured: item.is_featured,
@@ -47,7 +46,7 @@ async function getNewArrivals(): Promise<Product[]> {
   }));
 }
 
-// Fetch top selling
+// Fetch top selling gifts
 async function getTopSelling(): Promise<Product[]> {
   const { data, error } = await supabase
     .from("products")
@@ -61,9 +60,9 @@ async function getTopSelling(): Promise<Product[]> {
   return data.map((item: any) => ({
     id: item.id,
     title: item.title || "",
-    src_url: item.src_url || "/images/book1.webp", // ✅ Changed from srcUrl to src_url
-    srcUrl: item.src_url || "/images/book1.webp", // Keep both for compatibility
-    gallery: item.gallery || [item.src_url || "/images/book1.webp"],
+    src_url: item.src_url || "/images/placeholder.png",
+    srcUrl: item.src_url || "/images/placeholder.png",
+    gallery: item.gallery || [item.src_url],
     price: item.price || 0,
     discount: {
       amount: item.discount_amount || 0,
@@ -73,7 +72,8 @@ async function getTopSelling(): Promise<Product[]> {
     discount_percentage: item.discount_percentage || 0,
     rating: item.rating || 0,
     author: item.author,
-    category: item.category,
+    category_id: item.category_id,
+    subcategory_id: item.subcategory_id,
     stock: item.stock,
     is_new_arrival: item.is_new_arrival,
     is_featured: item.is_featured,
@@ -87,37 +87,44 @@ export default async function Home() {
     getTopSelling(),
   ]);
 
-  // Filter out any null or deleted Candles (safety)
-  const validNewArrivals = newArrivals.filter((book) => book && book.id);
-  const validTopSelling = topSelling.filter((book) => book && book.id);
+  const validNewArrivals = newArrivals.filter(
+    (product) => product && product.id
+  );
+  const validTopSelling = topSelling.filter((product) => product && product.id);
 
   return (
     <>
       <Header />
+
       <Brands />
-      <main className="my-[55px] sm:my-[72px]">
-        <ProductListSec
-          title="NEW ARRIVALS"
-          data={validNewArrivals}
-          viewAllLink="/shop#new-arrivals"
-        />
 
+      <main className="relative overflow-hidden">
+        <CategorySection />
+
+        <section className="">
+          <GiftBoxBuilder />
+        </section>
+
+        {/* 🆕 New Arrivals */}
         {validNewArrivals.length > 0 && (
-          <div className="max-w-frame mx-auto px-4 xl:px-0">
-            <hr className="h-[1px] border-t-black/10 my-10 sm:my-16" />
-          </div>
+          <>
+            <section className="">
+              <ProductListSec
+                title="NEW ARRIVALS"
+                data={validNewArrivals}
+                viewAllLink="/shop"
+              />
+            </section>
+          </>
         )}
-        <TrustBadges />
-        <GiftBoxBuilder />
-        <div className="mb-[50px] sm:mb-20">
-          <ProductListSec
-            title="TOP SELLING"
-            data={validTopSelling}
-            viewAllLink="/shop#top-selling"
-          />
-        </div>
 
-        <Reviews data={reviewsData} />
+        {/* 🌟 Why Choose Us */}
+
+        <WhyChooseUs />
+
+        {/* ⭐ Customer Reviews */}
+
+        <Reviews />
       </main>
     </>
   );

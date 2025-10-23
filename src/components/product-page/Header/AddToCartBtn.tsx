@@ -1,4 +1,3 @@
-// src/components/product-page/Header/AddToCartBtn.tsx
 "use client";
 
 import { addToCart } from "@/lib/features/carts/cartsSlice";
@@ -6,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks/redux";
 import { RootState } from "@/lib/store";
 import { Product } from "@/types/product.types";
 import React from "react";
+import { ShoppingCart } from "lucide-react";
 
 const AddToCartBtn = ({ data }: { data: Product & { quantity: number } }) => {
   const dispatch = useAppDispatch();
@@ -14,11 +14,10 @@ const AddToCartBtn = ({ data }: { data: Product & { quantity: number } }) => {
   );
 
   const handleAddToCart = () => {
-    // ✅ Prepare safe cart item
     const cartItem = {
       id: data.id,
       name: data.title || 'Untitled Product',
-      srcUrl: data.srcUrl || data.src_url || '/images/book1.webp',
+      srcUrl: data.srcUrl || data.src_url || '',
       price: data.price || 0,
       attributes: [
         sizeSelection || 'Default',
@@ -37,9 +36,10 @@ const AddToCartBtn = ({ data }: { data: Product & { quantity: number } }) => {
   return (
     <button
       type="button"
-      className="bg-black w-full ml-3 sm:ml-5 rounded-full h-11 md:h-[52px] text-sm sm:text-base text-white hover:bg-black/80 transition-all duration-300 font-semibold"
+      className="group w-full ml-3 sm:ml-5 rounded-full h-auto py-3 md:py-3.5 text-sm sm:text-base text-white hover:shadow-gift-lg transition-all duration-300 font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 flex items-center justify-center gap-2"
       onClick={handleAddToCart}
     >
+      <ShoppingCart className="w-5 h-5 group-hover:animate-bounce" />
       Add to Cart
     </button>
   );
