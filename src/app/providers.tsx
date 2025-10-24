@@ -17,8 +17,8 @@ const Providers = ({ children }: Props) => {
     <Provider store={store}>
       <PersistGate
         loading={
-          <div className="flex items-center justify-center h-96">
-            <SpinnerbLoader className="w-10 border-2 border-gray-300 border-r-gray-600" />
+          <div className="flex items-center justify-center h-106">
+            <SpinnerbLoader className="w-10 border-2 border-rose-300 border-r-rose-600" />
           </div>
         }
         persistor={persistor}
