@@ -191,7 +191,7 @@ export default async function CategorySection() {
           >
             <Link
               href="/shop"
-             className="group inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 border-2 border-rose-500  rounded-full hover:text-white hover:bg-rose-500  transition-all duration-300 font-bold text-sm sm:text-base shadow-lg "
+             className="group inline-flex items-center justify-center gap-2 px-8 sm:px-10 py-4 sm:py-5 border-2 border-rose-300  rounded-full hover:text-white hover:bg-rose-500  transition-all duration-300 font-bold text-sm sm:text-base shadow-lg "
             >
               View All Categories
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

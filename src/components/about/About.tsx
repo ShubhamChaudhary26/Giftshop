@@ -77,22 +77,30 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#fff9fb]">
-      <div className="bg-rose-500 text-white py-12 relative overflow-hidden">
-        <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-full mb-4">
-            <Gift className="w-4 h-4" />
-            <span className="text-xs font-bold uppercase">BestGiftEver</span>
-          </div>
-          <h1 className={cn([integralCF.className, "text-4xl md:text-5xl uppercase mb-2"])}>
-           Gifts That Tell Your Story
-          </h1>
-          <p className="text-white/90 mt-2">
-           Personalized mugs, frames, keyrings & gift sets crafted with love — for every moment that matters
-          </p>
-        </div>
-      </div>
+    <div className="min-h-screen ">
+     <div className="py-5 relative overflow-hidden bg-gradient-to-br from-rose-600 via-rose-500 to-rose-300 text-white">
+  <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
+  <div className="max-w-7xl mx-auto px-4 relative z-10">
+    <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-full mb-4">
+      <Gift className="w-4 h-4" />
+      <span className="text-xs font-bold uppercase">BestGiftEver</span>
+    </div>
+
+    <h1
+      className={cn([
+        integralCF.className,
+        "text-4xl md:text-5xl uppercase mb-2 bg-gradient-to-r from-white via-rose-100 to-rose-200 bg-clip-text text-transparent",
+      ])}
+    >
+      Gifts That Tell Your Story
+    </h1>
+
+    <p className="text-rose-50/90 mt-2 max-w-2xl">
+      Personalized mugs, frames, keyrings & gift sets crafted with love — for every moment that matters
+    </p>
+  </div>
+</div>
+
 
 
 
@@ -189,26 +197,43 @@ export default function AboutPage() {
 <Reviews/>
 
 
-      {/* CTA */}
-      <section className="py-14 sm:py-8 relative overflow-hidden text-white">
-        <div className="absolute inset-0 bg-rose-500" />
-        <div className="relative max-w-4xl mx-auto px-4 text-center">
-          <h3 className={cn(integralCF.className, 'text-3xl sm:text-4xl md:text-5xl mb-4 uppercase')}>
-            Ready to Make Someone Smile?
-          </h3>
-          <p className="text-white/90 text-base sm:text-lg mb-8">
-            Pick a gift that tells your story — crafted with love, delivered with care.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/shop" className="bg-white text-purple-700 font-bold px-8 py-3 rounded-full hover:shadow-gift-lg transition">
-              Explore Gifts
-            </Link>
-            <Link href="/contact" className="border-2 border-white text-white font-bold px-8 py-3 rounded-full hover:bg-white hover:text-purple-700 transition">
-              Get in Touch
-            </Link>
-          </div>
-        </div>
-      </section>
+     {/* CTA Section — Rose Gradient Style */}
+<section className="py-14 sm:py-8 relative overflow-hidden text-white bg-gradient-to-br from-rose-600 via-rose-500 to-rose-300">
+  {/* Overlay blur effect for glow */}
+  <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
+
+  <div className="relative max-w-4xl mx-auto px-4 text-center z-10">
+    <h3
+      className={cn(
+        integralCF.className,
+        "text-3xl sm:text-4xl md:text-5xl mb-4 uppercase bg-gradient-to-r from-white via-rose-100 to-rose-200 bg-clip-text text-transparent"
+      )}
+    >
+      Ready to Make Someone Smile?
+    </h3>
+
+    <p className="text-rose-50/90 text-base sm:text-lg mb-8">
+      Pick a gift that tells your story — crafted with love, delivered with care.
+    </p>
+
+    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <Link
+        href="/shop"
+        className="bg-white text-rose-700 font-bold px-8 py-3 rounded-full hover:shadow-lg hover:shadow-rose-200/40 transition"
+      >
+        Explore Gifts
+      </Link>
+
+      <Link
+        href="/contact"
+        className="border-2 border-white text-white font-bold px-8 py-3 rounded-full hover:bg-white hover:text-rose-700 transition"
+      >
+        Get in Touch
+      </Link>
+    </div>
+  </div>
+</section>
+
     </div>
   );
 }

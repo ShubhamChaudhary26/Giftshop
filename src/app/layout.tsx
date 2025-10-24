@@ -12,6 +12,7 @@ import AdminWrapper from "@/components/layout/AdminWrapper";
 export const metadata: Metadata = {
   title: "BestGiftEver",
   description: "BestGiftEver - Your Gateway to a World of Candles",
+  icons:"/icons/logo.jpg"
 };
 
 export const viewport: Viewport = {

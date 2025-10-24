@@ -83,21 +83,31 @@ export default function ShopPage() {
   return (
     <div className="min-h-screen bg-[#fff9fb]">
       {/* Header */}
-      <div className="text-rose-500 py-5 relative overflow-hidden">
-        <div className="absolute inset-0 bg-rose-500/10 backdrop-blur-sm"></div>
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-rose-500/30 text-rose-500 px-4 py-2 rounded-full mb-4">
-            <Package className="w-4 h-4" />
-            <span className="text-xs font-bold uppercase">All Categories</span>
-          </div>
-          <h1 className={cn([integralCF.className, "text-4xl md:text-5xl uppercase mb-2"])}>
-            Shop by Category
-          </h1>
-          <p className="text-rose-500/90 mt-2">
-            {categories.length} {categories.length === 1 ? 'category' : 'categories'} available
-          </p>
-        </div>
-      </div>
+      <div className="py-5 relative overflow-hidden bg-gradient-to-br from-rose-600 via-rose-500 to-rose-300 text-white">
+  {/* subtle glass blur overlay */}
+  <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
+
+  <div className="max-w-7xl mx-auto px-4 relative z-10">
+    <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-full mb-4">
+      <Package className="w-4 h-4" />
+      <span className="text-xs font-bold uppercase">All Categories</span>
+    </div>
+
+    <h1
+      className={cn([
+        integralCF.className,
+        "text-4xl md:text-5xl uppercase mb-2 bg-gradient-to-r from-white via-rose-100 to-rose-200 bg-clip-text text-transparent",
+      ])}
+    >
+      Shop by Category
+    </h1>
+
+    <p className="text-rose-50/90 mt-2">
+      {categories.length} {categories.length === 1 ? "category" : "categories"} available
+    </p>
+  </div>
+</div>
+
 
       {/* Categories Grid */}
       <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">

@@ -175,32 +175,32 @@ export default function SubcategoryPage() {
   return (
     <div className="min-h-screen bg-[#fff9fb]">
       {/* Header - Same style as Category Page */}
-      <div className="text-rose-500  relative overflow-hidden">
-        <div className="absolute inset-0 bg-rose-500/10 backdrop-blur-sm"></div>
-       
-        
-      <div className="text-rose-500 py-5 relative overflow-hidden">
-  <div className="absolute inset-0 bg-rose-500/10 backdrop-blur-sm"></div>
-  
-  <div className="max-w-7xl mx-auto px-4 relative z-10">
-    {/* Breadcrumb Badges - Mobile me ek line */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-rose-600 via-rose-500 to-rose-300 text-white">
+  {/* overlay blur for glass effect */}
+  <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
+
+  <div className="max-w-7xl mx-auto px-4 relative z-10 py-5">
+    {/* Breadcrumb badges */}
     <div className="flex items-center gap-2 mb-4 overflow-x-auto scrollbar-hide pb-1">
+      {/* Shop link */}
       <Link
         href="/shop"
-        className="inline-flex items-center gap-1 sm:gap-2 bg-white/30 backdrop-blur-sm border border-rose-500/30 text-rose-500 px-3 sm:px-4 py-2 rounded-full hover:bg-white/40 transition whitespace-nowrap flex-shrink-0"
+        className="inline-flex items-center gap-1 sm:gap-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white px-3 sm:px-4 py-2 rounded-full hover:bg-white/20 transition whitespace-nowrap flex-shrink-0"
       >
         <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4" />
         <span className="text-xs font-bold uppercase">Shop</span>
       </Link>
-      
+
+      {/* Category link */}
       <Link
         href={`/shop/${categorySlug}`}
-        className="inline-flex items-center gap-1 sm:gap-2 bg-white/30 backdrop-blur-sm border border-rose-500/30 text-rose-500 px-3 sm:px-4 py-2 rounded-full hover:bg-white/40 transition whitespace-nowrap flex-shrink-0"
+        className="inline-flex items-center gap-1 sm:gap-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white px-3 sm:px-4 py-2 rounded-full hover:bg-white/20 transition whitespace-nowrap flex-shrink-0"
       >
         <span className="text-xs font-bold uppercase">{category.name}</span>
       </Link>
 
-      <div className="inline-flex items-center gap-1 sm:gap-2 bg-white/20 backdrop-blur-sm border border-rose-500/30 text-rose-500 px-3 sm:px-4 py-2 rounded-full whitespace-nowrap flex-shrink-0">
+      {/* Products badge */}
+      <div className="inline-flex items-center gap-1 sm:gap-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white px-3 sm:px-4 py-2 rounded-full whitespace-nowrap flex-shrink-0">
         <Package className="w-3 h-3 sm:w-4 sm:h-4" />
         <span className="text-xs font-bold uppercase">Products</span>
       </div>
@@ -208,19 +208,20 @@ export default function SubcategoryPage() {
 
     {/* Title Section */}
     <div className="flex items-start gap-4">
-     
-      
       <div className="flex-1">
-        <h1 className={cn([integralCF.className, "text-4xl md:text-5xl uppercase mb-2"])}>
+        <h1
+          className={cn([
+            integralCF.className,
+            "text-4xl md:text-5xl uppercase mb-2 bg-gradient-to-r from-white via-rose-100 to-rose-200 bg-clip-text text-transparent",
+          ])}
+        >
           {subcategory.name}
         </h1>
-       
-        
       </div>
     </div>
   </div>
 </div>
-      </div>
+
 
       {/* Filters & Sort */}
       {products.length > 0 && (

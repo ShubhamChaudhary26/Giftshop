@@ -121,34 +121,49 @@ export default function CategoryPage() {
   return (
     <div className="min-h-screen bg-[#fff9fb]">
       {/* Header Section */}
-      <div className="text-rose-500 py-5 relative overflow-hidden">
-        <div className="absolute inset-0 bg-rose-500/10 backdrop-blur-sm"></div>
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <Link
-            href="/shop"
-            className="inline-flex items-center gap-2 bg-white/30 backdrop-blur-sm border border-rose-500/30 text-rose-500 px-4 py-2 rounded-full mb-4 hover:bg-white/40 transition"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span className="text-xs font-bold uppercase">Back</span>
-          </Link>
+      <div className="py-5 relative overflow-hidden bg-gradient-to-br from-rose-600 via-rose-500 to-rose-300 text-white">
+  {/* subtle overlay blur for glow */}
+  <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
 
-          <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-rose-500/30 text-rose-500 px-4 py-2 rounded-full mb-4">
-            <Layers className="w-4 h-4" />
-            <span className="text-xs font-bold uppercase">Subcategories</span>
-          </div>
+  <div className="max-w-7xl mx-auto px-4 relative z-10">
+    {/* Back button */}
+    <Link
+      href="/shop"
+      className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-full mb-4 hover:bg-white/20 transition"
+    >
+      <ArrowLeft className="w-4 h-4" />
+      <span className="text-xs font-bold uppercase">Back</span>
+    </Link>
 
-          <h1 className={cn([integralCF.className, "text-4xl md:text-5xl uppercase mb-2"])}>
-            {category.name}
-          </h1>
-          {category.description && (
-            <p className="text-rose-500/90 max-w-2xl mt-1">{category.description}</p>
-          )}
-          <p className="text-rose-500/90 mt-2">
-            {subcategories.length}{' '}
-            {subcategories.length === 1 ? 'subcategory' : 'subcategories'} available
-          </p>
-        </div>
-      </div>
+    {/* Subcategory Tag */}
+    <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-full mb-4">
+      <Layers className="w-4 h-4" />
+      <span className="text-xs font-bold uppercase">Subcategories</span>
+    </div>
+
+    {/* Heading */}
+    <h1
+      className={cn([
+        integralCF.className,
+        "text-4xl md:text-5xl uppercase mb-2 bg-gradient-to-r from-white via-rose-100 to-rose-200 bg-clip-text text-transparent",
+      ])}
+    >
+      {category.name}
+    </h1>
+
+    {/* Optional description */}
+    {category.description && (
+      <p className="text-rose-50/90 max-w-2xl mt-1">{category.description}</p>
+    )}
+
+    {/* Count */}
+    <p className="text-rose-50/90 mt-2">
+      {subcategories.length}{" "}
+      {subcategories.length === 1 ? "subcategory" : "subcategories"} available
+    </p>
+  </div>
+</div>
+
 
       {/* Subcategories Grid */}
 {/* Subcategories Grid */}
