@@ -9,7 +9,8 @@ import { integralCF } from "@/styles/fonts";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Filter, ChevronRight, Home } from "lucide-react";
+import { ArrowLeft, Filter, ChevronRight, Home, Package } from "lucide-react";
+import { div } from "framer-motion/client";
 
 interface Category {
   id: number;
@@ -151,7 +152,7 @@ export default function SubcategoryPage() {
       <div className="min-h-screen flex items-center justify-center bg-[#fff9fb]">
         <div className="text-center">
           <div className="animate-spin w-12 h-12 border-4 border-pink-500 border-t-transparent rounded-full mx-auto mb-4"></div>
-          <p className="text-xl font-semibold font-bold bg-rose-500 bg-clip-text text-transparent">Loading products...</p>
+          <p className="text-gray-600 font-semibold">Loading products...</p>
         </div>
       </div>
     );
@@ -160,10 +161,10 @@ export default function SubcategoryPage() {
   if (!category || !subcategory) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#fff9fb]">
-        <div className="text-center bg-white rounded-3xl p-12 shadow-gift-lg">
+        <div className="text-center bg-white rounded-3xl p-12 shadow-lg">
           <div className="text-6xl mb-4">😕</div>
-          <p className="text-2xl font-bold font-bold bg-rose-500 bg-clip-text text-transparent mb-4">Page not found</p>
-          <Link href="/shop" className="inline-block px-6 py-3 bg-rose-500 text-white rounded-full hover:shadow-gift-lg transition-all font-bold">
+          <p className="text-2xl font-bold bg-rose-500 bg-clip-text text-transparent mb-4">Page not found</p>
+          <Link href="/shop" className="inline-block px-6 py-3 bg-rose-500 text-white rounded-full hover:shadow-lg transition-all font-bold">
             Back to Shop
           </Link>
         </div>
@@ -173,73 +174,64 @@ export default function SubcategoryPage() {
 
   return (
     <div className="min-h-screen bg-[#fff9fb]">
-      {/* Header */}
-      <div className="relative bg-rose-500 text-white overflow-hidden">
-        {subcategory.image_url && (
-          <div className="absolute inset-0 opacity-20">
-            <Image src={subcategory.image_url} alt={subcategory.name} fill className="object-cover" priority />
-          </div>
-        )}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/80" />
-        <div className="relative max-w-7xl mx-auto px-4 py-8 md:py-12">
-          {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-sm mb-6 flex-wrap">
-            <Link href="/" className="text-white/80 hover:text-white transition-colors flex items-center gap-1">
-              <Home className="w-4 h-4" />
-              <span>Home</span>
-            </Link>
-            <ChevronRight className="w-4 h-4 text-white/60" />
-            <Link href="/shop" className="text-white/80 hover:text-white transition-colors">
-              Shop
-            </Link>
-            <ChevronRight className="w-4 h-4 text-white/60" />
-            <Link href={`/shop/${categorySlug}`} className="text-white/80 hover:text-white transition-colors">
-              {category.name}
-            </Link>
-            <ChevronRight className="w-4 h-4 text-white/60" />
-            <span className="text-white font-bold">{subcategory.name}</span>
-          </nav>
-          {/* Title Section */}
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
-            {subcategory.image_url && (
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden shadow-gift-lg border-2 border-white/30 flex-shrink-0 bg-white">
-                <Image src={subcategory.image_url} alt={subcategory.name} width={80} height={80} className="object-cover w-full h-full" />
-              </div>
-            )}
-            <div className="flex-1">
-              <h1 className={cn([integralCF.className, "text-3xl md:text-5xl uppercase leading-tight"])}>
-                {subcategory.name}
-              </h1>
-              {subcategory.description && (
-                <p className="text-white/90 mt-2 text-sm md:text-base max-w-2xl">{subcategory.description}</p>
-              )}
-              <div className="flex items-center gap-4 mt-3 text-sm">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="text-white/80">{products.length} {products.length === 1 ? "Product" : "Products"}</span>
-                </div>
-                {products.filter((p) => p.is_new_arrival).length > 0 && (
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                    <span className="text-white/80">{products.filter((p) => p.is_new_arrival).length} New Arrivals</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Header - Same style as Category Page */}
+      <div className="text-rose-500  relative overflow-hidden">
+        <div className="absolute inset-0 bg-rose-500/10 backdrop-blur-sm"></div>
+       
+        
+      <div className="text-rose-500 py-5 relative overflow-hidden">
+  <div className="absolute inset-0 bg-rose-500/10 backdrop-blur-sm"></div>
+  
+  <div className="max-w-7xl mx-auto px-4 relative z-10">
+    {/* Breadcrumb Badges - Mobile me ek line */}
+    <div className="flex items-center gap-2 mb-4 overflow-x-auto scrollbar-hide pb-1">
+      <Link
+        href="/shop"
+        className="inline-flex items-center gap-1 sm:gap-2 bg-white/30 backdrop-blur-sm border border-rose-500/30 text-rose-500 px-3 sm:px-4 py-2 rounded-full hover:bg-white/40 transition whitespace-nowrap flex-shrink-0"
+      >
+        <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4" />
+        <span className="text-xs font-bold uppercase">Shop</span>
+      </Link>
+      
+      <Link
+        href={`/shop/${categorySlug}`}
+        className="inline-flex items-center gap-1 sm:gap-2 bg-white/30 backdrop-blur-sm border border-rose-500/30 text-rose-500 px-3 sm:px-4 py-2 rounded-full hover:bg-white/40 transition whitespace-nowrap flex-shrink-0"
+      >
+        <span className="text-xs font-bold uppercase">{category.name}</span>
+      </Link>
+
+      <div className="inline-flex items-center gap-1 sm:gap-2 bg-white/20 backdrop-blur-sm border border-rose-500/30 text-rose-500 px-3 sm:px-4 py-2 rounded-full whitespace-nowrap flex-shrink-0">
+        <Package className="w-3 h-3 sm:w-4 sm:h-4" />
+        <span className="text-xs font-bold uppercase">Products</span>
+      </div>
+    </div>
+
+    {/* Title Section */}
+    <div className="flex items-start gap-4">
+     
+      
+      <div className="flex-1">
+        <h1 className={cn([integralCF.className, "text-4xl md:text-5xl uppercase mb-2"])}>
+          {subcategory.name}
+        </h1>
+       
+        
+      </div>
+    </div>
+  </div>
+</div>
       </div>
 
       {/* Filters & Sort */}
       {products.length > 0 && (
-        <div className="sticky top-[68px] sm:top-[72px] bg-white/95 backdrop-blur-lg border-b-2 border-pink-100 shadow-sm z-40">
+        <div className=" top-[68px] sm:top-[72px] bg-white/95 backdrop-blur-lg border-b-2 border-pink-100 shadow-sm z-40">
           <div className="max-w-7xl mx-auto px-4 py-4">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div className="text-sm text-gray-700">
-                Showing <span className="font-bold font-bold bg-rose-500 bg-clip-text text-transparent">{products.length}</span> results
+                Showing <span className="font-bold bg-rose-500 bg-clip-text text-transparent">{products.length}</span> results
               </div>
               <div className="flex items-center gap-3 w-full sm:w-auto">
-                <label className="text-sm font-semibold font-bold bg-rose-500 bg-clip-text text-transparent whitespace-nowrap flex items-center gap-1">
+                <label className="text-sm font-semibold bg-rose-500 bg-clip-text text-transparent whitespace-nowrap flex items-center gap-1">
                   <Filter className="w-4 h-4" />
                   Sort by:
                 </label>
@@ -260,7 +252,7 @@ export default function SubcategoryPage() {
         </div>
       )}
 
-      {/* Products Grid */}
+      {/* Products Grid - Same style as Categories */}
       <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
         {products.length > 0 ? (
           <motion.div
@@ -283,18 +275,18 @@ export default function SubcategoryPage() {
         ) : (
           <div className="text-center py-20 bg-white rounded-3xl shadow-lg">
             <div className="text-6xl mb-4">📦</div>
-            <p className="text-2xl font-bold font-bold bg-rose-500 bg-clip-text text-transparent mb-4">No products available</p>
+            <p className="text-2xl font-bold bg-rose-500 bg-clip-text text-transparent mb-4">No products available</p>
             <p className="text-gray-600 mb-6">We're adding new items to this collection soon. Check back later!</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href={`/shop/${categorySlug}`}
-                className="inline-block px-6 py-3 bg-rose-500 text-white rounded-full hover:shadow-gift-lg transition-all font-bold"
+                className="inline-block px-6 py-3 bg-rose-500 text-white rounded-full hover:shadow-lg transition-all font-bold"
               >
                 Back to {category.name}
               </Link>
               <Link
                 href="/shop"
-                className="inline-block px-6 py-3 border-2 border-rose-500  rounded-full hover:bg-gradient-to-r hover:bg-rose-500 hover:text-white hover:border-transparent transition-all font-bold"
+                className="inline-block px-6 py-3 border-2 border-rose-500 rounded-full hover:bg-rose-500 hover:text-white hover:border-transparent transition-all font-bold"
               >
                 Browse All Categories
               </Link>
@@ -309,19 +301,19 @@ export default function SubcategoryPage() {
           <div className="max-w-7xl mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
               <div>
-                <p className="text-3xl font-bold font-bold bg-rose-500 bg-clip-text text-transparent">{products.length}</p>
+                <p className="text-3xl font-bold bg-rose-500 bg-clip-text text-transparent">{products.length}</p>
                 <p className="text-sm font-semibold text-gray-700 mt-1">Total Products</p>
               </div>
               <div>
-                <p className="text-3xl font-bold font-bold bg-rose-500 bg-clip-text text-transparent">{products.filter((p) => (p.stock ?? 0) > 0).length}</p>
+                <p className="text-3xl font-bold bg-rose-500 bg-clip-text text-transparent">{products.filter((p) => (p.stock ?? 0) > 0).length}</p>
                 <p className="text-sm font-semibold text-gray-700 mt-1">In Stock</p>
               </div>
               <div>
-                <p className="text-3xl font-bold font-bold bg-rose-500 bg-clip-text text-transparent">{products.filter((p) => p.is_new_arrival).length}</p>
+                <p className="text-3xl font-bold bg-rose-500 bg-clip-text text-transparent">{products.filter((p) => p.is_new_arrival).length}</p>
                 <p className="text-sm font-semibold text-gray-700 mt-1">New Arrivals</p>
               </div>
               <div>
-                <p className="text-3xl font-bold font-bold bg-rose-500 bg-clip-text text-transparent">₹{Math.min(...products.map((p) => getDiscountedPrice(p))).toLocaleString("en-IN")}+</p>
+                <p className="text-3xl font-bold bg-rose-500 bg-clip-text text-transparent">₹{Math.min(...products.map((p) => getDiscountedPrice(p))).toLocaleString("en-IN")}+</p>
                 <p className="text-sm font-semibold text-gray-700 mt-1">Starting Price</p>
               </div>
             </div>
@@ -342,7 +334,7 @@ export default function SubcategoryPage() {
             </Link>
             <Link
               href="/shop"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm border-2 border-purple-200  rounded-full hover:bg-purple-500 hover:text-white hover:border-purple-500 transition-all text-sm font-semibold shadow-md"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm border-2 border-purple-200 text-purple-600 rounded-full hover:bg-purple-500 hover:text-white hover:border-purple-500 transition-all text-sm font-semibold shadow-md"
             >
               <Home className="w-4 h-4" />
               <span>All Categories</span>

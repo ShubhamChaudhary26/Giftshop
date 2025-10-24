@@ -78,12 +78,7 @@ const PhotoSection = ({ data }: { data: Product }) => {
           </div>
         )}
         
-        {data.is_new_arrival && (
-          <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-[10px] sm:text-xs py-1 px-2.5 rounded-full font-bold shadow-lg">
-            <Sparkles className="w-3 h-3" />
-            New
-          </div>
-        )}
+       
       </div>
     </div>
   );
