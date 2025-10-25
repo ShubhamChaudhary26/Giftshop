@@ -104,10 +104,10 @@ const Reviews = () => { // ✅ No props
 
             {/* Navigation Arrows */}
             <div className="hidden absolute right-4 xl:right-0 top-1/2 -translate-y-1/2 items-center gap-2">
-              <CarouselPrevious className="bg-white/80 backdrop-blur-sm hover:bg-gradient-to-r hover:bg-rose-500 text-pink-600 hover:text-white border-2 border-pink-200 hover:border-transparent transition-all duration-300 shadow-md hover:shadow-lg w-10 h-10 sm:w-12 sm:h-12 rounded-full">
+              <CarouselPrevious className="bg-white/80 backdrop-blur-sm hover:bg-rose-500 hover:bg-rose-500 text-pink-600 hover:text-white border-2 border-pink-200 hover:border-transparent transition-all duration-300 shadow-md hover:shadow-lg w-10 h-10 sm:w-12 sm:h-12 rounded-full">
                 <FaArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </CarouselPrevious>
-              <CarouselNext className="bg-white/80 backdrop-blur-sm hover:bg-gradient-to-r hover:bg-rose-500 text-pink-600 hover:text-white border-2 border-pink-200 hover:border-transparent transition-all duration-300 shadow-md hover:shadow-lg w-10 h-10 sm:w-12 sm:h-12 rounded-full">
+              <CarouselNext className="bg-white/80 backdrop-blur-sm hover:bg-rose-500 hover:bg-rose-500 text-pink-600 hover:text-white border-2 border-pink-200 hover:border-transparent transition-all duration-300 shadow-md hover:shadow-lg w-10 h-10 sm:w-12 sm:h-12 rounded-full">
                 <FaArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </CarouselNext>
             </div>
@@ -175,7 +175,7 @@ const Reviews = () => { // ✅ No props
                 "h-2 rounded-full transition-all duration-300",
                 current === index + 1
                   ? "w-8 bg-rose-500 shadow-md"
-                  : "w-2 bg-pink-300 hover:bg-gradient-to-r hover:from-pink-400 hover:to-purple-500"
+                  : "w-2 bg-pink-300 hover:bg-rose-500 hover:from-pink-400 hover:to-purple-500"
               ])}
               aria-label={`Go to review ${index + 1}`}
             />

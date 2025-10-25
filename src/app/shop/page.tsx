@@ -1,12 +1,12 @@
-'use client'
-import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
-import Link from 'next/link';
-import { cn } from '@/lib/utils';
-import { integralCF } from '@/styles/fonts';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { Package, ArrowRight } from 'lucide-react';
+"use client";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { integralCF } from "@/styles/fonts";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { Package, ArrowRight } from "lucide-react";
 
 interface Category {
   id: number;
@@ -40,30 +40,30 @@ export default function ShopPage() {
   async function fetchCategories() {
     try {
       const { data: categoriesData, error: catError } = await supabase
-        .from('categories')
-        .select('*')
-        .eq('is_active', true)
-        .order('name');
+        .from("categories")
+        .select("*")
+        .eq("is_active", true)
+        .order("name");
 
       if (catError) throw catError;
 
       const categoriesWithCount = await Promise.all(
         (categoriesData || []).map(async (cat) => {
           const { count } = await supabase
-            .from('products')
-            .select('*', { count: 'exact', head: true })
-            .eq('category_id', cat.id);
+            .from("products")
+            .select("*", { count: "exact", head: true })
+            .eq("category_id", cat.id);
 
           return {
             ...cat,
-            productCount: count || 0
+            productCount: count || 0,
           };
         })
       );
 
       setCategories(categoriesWithCount);
     } catch (error) {
-      console.error('Error fetching categories:', error);
+      console.error("Error fetching categories:", error);
     } finally {
       setLoading(false);
     }
@@ -84,30 +84,30 @@ export default function ShopPage() {
     <div className="min-h-screen bg-[#fff9fb]">
       {/* Header */}
       <div className="py-5 relative overflow-hidden bg-gradient-to-br from-rose-600 via-rose-500 to-rose-300 text-white">
-  {/* subtle glass blur overlay */}
-  <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
+        {/* subtle glass blur overlay */}
+        <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
 
-  <div className="max-w-7xl mx-auto px-4 relative z-10">
-    <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-full mb-4">
-      <Package className="w-4 h-4" />
-      <span className="text-xs font-bold uppercase">All Categories</span>
-    </div>
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-full mb-4">
+            <Package className="w-4 h-4" />
+            <span className="text-xs font-bold uppercase">All Categories</span>
+          </div>
 
-    <h1
-      className={cn([
-        integralCF.className,
-        "text-4xl md:text-5xl uppercase mb-2 bg-gradient-to-r from-white via-rose-100 to-rose-200 bg-clip-text text-transparent",
-      ])}
-    >
-      Shop by Category
-    </h1>
+          <h1
+            className={cn([
+              integralCF.className,
+              "text-4xl md:text-5xl uppercase mb-2 bg-gradient-to-r from-white via-rose-100 to-rose-200 bg-clip-text text-transparent",
+            ])}
+          >
+            Shop by Category
+          </h1>
 
-    <p className="text-rose-50/90 mt-2">
-      {categories.length} {categories.length === 1 ? "category" : "categories"} available
-    </p>
-  </div>
-</div>
-
+          <p className="text-rose-50/90 mt-2">
+            {categories.length}{" "}
+            {categories.length === 1 ? "category" : "categories"} available
+          </p>
+        </div>
+      </div>
 
       {/* Categories Grid */}
       <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
@@ -120,7 +120,7 @@ export default function ShopPage() {
           >
             {categories.map((category, index) => {
               const gradient = gradients[index % gradients.length];
-              
+
               return (
                 <motion.div
                   key={category.id}
@@ -153,11 +153,13 @@ export default function ShopPage() {
                           </div>
                         </div>
                       )}
-                      
-                      <div className={cn([
-                        "absolute inset-0 bg-gradient-to-t opacity-0 group-hover:opacity-70 transition-opacity duration-500",
-                        gradient
-                      ])} />
+
+                      <div
+                        className={cn([
+                          "absolute inset-0 bg-gradient-to-t opacity-0 group-hover:opacity-70 transition-opacity duration-500",
+                          gradient,
+                        ])}
+                      />
 
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         <div className="bg-white/20 backdrop-blur-sm p-3 sm:p-4 rounded-full">
@@ -172,7 +174,7 @@ export default function ShopPage() {
                         <h3 className="text-sm sm:text-lg lg:text-xl font-bold mb-1 sm:mb-2 text-gray-900 transition-all duration-300 line-clamp-1">
                           {category.name}
                         </h3>
-                        
+
                         {/* Description visible on all screens */}
                         <div className="h-8 sm:h-10 lg:h-11 mb-5 sm:mb-5">
                           {category.description ? (
@@ -186,10 +188,11 @@ export default function ShopPage() {
                           )}
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center justify-between pt-1 sm:pt-2 border-t border-pink-100">
                         <span className="text-xs sm:text-sm font-bold bg-rose-500 bg-clip-text text-transparent">
-                          {category.productCount} {category.productCount === 1 ? 'Item' : 'Items'}
+                          {category.productCount}{" "}
+                          {category.productCount === 1 ? "Item" : "Items"}
                         </span>
                         <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-rose-500 group-hover:translate-x-1 transition-all duration-300" />
                       </div>
@@ -202,7 +205,9 @@ export default function ShopPage() {
         ) : (
           <div className="text-center py-20 bg-white rounded-3xl shadow-lg">
             <div className="text-6xl mb-4">📦</div>
-            <p className="text-2xl font-bold bg-rose-500 bg-clip-text text-transparent mb-4">No categories available yet</p>
+            <p className="text-2xl font-bold bg-rose-500 bg-clip-text text-transparent mb-4">
+              No categories available yet
+            </p>
             <p className="text-gray-600">Check back soon for new products!</p>
           </div>
         )}

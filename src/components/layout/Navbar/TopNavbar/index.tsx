@@ -130,7 +130,7 @@ const TopNavbar = () => {
             href="/"
             className={cn(
               integralCF.className,
-              "text-lg sm:text-xl lg:text-[32px] font-bold leading-none tracking-tight ml-1 font-bold bg-rose-500 bg-clip-text text-transparent hover:from-rose-500 hover:via-purple-500 hover:to-blue-500 transition-all"
+              "text-lg sm:text-xl lg:text-[32px] font-bold leading-none tracking-tight ml-1 font-bold bg-rose-500 bg-clip-text text-transparent  transition-all"
             )}
           >
             BestGiftEver
@@ -170,7 +170,7 @@ const TopNavbar = () => {
             </form>
 
             {showResults && (
-              <div className="absolute top-full mt-2 w-full min-w-[350px] max-w-md bg-white/95 backdrop-blur-lg border-2 border-rose-200 rounded-2xl shadow-gift-lg max-h-96 overflow-y-auto z-50">
+              <div className="absolute top-full mt-2 w-full min-w-[350px] max-w-md bg-white/95 backdrop-blur-lg border-2 border-rose-200 rounded-2xl  max-h-96 overflow-y-auto z-50">
                 {loading ? (
                   <div className="p-6 text-center">
                     <div className="animate-spin inline-block w-6 h-6 border-2 border-rose-500 border-t-transparent rounded-full mb-2"></div>
@@ -209,7 +209,7 @@ const TopNavbar = () => {
                             key={product.id}
                             href={`/shop/product/${product.id}/${productSlug}`}
                             onClick={handleProductClick}
-                            className="flex gap-3 p-3 hover:bg-gradient-to-r hover:from-rose-50 hover:to-purple-50 transition-all"
+                            className="flex gap-3 p-3 hover:bg-rose-500 hover:from-rose-50 hover:to-purple-50 transition-all"
                           >
                             <div className="w-16 h-24 bg-gradient-to-br from-rose-100 to-purple-100 rounded-lg flex-shrink-0 overflow-hidden border-2 border-rose-200">
                               {imageUrl ? (

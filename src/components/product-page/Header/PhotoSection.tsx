@@ -53,33 +53,33 @@ const PhotoSection = ({ data }: { data: Product }) => {
       </div>
 
       {/* Main Image */}
-      <div className="relative flex items-center justify-center bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl sm:rounded-2xl w-full mx-auto aspect-square md:aspect-auto md:h-auto min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] overflow-hidden border-2 border-pink-100 shadow-lg">
-        {selected ? (
-          <Image
-            src={selected}
-            alt={data.title || 'Product'}
-            fill
-            className="object-contain p-4 sm:p-6 hover:scale-105 transition-all duration-500"
-            sizes="(max-width: 768px) 100vw, 50vw"
-            priority
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.style.display = 'none';
-              const parent = target.parentElement;
-              if (parent) {
-                parent.innerHTML = `<div class="w-full h-full flex flex-col items-center justify-center text-purple-300"><svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image-off"><path d="M21.08 21.08a2 2 0 0 1-2.83 0l-16-16a2 2 0 0 1 0-2.83s0 0 0 0a2 2 0 0 1 2.83 0L21.08 21.08z"/><path d="M11 21H7a2 2 0 0 1-2-2V7"/><path d="M21 13V7a2 2 0 0 0-2-2h-6"/><path d="M16 16l-3-3-4 4"/><circle cx="8" cy="8" r="1"/></svg><p class="mt-2 text-sm">Image not available</p></div>`;
-              }
-            }}
-          />
-        ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center text-purple-300">
-            <ImageOff className="w-16 h-16" />
-            <p className="mt-2 text-sm">Image not available</p>
-          </div>
-        )}
-        
-       
-      </div>
+     {/* Main Image */}
+<div className="relative flex items-center justify-center bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl sm:rounded-2xl w-full mx-auto aspect-square md:aspect-auto md:h-auto min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] overflow-hidden border-2 border-pink-100 shadow-lg">
+  {selected ? (
+    <Image
+      src={selected}
+      alt={data.title || 'Product'}
+      fill
+      className="object-cover hover:scale-105 transition-transform duration-500"
+      sizes="(max-width: 768px) 100vw, 50vw"
+      priority
+      onError={(e) => {
+        const target = e.target as HTMLImageElement;
+        target.style.display = 'none';
+        const parent = target.parentElement;
+        if (parent) {
+          parent.innerHTML = `<div class="w-full h-full flex flex-col items-center justify-center text-purple-300"><svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image-off"><path d="M21.08 21.08a2 2 0 0 1-2.83 0l-16-16a2 2 0 0 1 0-2.83s0 0 0 0a2 2 0 0 1 2.83 0L21.08 21.08z"/><path d="M11 21H7a2 2 0 0 1-2-2V7"/><path d="M21 13V7a2 2 0 0 0-2-2h-6"/><path d="M16 16l-3-3-4 4"/><circle cx="8" cy="8" r="1"/></svg><p class="mt-2 text-sm">Image not available</p></div>`;
+        }
+      }}
+    />
+  ) : (
+    <div className="w-full h-full flex flex-col items-center justify-center text-purple-300">
+      <ImageOff className="w-16 h-16" />
+      <p className="mt-2 text-sm">Image not available</p>
+    </div>
+  )}
+</div>
+
     </div>
   );
 };

@@ -99,7 +99,7 @@ export default function Tabs({ product }: TabsProps) {
               </div>
             ) : null}
             <p className="text-gray-500 mb-4">No reviews yet.</p>
-            <button className="px-6 py-3 bg-rose-500 text-white rounded-full hover:shadow-gift-lg transition font-bold">
+            <button className="px-6 py-3 bg-rose-500 text-white rounded-full  transition font-bold">
               Be the first to review
             </button>
           </div>

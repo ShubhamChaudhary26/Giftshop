@@ -21,7 +21,7 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
     <div className="mb-4">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full bg-white/90 backdrop-blur-sm rounded-2xl p-6 text-left hover:shadow-gift-lg transition-all border-2 border-pink-100 hover:border-purple-300"
+        className="w-full bg-white/90 backdrop-blur-sm rounded-2xl p-6 text-left  transition-all border-2 border-pink-100 hover:border-purple-300"
       >
         <div className="flex items-center justify-between">
           <h3 className="font-extrabold font-bold bg-rose-500 bg-clip-text text-transparent pr-4">
@@ -125,7 +125,7 @@ export default function ContactPage() {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08, duration: 0.5 }}
-                className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 text-center hover:shadow-gift-lg transition-shadow border-2 border-pink-100 hover:border-purple-300"
+                className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 text-center  transition-shadow border-2 border-pink-100 hover:border-purple-300"
               >
                 <div className="w-14 h-14 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-md">
                   {info.icon}
@@ -207,7 +207,7 @@ export default function ContactPage() {
 
                 <button
                   type="submit" disabled={isSubmitting}
-                  className="w-full md:w-auto px-10 py-3.5 rounded-full font-bold text-white bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:shadow-gift-lg transition flex items-center justify-center gap-2 disabled:opacity-60"
+                  className="w-full md:w-auto px-10 py-3.5 rounded-full font-bold text-white bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500  transition flex items-center justify-center gap-2 disabled:opacity-60"
                 >
                   {isSubmitting ? (<><span className="animate-spin">⏳</span>Sending...</>) : (<><Send size={18} />Send Message</>)}
                 </button>

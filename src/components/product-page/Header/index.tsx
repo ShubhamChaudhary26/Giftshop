@@ -34,7 +34,7 @@ const Header = ({ data }: { data: Product }) => {
       <div className="flex flex-col">
         {/* Title */}
         <h1
-          className="text-2xl md:text-[40px] md:leading-[44px] mb-2 capitalize font-bold font-bold bg-rose-500 bg-clip-text text-transparent"
+          className="text-2xl md:text-[40px] md:leading-[55px] mb-2 capitalize font-bold font-bold bg-rose-500 bg-clip-text text-transparent"
         >
           {data.title}
         </h1>
@@ -95,7 +95,7 @@ const Header = ({ data }: { data: Product }) => {
         {data.stock !== undefined && (
           <div className="mb-5">
             {data.stock > 0 ? (
-              <div className="flex items-center gap-2 bg-green-100/80 border border-green-200 text-green-700 font-semibold px-4 py-2 rounded-lg w-fit">
+              <div className="flex items-center gap-2 bg-gray-100/80 border border-gray-200 text-gray-700 font-semibold px-4 py-2 rounded-lg w-fit">
                 <CheckCircle className="w-5 h-5" />
                 <span>In Stock ({data.stock} available)</span>
               </div>

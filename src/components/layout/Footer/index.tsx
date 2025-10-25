@@ -90,7 +90,7 @@ const Footer = () => {
                   <Link
                     href={social.url}
                     key={social.id}
-                    className="bg-white hover:bg-gradient-to-r hover:bg-rose-500 hover:text-white transition-all w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-pink-200 hover:border-transparent flex items-center justify-center p-1.5 shadow-md hover:shadow-gift text-sm sm:text-base"
+                    className="bg-white hover:bg-rose-500 hover:bg-rose-500 hover:text-white transition-all w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-pink-200 hover:border-transparent flex items-center justify-center p-1.5 shadow-md hover:shadow-gift text-sm sm:text-base"
                   >
                     {social.icon}
                   </Link>

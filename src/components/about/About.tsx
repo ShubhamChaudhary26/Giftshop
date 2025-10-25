@@ -155,7 +155,7 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {categories.map((cat, idx) => (
-              <Link key={idx} href={`/shop/${cat.slug}`} className="group relative rounded-2xl overflow-hidden border-2 border-pink-100 hover:border-purple-300 shadow-md hover:shadow-gift-lg transition">
+              <Link key={idx} href={`/shop/${cat.slug}`} className="group relative rounded-2xl overflow-hidden border-2 border-pink-100 hover:border-purple-300 shadow-md  transition">
                 <div className="relative aspect-square">
                   <Image src={cat.image} alt={cat.name} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
                   <div className={cn('absolute inset-0 bg-gradient-to-t opacity-70 group-hover:opacity-90 transition', cat.grad)} />
@@ -182,7 +182,7 @@ export default function AboutPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {values.map((v, i) => (
-              <div key={i} className="bg-white p-6 rounded-3xl border-2 border-pink-100 hover:border-purple-300 shadow-md hover:shadow-gift-lg transition">
+              <div key={i} className="bg-white p-6 rounded-3xl border-2 border-pink-100 hover:border-purple-300 shadow-md  transition">
                 <div className={cn('w-14 h-14 rounded-2xl text-white flex items-center justify-center shadow-md mb-4', `bg-gradient-to-br ${v.grad}`)}>
                   {v.icon}
                 </div>

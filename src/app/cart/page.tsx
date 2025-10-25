@@ -35,7 +35,7 @@ const EmptyCart = memo(() => (
     <span className="block mb-6 text-lg md:text-xl font-semibold font-bold bg-rose-500 bg-clip-text text-transparent">
       Your shopping cart is empty
     </span>
-    <Link href="/shop" className="inline-block bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold px-8 py-3 rounded-full hover:shadow-gift-lg transition-shadow">
+    <Link href="/shop" className="inline-block bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold px-8 py-3 rounded-full  transition-shadow">
       Start Shopping
     </Link>
   </div>
@@ -92,7 +92,7 @@ const OrderSummary = memo<OrderSummaryProps>(({
 
       <button
         type="button"
-        className={cn("text-sm md:text-base font-bold text-white bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-full w-full py-3.5 md:py-4 disabled:opacity-60 disabled:cursor-not-allowed", "hover:shadow-gift-lg transition-all duration-300")}
+        className={cn("text-sm md:text-base font-bold text-white bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-full w-full py-3.5 md:py-4 disabled:opacity-60 disabled:cursor-not-allowed", " transition-all duration-300")}
         onClick={onPlaceOrder}
         disabled={isPending || !isFormValid}
       >
@@ -177,7 +177,7 @@ export default function CartPage() {
             initial={{ scale: 0.8, y: 50 }}
             animate={{ scale: 1, y: 0 }}
             transition={{ type: 'spring', stiffness: 250, damping: 20 }}
-            className="bg-white rounded-3xl p-8 text-center shadow-gift-lg max-w-lg w-full mx-auto border-2 border-pink-100"
+            className="bg-white rounded-3xl p-8 text-center  max-w-lg w-full mx-auto border-2 border-pink-100"
           >
             <motion.div
               initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2, type: 'spring' }}

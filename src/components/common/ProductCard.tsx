@@ -66,45 +66,30 @@ const ProductCard = ({ data, className }: ProductCardProps) => {
       ])}
     >
       {/* Product Image */}
-      <div className="aspect-square relative overflow-hidden bg-white flex-shrink-0">
-        {imageUrl ? (
-          <Image
-            src={imageUrl}
-            alt={data.title || "Product"}
-            fill
-            className="object-contain group-hover:scale-110 transition-transform duration-700"
-            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
-            quality={85}
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.src = fallbackImage;
-            }}
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-pink-100 to-purple-100">
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl lg:text-6xl filter grayscale group-hover:grayscale-0 transition-all duration-300">
-                🎁
-              </div>
-            </div>
-          </div>
-        )}
-        
-        {/* Gradient Overlay on Hover */}
-        <div className={cn([
-          "absolute inset-0 bg-gradient-to-t opacity-0 group-hover:opacity-70 transition-opacity duration-500",
-          gradient
-        ])} />
-
-        {/* Arrow Icon on Hover */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <div className="bg-white/20 backdrop-blur-sm p-3 rounded-full">
-            <ArrowRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
-          </div>
+     <div className="aspect-square relative overflow-hidden bg-white flex-shrink-0">
+  {imageUrl ? (
+    <Image
+      src={imageUrl}
+      alt={data.title || "Product"}
+      fill
+      className="object-contain group-hover:scale-105 transition-transform duration-700"
+      sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
+      quality={85}
+      onError={(e) => {
+        const target = e.target as HTMLImageElement;
+        target.src = fallbackImage;
+      }}
+    />
+  ) : (
+    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-pink-100 to-purple-100">
+      <div className="text-center">
+        <div className="text-4xl md:text-5xl lg:text-6xl filter grayscale transition-all duration-300">
+          🎁
         </div>
-
-        
       </div>
+    </div>
+  )}
+</div>
 
       {/* Product Info */}
       <div className="flex flex-col justify-between p-3 md:p-4 lg:p-5 flex-1 min-h-[140px] md:min-h-[160px] bg-gradient-to-b from-white to-pink-50/30">

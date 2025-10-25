@@ -185,7 +185,7 @@ export default function GiftBoxBuilder() {
               initial={{ scale: 0.5, y: 100 }}
               animate={{ scale: 1, y: 0 }}
               transition={{ type: 'spring', stiffness: 250, damping: 20 }}
-              className="bg-white rounded-3xl p-8 text-center shadow-gift-lg max-w-sm w-full mx-4 border-2 border-pink-200"
+              className="bg-white rounded-3xl p-8 text-center  max-w-sm w-full mx-4 border-2 border-pink-200"
             >
               <motion.div
                 animate={{ rotate: [0, -10, 10, -10, 10, 0], scale: [1, 1.1, 1] }}
@@ -227,7 +227,7 @@ export default function GiftBoxBuilder() {
             exit={{ opacity: 0, y: -50 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             className={cn(
-              "fixed top-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 shadow-gift-lg rounded-full py-3 px-5 text-sm font-semibold backdrop-blur-sm",
+              "fixed top-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3  rounded-full py-3 px-5 text-sm font-semibold backdrop-blur-sm",
               notification.type === 'success' 
                 ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white" 
                 : "bg-gradient-to-r from-red-500 to-pink-600 text-white"
@@ -397,7 +397,7 @@ export default function GiftBoxBuilder() {
               className={cn(
                 "w-full py-4 rounded-full font-bold transition-all flex items-center justify-center gap-2 text-base shadow-lg",
                 selectedCandles.length > 0 
-                  ? "bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white hover:shadow-gift-lg active:scale-95" 
+                  ? "bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white  active:scale-95" 
                   : "bg-gray-200 text-gray-400 cursor-not-allowed"
               )}
             >

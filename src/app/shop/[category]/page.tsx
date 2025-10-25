@@ -28,14 +28,7 @@ interface Subcategory {
 
 // Gradient colors (same as ShopPage)
 const gradients = [
-  "from-pink-500 to-rose-500",
-  "from-purple-500 to-indigo-500",
-  "from-blue-500 to-cyan-500",
-  "from-amber-500 to-orange-500",
-  "from-green-500 to-emerald-500",
-  "from-red-500 to-pink-500",
-  "from-violet-500 to-purple-500",
-  "from-teal-500 to-cyan-500",
+  ""
 ];
 
 export default function CategoryPage() {
@@ -165,7 +158,6 @@ export default function CategoryPage() {
 </div>
 
 
-      {/* Subcategories Grid */}
 {/* Subcategories Grid */}
 <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
   {subcategories.length > 0 ? (
@@ -202,21 +194,20 @@ export default function CategoryPage() {
                     priority={index < 5}
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-pink-100 to-purple-100">
+                  <div className="w-full h-full flex items-center justify-center bg-white">
                     <div className="text-center">
-                      <div className="text-4xl md:text-5xl lg:text-6xl filter grayscale group-hover:grayscale-0 transition-all duration-300">
+                      <div className="text-4xl md:text-5xl lg:text-6xl filter grayscale transition-all duration-300">
                         🏷️
                       </div>
                     </div>
                   </div>
                 )}
                 
-                <div className={cn([
-                  "absolute inset-0 bg-gradient-to-t opacity-0 group-hover:opacity-70 transition-opacity duration-500",
-                  gradient
-                ])} />
+                {/* Removed hover gradient overlay */}
+                <div className={`absolute inset-0 bg-gradient-to-t opacity-0 transition-opacity duration-500`} />
 
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                {/* Optional arrow overlay */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500">
                   <div className="bg-white/20 backdrop-blur-sm p-3 rounded-full">
                     <ArrowRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
                   </div>
@@ -230,7 +221,6 @@ export default function CategoryPage() {
                     {subcategory.name}
                   </h3>
                   
-                  {/* Description */}
                   {subcategory.description && (
                     <p className="text-xs md:text-sm text-gray-600 line-clamp-2 mb-2">
                       {subcategory.description}
@@ -242,7 +232,7 @@ export default function CategoryPage() {
                   <span className="text-xs md:text-sm font-bold bg-rose-500 bg-clip-text text-transparent">
                     {subcategory.productCount} {subcategory.productCount === 1 ? 'Item' : 'Items'}
                   </span>
-                  <ArrowRight className="w-3 h-3 md:w-4 md:h-4 text-rose-500 group-hover:translate-x-1 transition-all duration-300" />
+                  <ArrowRight className="w-3 h-3 md:w-4 md:h-4 text-rose-500 transition-all duration-300" />
                 </div>
               </div>
             </Link>
@@ -266,6 +256,7 @@ export default function CategoryPage() {
     </div>
   )}
 </div>
+
 
 {/* Optional: Subcategories Stats - products wale jaisa */}
 {subcategories.length > 3 && (

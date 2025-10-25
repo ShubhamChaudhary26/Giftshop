@@ -36,7 +36,7 @@ const AddToCartBtn = ({ data }: { data: Product & { quantity: number } }) => {
   return (
     <button
       type="button"
-      className="group w-full ml-3 sm:ml-5 rounded-full h-auto py-3 md:py-3.5 text-sm sm:text-base text-white hover:shadow-gift-lg transition-all duration-300 font-bold bg-rose-500 flex items-center justify-center gap-2"
+      className="group w-full ml-3 sm:ml-5 rounded-full h-auto py-3 md:py-3.5 text-sm sm:text-base text-white  transition-all duration-300 font-bold bg-rose-500 flex items-center justify-center gap-2"
       onClick={handleAddToCart}
     >
       <ShoppingCart className="w-5 h-5 group-hover:animate-bounce" />

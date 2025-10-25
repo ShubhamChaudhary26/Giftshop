@@ -24,7 +24,7 @@ const ReviewCard = ({
   return (
     <div
       className={cn([
-        "relative bg-white/90 backdrop-blur-sm flex flex-col items-start aspect-auto border-2 border-pink-200 hover:border-rose-500 rounded-[20px] p-6 sm:px-8 sm:py-7 overflow-hidden transition-all duration-300 hover:shadow-gift-lg",
+        "relative bg-white/90 backdrop-blur-sm flex flex-col items-start aspect-auto border-2 border-pink-200 hover:border-rose-500 rounded-[20px] p-6 sm:px-8 sm:py-7 overflow-hidden transition-all duration-300 ",
         className,
       ])}
     >
