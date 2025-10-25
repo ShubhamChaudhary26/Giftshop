@@ -4,7 +4,7 @@ const integralCF = localFont({
   src: [
     {
       path: "./integralcf-bold.woff",
-      weight: "700",
+      weight: "50",
       style: "normal",
     },
   ],
