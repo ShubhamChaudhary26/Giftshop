@@ -8,11 +8,12 @@ import Footer from "@/components/layout/Footer";
 import HolyLoader from "holy-loader";
 import Providers from "./providers";
 import AdminWrapper from "@/components/layout/AdminWrapper";
+import FloatingButtons from "@/components/common/FloatingButtons";
 
 export const metadata: Metadata = {
   title: "BestGiftEver",
   description: "BestGiftEver - Your Gateway to a World of Candles",
-  icons:"/icons/logo.jpg"
+  icons: "/icons/logo.jpg"
 };
 
 export const viewport: Viewport = {
@@ -33,6 +34,9 @@ export default function RootLayout({
             {children}
           </AdminWrapper>
         </Providers>
+        
+        {/* Floating Action Buttons */}
+        <FloatingButtons />
       </body>
     </html>
   );
