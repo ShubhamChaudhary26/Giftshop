@@ -8,7 +8,7 @@ export default function FloatingButtons() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   
   const phoneNumber = '919545844195';
-  const message = 'Hello! I am interested in your candles.';
+  const message = 'Hello! I am interested in your Products.';
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   useEffect(() => {
