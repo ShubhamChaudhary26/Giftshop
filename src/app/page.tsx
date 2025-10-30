@@ -8,6 +8,7 @@ import { supabase } from "@/lib/supabase";
 import GiftBoxBuilder from "@/components/ScentIntensitySelector/ScentIntensitySelector";
 import CategorySection from "@/components/homepage/CategorySection";
 import WhyChooseUs from "@/components/homepage/WhyChooseUs";
+import FloatingButtons from "@/components/common/FloatingButtons";
 
 export const dynamic = "force-dynamic";
 
@@ -126,6 +127,7 @@ export default async function Home() {
 
         <Reviews />
       </main>
+      <FloatingButtons/>
     </>
   );
 }

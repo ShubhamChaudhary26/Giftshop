@@ -36,7 +36,7 @@ export default function RootLayout({
         </Providers>
         
         {/* Floating Action Buttons */}
-        <FloatingButtons />
+        {/* <FloatingButtons /> */}
       </body>
     </html>
   );

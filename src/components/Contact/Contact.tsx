@@ -21,7 +21,7 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
     <div className="mb-4">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full bg-white/90 backdrop-blur-sm rounded-2xl p-6 text-left  transition-all border-2 border-pink-100 hover:border-purple-300"
+        className="w-full bg-white/90 backdrop-blur-sm rounded-2xl p-6 text-left  transition-all border-2 border-pink-100 hover:border-rose-300"
       >
         <div className="flex items-center justify-between">
           <h3 className="font-extrabold font-bold bg-rose-500 bg-clip-text text-transparent pr-4">
@@ -37,7 +37,7 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
           </span>
         </div>
         {isOpen && (
-          <p className="mt-4 text-purple-800/90 text-sm leading-relaxed">
+          <p className="mt-4 text-rose-800/90 text-sm leading-relaxed">
             {answer}
           </p>
         )}
@@ -48,14 +48,14 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
 
 const InfoRow = ({ icon, title, detail }: { icon: React.ReactNode; title: string; detail: string }) => (
   <div className="flex items-start gap-4">
-    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center flex-shrink-0 shadow-md">
+    <div className="w-12 h-12 rounded-full bg-rose-500 flex items-center justify-center flex-shrink-0 shadow-md">
       {icon}
     </div>
     <div>
       <h4 className="font-extrabold font-bold bg-rose-500 bg-clip-text text-transparent mb-1">
         {title}
       </h4>
-      <p className="text-purple-800/90 text-sm whitespace-pre-line">
+      <p className="text-rose-800/90 text-sm whitespace-pre-line">
         {detail}
       </p>
     </div>
@@ -125,15 +125,15 @@ export default function ContactPage() {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08, duration: 0.5 }}
-                className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 text-center  transition-shadow border-2 border-pink-100 hover:border-purple-300"
+                className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 text-center  transition-shadow border-2 border-pink-100 hover:border-rose-300"
               >
-                <div className="w-14 h-14 bg-gradient-to-br from-pink-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-md">
+                <div className="w-14 h-14 bg-rose-500 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-md">
                   {info.icon}
                 </div>
                 <h3 className="font-extrabold text-lg font-bold bg-rose-500 bg-clip-text text-transparent mb-2">
                   {info.title}
                 </h3>
-                <p className="text-purple-800/90 text-sm whitespace-pre-line">{info.detail}</p>
+                <p className="text-rose-800/90 text-sm whitespace-pre-line">{info.detail}</p>
               </motion.div>
             ))}
           </div>
@@ -149,12 +149,12 @@ export default function ContactPage() {
               <h2 className={cn(integralCF.className, "text-[24px] md:text-[32px] font-bold font-bold bg-rose-500 bg-clip-text text-transparent mb-2 uppercase")}>
                 Send Us A Message
               </h2>
-              <p className="text-purple-800/90 mb-8">Fill out the form and we’ll get back within 24 hours.</p>
+              <p className="text-rose-800/90 mb-8">Fill out the form and we’ll get back within 24 hours.</p>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-bold text-purple-700 mb-2">Your Name *</label>
+                    <label className="block text-sm font-bold text-rose-700 mb-2">Your Name *</label>
                     <input
                       type="text" name="name" value={formData.name} onChange={handleChange} required
                       className="w-full px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-rose-500 bg-white outline-none transition"
@@ -162,7 +162,7 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-purple-700 mb-2">Email Address *</label>
+                    <label className="block text-sm font-bold text-rose-700 mb-2">Email Address *</label>
                     <input
                       type="email" name="email" value={formData.email} onChange={handleChange} required
                       className="w-full px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-rose-500 bg-white outline-none transition"
@@ -173,7 +173,7 @@ export default function ContactPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-bold text-purple-700 mb-2">Phone Number</label>
+                    <label className="block text-sm font-bold text-rose-700 mb-2">Phone Number</label>
                     <input
                       type="tel" name="phone" value={formData.phone} onChange={handleChange}
                       className="w-full px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-rose-500 bg-white outline-none transition"
@@ -181,7 +181,7 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-purple-700 mb-2">Subject *</label>
+                    <label className="block text-sm font-bold text-rose-700 mb-2">Subject *</label>
                     <select
                       name="subject" value={formData.subject} onChange={handleChange} required
                       className="w-full px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-rose-500 bg-white outline-none transition"
@@ -197,7 +197,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold text-purple-700 mb-2">Message *</label>
+                  <label className="block text-sm font-bold text-rose-700 mb-2">Message *</label>
                   <textarea
                     name="message" value={formData.message} onChange={handleChange} required rows={6}
                     className="w-full px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-rose-500 bg-white outline-none transition resize-none"
@@ -207,7 +207,7 @@ export default function ContactPage() {
 
                 <button
                   type="submit" disabled={isSubmitting}
-                  className="w-full md:w-auto px-10 py-3.5 rounded-full font-bold text-white bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500  transition flex items-center justify-center gap-2 disabled:opacity-60"
+                  className="w-full md:w-auto px-10 py-3.5 rounded-full font-bold text-white bg-rose-500 transition flex items-center justify-center gap-2 disabled:opacity-60"
                 >
                   {isSubmitting ? (<><span className="animate-spin">⏳</span>Sending...</>) : (<><Send size={18} />Send Message</>)}
                 </button>
@@ -219,7 +219,7 @@ export default function ContactPage() {
               <h2 className={cn(integralCF.className, "text-[24px] md:text-[32px] font-bold font-bold bg-rose-500 bg-clip-text text-transparent mb-2 uppercase")}>
                 Get In Touch
               </h2>
-              <p className="text-purple-800/90 mb-8">We’d love to hear from you. Here’s how you can reach us.</p>
+              <p className="text-rose-800/90 mb-8">We’d love to hear from you. Here’s how you can reach us.</p>
 
               <div className="space-y-6 mb-10">
                 <InfoRow icon={<MapPin size={20} className="text-white" />} title="Visit Our Studio" detail={"123 Gift Lane, Happy Market,\nMumbai, Maharashtra 400001, India"} />
@@ -254,7 +254,7 @@ export default function ContactPage() {
             <h2 className={cn(integralCF.className, "text-[28px] md:text-[36px] font-extrabold font-bold bg-rose-500 bg-clip-text text-transparent mb-4 uppercase")}>
               Frequently Asked Questions
             </h2>
-            <p className="text-purple-800/90 max-w-2xl mx-auto">
+            <p className="text-rose-800/90 max-w-2xl mx-auto">
               Find answers to common questions about our gifts and services.
             </p>
           </motion.div>
