@@ -483,7 +483,7 @@ export default function AdminDashboard() {
       {/* ============================================ */}
       <aside className="w-64 bg-black text-white flex flex-col">
         <div className="p-6 border-b border-gray-700">
-          <h1 className={cn([integralCF.className, "text-2xl uppercase"])}>Joogly</h1>
+          <h1 className={cn([integralCF.className, "text-2xl uppercase"])}>Hello Mayur</h1>
           <p className="text-xs text-gray-400 mt-1">Admin Panel</p>
         </div>
 
@@ -1153,7 +1153,7 @@ export default function AdminDashboard() {
                       value={productForm.author}
                       onChange={(e) => setProductForm({ ...productForm, author: e.target.value })}
                       className="w-full p-3 border rounded-lg"
-                      placeholder="e.g., Joogly Gifts"
+                      placeholder="e.g., Best Gifts"
                     />
                   </Field>
 
